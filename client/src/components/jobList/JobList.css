@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 80%;
+  width: 40vw;
+  min-width: 300px;
 }
 /*# sourceMappingURL=JobList.css.map */
