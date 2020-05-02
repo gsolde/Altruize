@@ -102,10 +102,12 @@ $base-color: rgb(4, 163, 129);
       padding: 10px 10px;
       color: white;
       font-weight: 700;
+      transition: all .2s ease-in-out;
     }
 
     button:hover {
       cursor: pointer;
+      transform: scale(1.1);
       background-color: rgb(43, 192, 160);
     }
   }

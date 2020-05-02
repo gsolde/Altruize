@@ -101,10 +101,12 @@
   padding: 10px 10px;
   color: white;
   font-weight: 700;
+  transition: all .2s ease-in-out;
 }
 
 .job-item .job-extra button:hover {
   cursor: pointer;
+  transform: scale(1.1);
   background-color: #2bc0a0;
 }
 
