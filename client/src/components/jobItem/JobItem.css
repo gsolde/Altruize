@@ -1,0 +1,32 @@
+.job-item {
+  display: flex;
+  width: 100%;
+  min-width: 300px;
+  box-shadow: 0 0 5px 1px rgba(52, 49, 49, 0.2);
+  border-radius: 5px;
+  margin: 10px auto;
+}
+
+.job-img-owner {
+  flex: 1;
+  margin: 15px 10px;
+  text-align: center;
+}
+
+.job-img-owner .img {
+  width: 120px;
+  height: 120px;
+  border-radius: 3px;
+}
+
+.job-img-owner .event-owner {
+  color: #9c9a9a;
+  font-size: 0.8rem;
+}
+
+.job-main-info {
+  flex: 3;
+  margin: 15px 10px;
+  text-align: left;
+}
+/*# sourceMappingURL=JobItem.css.map */
