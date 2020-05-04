@@ -40,6 +40,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    cancelled: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
   });
   return Event;
 };
