@@ -1,0 +1,52 @@
+$base-color: rgb(4, 163, 129);
+
+.footer-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: $base-color;
+  margin-top: auto;
+
+  .about {
+    width: 60%;
+    margin-top: 10px;
+
+    p {
+      color: white;
+      text-align: justify;
+    }
+  }
+
+  .bold {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .social-media {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .social-media-links {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    span {
+      color: white;
+    }
+
+    li {
+      list-style-type: none;
+
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  }
+}
+
