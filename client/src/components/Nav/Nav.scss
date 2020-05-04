@@ -1,0 +1,36 @@
+$base-color:#009688;
+
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  background-color: $base-color;
+  color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+
+  .name {
+    display: flex;
+    align-self: center;
+    padding-left: 10px;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  .addEvent-login-options {
+    display: flex;
+
+    .add-event-btn {
+      border: none;
+    }
+  }
+};
+
+.link-accent {
+  text-decoration: none;
+  color: black;
+};
+
+
+
+

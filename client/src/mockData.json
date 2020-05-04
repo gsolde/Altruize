@@ -1,0 +1,34 @@
+[
+
+  {
+    "id": 1,
+    "name": "Clean beach",
+    "eventOwner": "Green Peace",
+    "description": "Bacon ipsum dolor amet kevin boudin tri-tip ham ribeye. Spare ribs boudin ham hock sirloin, ribeye filet mignon prosciutto pork belly leberkas ham doner t-bone short ribs meatball fatback. Kevin landjaeger sausage, fatback capicola pancetta cow shankle ribeye corned beef ham flank prosciutto pork. Pig short ribs rump corned beef t-bone biltong pork loin meatloaf.",
+    "startDate": "2020-05-25T12:00:00Z",
+    "finishDate": "2020-05-25T14:00:00Z",
+    "lat": null,
+    "long": null,
+    "location": "Carrer d'Avila",
+    "profilePic": "https://images.unsplash.com/photo-1569254983547-44dc559f038f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80",
+    "active": true,
+    "tags": ["clean", "beach"],
+    "attendees": ["GerardO", "Carlos"]
+  },
+  {
+    "id": 2,
+    "name": "Social cooking",
+    "eventOwner": "Save the children",
+    "description": "Bacon ipsum dolor amet kevin boudin tri-tip ham ribeye. Spare ribs boudin ham hock sirloin, ribeye filet mignon prosciutto pork belly leberkas ham doner t-bone short ribs meatball fatback. Kevin landjaeger sausage, fatback capicola pancetta cow shankle ribeye corned beef ham flank prosciutto pork. Pig short ribs rump corned beef t-bone biltong pork loin meatloaf.",
+    "startDate": "2020-05-28T12:00:00Z",
+    "finishDate": "2020-05-28T15:00:00Z",
+    "lat": null,
+    "long": null,
+    "location": "Carrer de Mataró",
+    "profilePic": "https://images.unsplash.com/photo-1528712306091-ed0763094c98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=680&q=80",
+    "active": true,
+    "tags": ["save", "starving"],
+    "attendees": ["Leonard", "Alejandro"]
+  }
+
+]
