@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
     profile_pic: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     active: {

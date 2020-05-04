@@ -8,6 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: true,
     },
-  });
+  }) 
   return Attendance;
 };
