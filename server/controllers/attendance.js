@@ -29,3 +29,10 @@ module.exports = {
   getAllAttendances,
   addAttendance,
 };
+
+/*TODO ADD:
+users going to event
+list of events for user (active)
+
+
+*/

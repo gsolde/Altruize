@@ -31,3 +31,11 @@ module.exports = {
   getAllTags,
   addTag,
 };
+
+// Queries
+// tags for user
+// users for tag
+// tags for event
+// events for tag
+// tags for Orgs
+// orgs for tag
