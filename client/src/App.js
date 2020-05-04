@@ -1,17 +1,28 @@
 import React from 'react';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
-import JobList from '../src/components/jobList/JobList';
-import Header from '../src/components/header/Header';
-import SearchBar from '../src/components/searchBar/SearchBar';
+import Nav from './components/Nav/Nav';
 
-function App() {
+import Home from './pages/Home';
+import About from './pages/About';
+
+
+function App () {
   return (
-    <div className="App">
-      <Header />
-      <SearchBar />
-      <JobList />
-    </div>
+    <Router>
+      <div className="App">
+        <Nav />
+        <Route path="/" exact component={Home} />
+        <Route path="/about" component={About} />
+        {/* <Route path="/profile" component={Profile}/> */}
+      </div>
+    </Router>
   );
 }
 

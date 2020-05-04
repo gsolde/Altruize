@@ -1,0 +1,20 @@
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  background-color: #04a381;
+  color: white;
+}
+
+.nav-wrapper .addEvent-login-options {
+  display: flex;
+}
+
+.nav-wrapper .addEvent-login-options .add-event-btn {
+  border: none;
+}
+
+.nav-wrapper .addEvent-login-options .log-in-btn {
+  border: none;
+  border-radius: 50%;
+}
+/*# sourceMappingURL=nav.css.map */

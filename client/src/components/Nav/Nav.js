@@ -1,9 +1,9 @@
 import React from 'react';
-import './Header.css';
+import './Nav.css';
 
-export default function Header() {
+export default function Nav () {
   return (
-    <div className="header-wrapper">
+    <div className="nav-wrapper">
       <div className="name">
         ALTRUIZE
       </div>
@@ -16,5 +16,5 @@ export default function Header() {
         </button>
       </div>
     </div>
-  )
+  );
 }
