@@ -13,6 +13,7 @@ import About from './pages/About';
 import AddEventPage from './pages/AddEventPage';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import NotFound from './pages/notfound/NotFound';
 
 
 function App () {
@@ -26,6 +27,7 @@ function App () {
           <Route path="/addEvent" component={AddEventPage} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
+          <Route path="*" component={NotFound} />
         </Switch>
       </div>
     </Router>
