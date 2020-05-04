@@ -2,38 +2,47 @@
   display: flex;
   justify-content: space-evenly;
   background-color: #04a381;
+  margin-top: auto;
 }
 
 .footer-wrapper .about {
-  width: 50%;
-  margin-top: 7px;
+  width: 60%;
+  margin-top: 10px;
 }
 
-.footer-wrapper .about span {
+.footer-wrapper .about p {
+  color: white;
+  text-align: justify;
+}
+
+.footer-wrapper .bold {
+  margin-top: 10px;
   font-size: 18px;
   font-weight: bold;
   color: white;
 }
 
-.footer-wrapper .about p {
-  color: white;
-}
-
 .footer-wrapper .social-media {
+  width: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.footer-wrapper li {
-  list-style-type: none;
+.footer-wrapper .social-media .social-media-links {
+  display: flex;
+  justify-content: space-between;
 }
 
-.footer-wrapper li span {
+.footer-wrapper .social-media span {
   color: white;
 }
 
-.footer-wrapper a {
+.footer-wrapper .social-media li {
+  list-style-type: none;
+}
+
+.footer-wrapper .social-media a {
   text-decoration: none;
   color: white;
 }

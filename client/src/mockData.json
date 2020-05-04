@@ -1,5 +1,4 @@
 [
-
   {
     "id": 1,
     "name": "Clean beach",
@@ -12,8 +11,14 @@
     "location": "Carrer d'Avila",
     "profilePic": "https://images.unsplash.com/photo-1569254983547-44dc559f038f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80",
     "active": true,
-    "tags": ["clean", "beach"],
-    "attendees": ["GerardO", "Carlos"]
+    "tags": [
+      "clean",
+      "beach"
+    ],
+    "attendees": [
+      "GerardO",
+      "Carlos"
+    ]
   },
   {
     "id": 2,
@@ -27,8 +32,13 @@
     "location": "Carrer de Mataró",
     "profilePic": "https://images.unsplash.com/photo-1528712306091-ed0763094c98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=680&q=80",
     "active": true,
-    "tags": ["save", "starving"],
-    "attendees": ["Leonard", "Alejandro"]
+    "tags": [
+      "save",
+      "starving"
+    ],
+    "attendees": [
+      "Leonard",
+      "Alejandro"
+    ]
   }
-
 ]
