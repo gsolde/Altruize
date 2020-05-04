@@ -41,6 +41,6 @@ fs.readdirSync(__dirname)
     db[model.name] = model;
   });
 
-db.sync(); //! {force:true} to drop the tables (if changes on the models are made)
+db.sync(); //! db.sync({force:true}) to drop the tables (if changes on the models are made)
 
 module.exports = db;
