@@ -1,21 +1,43 @@
 import React from 'react';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
-import JobList from '../src/components/jobList/JobList';
-import Header from '../src/components/header/Header';
-import SearchBar from '../src/components/searchBar/SearchBar';
-import Footer from '../src/components/footer/Footer';
 
-function App() {
+import Nav from './components/Nav/Nav';
+import Home from './pages/home/Home';
+import About from './pages/about/About';
+import AddEventPage from './pages/addEventPage/AddEventPage';
+import Login from './pages/login/Login';
+import Profile from './pages/profile/Profile';
+import NotFound from './pages/notfound/NotFound';
+import SignUp from './pages/signUp/SignUp';
+import PrivateRoute from './pages/PrivateRoute';
+
+
+function App () {
   return (
-    <div className="App">
-      <div className="main-wrapper">
-        <Header />
-        <SearchBar />
-        <JobList />
-        <Footer />
+    <Router>
+      <div className="App">
+        <Nav />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/login" component={Login} />
+          <Route path="/signUp" component={SignUp} />
+          <PrivateRoute path="/addEvent">
+            <AddEventPage />
+          </PrivateRoute>
+          <PrivateRoute path="/profile">
+            <Profile />
+          </PrivateRoute>
+          <Route path="*" component={NotFound} />
+        </Switch>
       </div>
-    </div>
+    </Router>
   );
 }
 
