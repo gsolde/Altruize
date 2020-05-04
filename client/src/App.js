@@ -13,7 +13,7 @@ import AddEventPage from './pages/addEventPage/AddEventPage';
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
 import NotFound from './pages/notfound/NotFound';
-
+import SignUp from './pages/signUp/SignUp';
 import PrivateRoute from './pages/PrivateRoute';
 
 
@@ -26,6 +26,7 @@ function App () {
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
           <Route path="/login" component={Login} />
+          <Route path="/signUp" component={SignUp} />
           <PrivateRoute path="/addEvent">
             <AddEventPage />
           </PrivateRoute>
