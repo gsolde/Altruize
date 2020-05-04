@@ -8,6 +8,7 @@ import {
 
 
 import Nav from './components/Nav/Nav';
+import Footer from './components/footer/Footer';
 import Home from './pages/home/Home';
 import About from './pages/about/About';
 import AddEventPage from './pages/addEventPage/AddEventPage';
@@ -36,6 +37,7 @@ function App () {
           </PrivateRoute>
           <Route path="*" component={NotFound} />
         </Switch>
+        <Footer />
       </div>
     </Router>
   );
