@@ -1,0 +1,20 @@
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  background-color: #04a381;
+  color: white;
+}
+
+.header-wrapper .addEvent-login-options {
+  display: flex;
+}
+
+.header-wrapper .addEvent-login-options .add-event-btn {
+  border: none;
+}
+
+.header-wrapper .addEvent-login-options .log-in-btn {
+  border: none;
+  border-radius: 50%;
+}
+/*# sourceMappingURL=Header.css.map */

@@ -1,0 +1,24 @@
+$base-color: rgb(4, 163, 129);
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  background-color: $base-color;
+  color: white;
+
+  .addEvent-login-options {
+    display: flex;
+
+    .add-event-btn {
+      border: none;
+    }
+
+    .log-in-btn {
+      border: none;
+      border-radius: 50%;
+    }
+  }
+
+}
+
+
