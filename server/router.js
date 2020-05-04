@@ -3,6 +3,7 @@ const event = require('./controllers/event');
 const user = require('./controllers/user');
 const org = require('./controllers/org');
 const attendance = require('./controllers/attendance');
+const tag = require('./controllers/tag');
 
 // interactions with db
 
@@ -20,5 +21,8 @@ router.post('/users', user.addUser);
 
 router.get('/attendances', attendance.getAllAttendances);
 router.post('/attendances', attendance.addAttendance);
+
+router.get('/tags', tag.getAllTags);
+router.post('/tags', tag.addTag);
 
 module.exports = router;
