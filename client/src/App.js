@@ -3,17 +3,18 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from "react-router-dom";
 
 import Nav from './components/Nav/Nav';
-
-import Home from './pages/Home';
-import About from './pages/About';
-import AddEventPage from './pages/AddEventPage';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
+import Home from './pages/home/Home';
+import About from './pages/about/About';
+import AddEventPage from './pages/addEventPage/AddEventPage';
+import Login from './pages/login/Login';
+import Profile from './pages/profile/Profile';
 import NotFound from './pages/notfound/NotFound';
+
+import PrivateRoute from './pages/PrivateRoute';
 
 
 function App () {
@@ -24,9 +25,13 @@ function App () {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
-          <Route path="/addEvent" component={AddEventPage} />
           <Route path="/login" component={Login} />
-          <Route path="/profile" component={Profile} />
+          <PrivateRoute path="/addEvent">
+            <AddEventPage />
+          </PrivateRoute>
+          <PrivateRoute path="/profile">
+            <Profile />
+          </PrivateRoute>
           <Route path="*" component={NotFound} />
         </Switch>
       </div>

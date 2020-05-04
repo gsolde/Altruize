@@ -7,6 +7,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
+import fakeAuth from '../../FakeAuth';
+
 export default function Nav () {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -43,9 +45,16 @@ export default function Nav () {
             <MenuItem onClick={handleClose}>
               <Link className="link-accent" to="/profile">Profile</Link>
             </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Link className="link-accent" to="/login">Log in</Link>
-            </MenuItem>
+            {fakeAuth.isAuthenticated ? (
+              <MenuItem onClick={handleClose}>
+                <Link className="link-accent" to="/login">Log out</Link>
+              </MenuItem>
+            ) : (
+                <MenuItem onClick={handleClose}>
+                  <Link className="link-accent" to="/login">Log in</Link>
+                </MenuItem>
+              )
+            }
             <MenuItem onClick={handleClose}>
               <Link className="link-accent" to="/about">About</Link>
             </MenuItem>

@@ -1,6 +1,6 @@
 import React from 'react';
-import JobList from '../components/jobList/JobList';
-import SearchBar from '../components/searchBar/SearchBar';
+import JobList from '../../components/jobList/JobList';
+import SearchBar from '../../components/searchBar/SearchBar';
 
 
 function Home () {
