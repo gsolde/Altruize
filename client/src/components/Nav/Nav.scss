@@ -5,6 +5,10 @@ $base-color: rgb(4, 163, 129);
   justify-content: space-between;
   background-color: $base-color;
   color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
 
   .name {
     display: flex;
