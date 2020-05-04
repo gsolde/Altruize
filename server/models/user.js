@@ -2,15 +2,15 @@
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    userId: {
+    user_id: {
       type: DataTypes.UUID,
       allowNull: true,
     },
-    userName: {
+    user_name: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    aboutMe: {
+    about_me: {
       type: DataTypes.TEXT,
       allowNull: true,
     },
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    profilePic: {
+    profile_pic: {
       type: DataTypes.STRING,
       allowNull: true,
     },

@@ -1,10 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Attendance = sequelize.define('Attendance', {
-    userId: {
+    user_id: {
       type: DataTypes.UUID,
       allowNull: true,
     },
-    eventId: {
+    event_id: {
       type: DataTypes.UUID,
       allowNull: true,
     },

@@ -1,18 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
   const Tag = sequelize.define('Tag', {
-    tagName: {
+    tag_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userId: {
+    user_id: {
       type: DataTypes.UUID,
       allowNull: true,
     },
-    eventId: {
+    event_id: {
       type: DataTypes.UUID,
       allowNull: true,
     },
-    orgId: {
+    org_id: {
       type: DataTypes.UUID,
       allowNull: true,
     },

@@ -14,16 +14,16 @@ async function getAllOrgs(req, res) {
 async function addOrg(req, res) {
   try {
     const addedOrg = await db.Org.create({
-      orgId: req.body.orgId,
-      regNumber: req.body.regNumber,
-      phoneNumber: req.body.phoneNumber,
+      org_id: req.body.orgId,
+      reg_number: req.body.regNumber,
+      phone_number: req.body.phoneNumber,
       verified: req.body.verified,
-      orgName: req.body.orgName,
+      org_name: req.body.orgName,
       about: req.body.about,
       email: req.body.email,
       password: req.body.password,
       address: req.body.address,
-      profilePic: req.body.profilePic,
+      profile_pic: req.body.profilePic,
       active: req.body.active,
       notes: req.body.notes,
     });

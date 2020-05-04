@@ -1,14 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
   const Event = sequelize.define('Event', {
-    eventId: {
+    event_id: {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    eventName: {
+    event_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    eventOwnerId: {
+    event_owner_id: {
       type: DataTypes.UUID,
       allowNull: true,
     },
@@ -16,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    startDate: {
+    start_date: {
       type: DataTypes.DATE,
       allowNull: true,
     },
-    finishDate: {
+    finish_date: {
       type: DataTypes.DATE,
       allowNull: true,
     },

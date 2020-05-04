@@ -14,13 +14,13 @@ async function getAllUsers(req, res) {
 async function addUser(req, res) {
   try {
     const addedUser = await db.User.create({
-      userId: req.body.userId,
-      userName: req.body.userName,
-      aboutMe: req.body.aboutMe,
+      user_id: req.body.user_id,
+      user_name: req.body.user_name,
+      about_me: req.body.about_me,
       email: req.body.email,
       password: req.body.password,
       address: req.body.address,
-      profilePic: req.body.profilePic,
+      profile_pic: req.body.profile_pic,
       active: req.body.active,
       karma: req.body.karma,
       notes: req.body.notes,

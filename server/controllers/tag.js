@@ -14,10 +14,10 @@ async function getAllTags(req, res) {
 async function addTag(req, res) {
   try {
     const addedTag = await db.Tag.create({
-      tagName: req.body.tagName,
-      userId: req.body.userId,
-      eventId: req.body.eventId,
-      orgId: req.body.orgId,
+      tag_name: req.body.tag_name,
+      user_id: req.body.user_id,
+      event_id: req.body.event_id,
+      org_id: req.body.org_id,
     });
     res.status(201);
     res.json(addedTag);

@@ -14,8 +14,8 @@ async function getAllAttendances(req, res) {
 async function addAttendance(req, res) {
   try {
     const addedAttendance = await db.Attendance.create({
-      userId: req.body.userId,
-      eventId: req.body.eventId,
+      user_id: req.body.user_id,
+      event_id: req.body.event_id,
     });
     res.status(201);
     res.json(addedAttendance);

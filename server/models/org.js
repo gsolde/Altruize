@@ -1,14 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
   const Org = sequelize.define('Org', {
-    orgId: {
+    org_id: {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    regNumber: {
+    reg_number: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    phoneNumber: {
+    phone_number: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: true,
     },
-    orgName: {
+    org_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    profilePic: {
+    profile_pic: {
       type: DataTypes.STRING,
       allowNull: true,
     },

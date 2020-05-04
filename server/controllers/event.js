@@ -16,12 +16,12 @@ async function getAllEvents(req, res) {
 async function addEvent(req, res) {
   try {
     const addedEvent = await db.Event.create({
-      eventId: req.body.eventId,
-      eventName: req.body.eventName,
-      eventOwnerId: req.body.eventOwnerId,
+      event_id: req.body.event_id,
+      event_name: req.body.event_name,
+      event_owner_id: req.body.event_owner_id,
       description: req.body.description,
-      startDate: req.body.startDate,
-      finishDate: req.body.finishDate,
+      start_date: req.body.start_date,
+      finish_date: req.body.finish_date,
       latitude: req.body.latitude,
       longitude: req.body.longitude,
       location: req.body.location,
@@ -41,9 +41,9 @@ async function getActiveEvents(req, res) {
     const activeEvents = await db.Event.findAll({
       where: {
         cancelled: false,
-        startDate: { [Op.gt]: new Date() },
+        start_date: { [Op.gt]: new Date() },
       },
-      order: [['startDate', 'DESC']],
+      order: [['start_date', 'DESC']],
     });
     res.status(200);
     res.json(activeEvents);
