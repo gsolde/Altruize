@@ -1,4 +1,41 @@
+$base-color: rgb(4, 163, 129);
+
 .footer-wrapper {
-  border: 1px solid red;
   display: flex;
+  justify-content: space-evenly;
+  background-color: $base-color;
+
+  .about {
+    width: 50%;
+    margin-top: 7px;
+
+    span {
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+    }
+
+    p {
+      color: white;
+    }
+  }
+
+  .social-media {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  li {
+    list-style-type: none;
+
+    span {
+      color: white;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
 }

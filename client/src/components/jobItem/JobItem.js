@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './JobItem.css';
+
 import moment from 'moment';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarker } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
 
 // TODO: change cursor
 export default function JobItem({ job }) {
@@ -35,7 +36,7 @@ export default function JobItem({ job }) {
           })}</div>
         </div>
       </div>
-      {clicked ?
+      {/* {clicked ?
         <div className="job-extra">
           <div className="job-description">{job.description}</div>
           <button className="job-button">
@@ -43,7 +44,7 @@ export default function JobItem({ job }) {
         </button>
         </div>
         : null
-      }
+      } */}
     </div>
   );
 }

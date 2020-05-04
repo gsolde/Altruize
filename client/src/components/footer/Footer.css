@@ -1,5 +1,40 @@
 .footer-wrapper {
-  border: 1px solid red;
   display: flex;
+  justify-content: space-evenly;
+  background-color: #04a381;
+}
+
+.footer-wrapper .about {
+  width: 50%;
+  margin-top: 7px;
+}
+
+.footer-wrapper .about span {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+.footer-wrapper .about p {
+  color: white;
+}
+
+.footer-wrapper .social-media {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.footer-wrapper li {
+  list-style-type: none;
+}
+
+.footer-wrapper li span {
+  color: white;
+}
+
+.footer-wrapper a {
+  text-decoration: none;
+  color: white;
 }
 /*# sourceMappingURL=Footer.css.map */
