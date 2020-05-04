@@ -23,12 +23,12 @@ export default function Nav () {
   return (
     <div className="nav-wrapper">
       <div className="name">
-        <Link to="/">ALTRUIZE</Link>
+        <Link className="link" to="/">ALTRUIZE</Link>
       </div>
       <div className="addEvent-login-options">
-        <button className="add-event-btn">
-          <Link to="/addEvent">Add Event</Link>
-        </button>
+        <Button aria-controls="add-event-btn" aria-haspopup="true">
+          <Link className="link" to="/addEvent">Add Event</Link>
+        </Button>
         <div className="log-in-btn">
           <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
             <AccountCircleIcon style={{ color: 'white' }} />
@@ -41,13 +41,13 @@ export default function Nav () {
             onClose={handleClose}
           >
             <MenuItem onClick={handleClose}>
-              <Link to="/profile">Profile</Link>
+              <Link className="link-accent" to="/profile">Profile</Link>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <Link to="/login">Log in</Link>
+              <Link className="link-accent" to="/login">Log in</Link>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <Link to="/about">About</Link>
+              <Link className="link-accent" to="/about">About</Link>
             </MenuItem>
           </Menu>
         </div>

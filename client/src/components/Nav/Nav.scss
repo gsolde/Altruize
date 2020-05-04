@@ -6,19 +6,27 @@ $base-color: rgb(4, 163, 129);
   background-color: $base-color;
   color: white;
 
+  .name {
+    display: flex;
+    align-self: center;
+    padding-left: 10px;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
   .addEvent-login-options {
     display: flex;
 
     .add-event-btn {
       border: none;
     }
-
-    .log-in-btn {
-      border: none;
-      border-radius: 50%;
-    }
   }
+};
 
-}
+.link-accent {
+  text-decoration: none;
+  color: black;
+};
+
+
 
 
