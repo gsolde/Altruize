@@ -8,7 +8,15 @@ INSERT INTO "Tags" (tag_name, user_id, event_id, org_id, "createdAt", "updatedAt
 ('Beach', null, null, 'a72879b4-19c6-4c1f-9b95-a45ed8c16362', NOW(), NOW()),
 ('Beach', null, null, 'b5bbe80f-3511-46da-b438-bf6692bc0f23', NOW(), NOW()),
 ('Beach', null, null, '1fbce17f-e211-4d3e-a0e6-ed00a38c454e', NOW(), NOW()),
-('Keyboards', null, null, 'c468a1ce-e9a1-44e5-b0c9-971efdbe52bb', NOW(), NOW());
+('Keyboards', 'd9558336-9d65-4040-80cf-72487462e4ef', null, null, NOW(), NOW()),
+('Keyboards', '866dec02-de0f-4616-b184-ea35d3154d86', null, null, NOW(), NOW()),
+('Keyboards', 'b939bcf0-04ab-4e65-97ad-197fa86dae15', null, null, NOW(), NOW()),
+('Keyboards', null, '8592d552-a14e-4343-a83d-41a9251a7842', null, NOW(), NOW()),
+('Keyboards', null, '80db1c62-e634-49c3-b879-7c1504bfee18', null, NOW(), NOW()),
+('Keyboards', null, '2b2eab06-148d-4dae-82a6-97e347efe0af', null, NOW(), NOW()),
+('Keyboards', null, null, 'a72879b4-19c6-4c1f-9b95-a45ed8c16362', NOW(), NOW()),
+('Keyboards', null, null, 'b5bbe80f-3511-46da-b438-bf6692bc0f23', NOW(), NOW()),
+('Keyboards', null, null, '1fbce17f-e211-4d3e-a0e6-ed00a38c454e', NOW(), NOW());
 
 INSERT INTO "Attendances" (user_id, event_id, "createdAt", "updatedAt") VALUES 
 ('d9558336-9d65-4040-80cf-72487462e4ef','2b2eab06-148d-4dae-82a6-97e347efe0af', NOW(), NOW() ),

@@ -17,8 +17,8 @@ async function usersByTag(req, res) {
   try {
     const usersByTag = await db.Tag.findAll({
       where: {
-        tag_name: req.body.tag_name,  
-        user_id: {[Op.not]: null}
+        tag_name: req.body.tag_name,
+        user_id: { [Op.not]: null }
       },
       order: [['tag_name', 'DESC']],
       attributes: ['user_id'],
