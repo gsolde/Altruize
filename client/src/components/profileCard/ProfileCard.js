@@ -1,16 +1,21 @@
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import { indigo, pink, red, teal } from '@material-ui/core/colors';
+import { pink, teal, grey } from '@material-ui/core/colors';
 import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import ClearIcon from '@material-ui/icons/Clear';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+
 
 
 const theme = createMuiTheme({
@@ -36,6 +41,13 @@ const useStyles = makeStyles((theme) => ({
   },
   edit: {
     margin: theme.spacing(1),
+    backgroundColor: 'primary',
+    color: 'white',
+  },
+  discard: {
+    margin: theme.spacing(1),
+    backgroundColor: grey.A200,
+    color: 'white',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -47,15 +59,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  google: {
-    margin: theme.spacing(0.5, 0, 0.5),
-    backgroundColor: red.A200,
-    color: 'white',
-  },
-  facebook: {
-    margin: theme.spacing(0.5, 0, 0.5),
-    backgroundColor: indigo[800],
-    color: 'white',
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
   },
 }));
 
@@ -70,18 +76,17 @@ export default function SignUp () {
   return (
     <MuiThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar} alt="user.image{}" src="https://media-exp1.licdn.com/dms/image/C4D03AQEuhw7UQwbX5A/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=CJ7wNArHAR2JQhlbCWOaTUh2i6JjK6YiuR9bQD3GPCo" />
           <div>
             <Button
               variant="contained"
-              color={editMode ? 'secondary' : 'primary'}
-              className={classes.edit}
-              startIcon={editMode ? <SaveIcon /> : <EditIcon />}
+              color={editMode ? 'grey' : 'primary'}
+              className={editMode ? classes.discard : classes.edit}
+              startIcon={editMode ? <ClearIcon /> : <EditIcon />}
               onClick={handleEditMode}
             >
-              {editMode ? 'Save changes' : 'Edit Profile'}
+              {editMode ? 'Discard changes' : 'Edit Profile'}
             </Button>
           </div>
           <form className={classes.form} noValidate>
@@ -139,45 +144,58 @@ export default function SignUp () {
                 // autoComplete="current-password"
                 />
               </Grid>
-              {!editMode ?
+              <Grid item xs={12}>
+                <ExpansionPanel>
+                  <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography className={classes.heading}>Account Settings</Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      disabled={editMode ? false : true}
+                      id="email"
+                      label="Email"
+                      name="email"
+                      autoComplete="email"
+                    />
+                  </ExpansionPanelDetails>
+                  <ExpansionPanelDetails>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      disabled={editMode ? false : true}
+                      id="Password"
+                      label="Password"
+                      name="password"
+                      type="password"
+                      autoComplete="current-password"
+                    />
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+              </Grid>
+              {editMode ?
                 (
-                  <Grid item xs={12}>
-                    <Button
-                      type="login"
-                      fullWidth
-                      variant="contained"
-                      color="blue"
-                      className={classes.facebook}
-                    >
-                      Facebook
-                </Button>
-                    <Button
-                      type="login"
-                      fullWidth
-                      variant="contained"
-                      color="red"
-                      className={classes.google}
-                    >
-                      Google
-                </Button>
-                  </Grid>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color={editMode ? 'secondary' : 'primary'}
+                    className={classes.submit}
+                    startIcon={editMode ? <SaveIcon /> : <EditIcon />}
+                    onClick={handleEditMode}
+                  >
+                    {editMode ? 'Save changes' : 'Edit Profile'}
+                  </Button>
                 )
                 : null
               }
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color={editMode ? 'secondary' : 'primary'}
-              className={classes.submit}
-            >
-              Sign Up
-            </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link to="/login">Already have an account? Log in</Link>
-              </Grid>
             </Grid>
           </form>
         </div>
