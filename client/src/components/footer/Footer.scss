@@ -11,6 +11,7 @@ $base-color:#009688;
     width: 50%;
     min-width: 350px;
     margin-top: 10px;
+    padding: 0 10px;
 
     p {
       color: white;
@@ -27,9 +28,8 @@ $base-color:#009688;
 
   .social-media {
     min-width: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    margin-top: 10px;
+    padding: 0 10px;
 
     .social-media-links {
       display: flex;
@@ -40,14 +40,19 @@ $base-color:#009688;
       color: white;
     }
 
+    ul {
+      padding: 0;
+    }
+
     li {
       list-style-type: none;
-
+      margin-top: 15px;
     }
 
     a {
       text-decoration: none;
       color: white;
+      padding-right: 5px;
     }
   }
 }

@@ -15,6 +15,7 @@
   width: 50%;
   min-width: 350px;
   margin-top: 10px;
+  padding: 0 10px;
 }
 
 .footer-wrapper .about p {
@@ -31,15 +32,8 @@
 
 .footer-wrapper .social-media {
   min-width: 350px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  margin-top: 10px;
+  padding: 0 10px;
 }
 
 .footer-wrapper .social-media .social-media-links {
@@ -55,12 +49,18 @@
   color: white;
 }
 
+.footer-wrapper .social-media ul {
+  padding: 0;
+}
+
 .footer-wrapper .social-media li {
   list-style-type: none;
+  margin-top: 15px;
 }
 
 .footer-wrapper .social-media a {
   text-decoration: none;
   color: white;
+  padding-right: 5px;
 }
 /*# sourceMappingURL=Footer.css.map */
