@@ -5,9 +5,11 @@ $base-color:#009688;
   justify-content: space-evenly;
   background-color: $base-color;
   margin-top: auto;
+  flex-wrap: wrap;
 
   .about {
-    width: 60%;
+    width: 50%;
+    min-width: 350px;
     margin-top: 10px;
 
     p {
@@ -24,7 +26,7 @@ $base-color:#009688;
   }
 
   .social-media {
-    width: 150px;
+    min-width: 350px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
