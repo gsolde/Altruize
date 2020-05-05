@@ -44,6 +44,7 @@ async function getActiveEvents(req, res) {
         start_date: { [Op.gt]: new Date() },
       },
       order: [['start_date', 'DESC']],
+      include: [{model: db.User}]
     });
     res.status(200);
     res.json(activeEvents);
