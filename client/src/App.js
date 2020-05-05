@@ -24,23 +24,29 @@ function App () {
     <Router>
       <div className="App">
         <Nav />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/login" component={Login} />
-          <Route path="/signUp" component={SignUp} />
-          <PrivateRoute path="/addEvent">
-            <AddEventPage />
-          </PrivateRoute>
-          <PrivateRoute path="/profile">
-            <Profile />
-          </PrivateRoute>
-          <Route path="*" component={NotFound} />
-        </Switch>
-        <Footer />
+        <div className="main-wrapper">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/login" component={Login} />
+            <Route path="/signUp" component={SignUp} />
+            <PrivateRoute path="/addEvent">
+              <AddEventPage />
+            </PrivateRoute>
+            <PrivateRoute path="/profile">
+              <Profile />
+            </PrivateRoute>
+            <Route path="*" component={NotFound} />
+          </Switch>
+          <Footer />
+        </div>
       </div>
     </Router>
   );
 }
+//TODO make all pages load under the nabvar div wrapper
+//TODO make footer always at the bottom and get in touch should go under about (progressive)
+//add copyright to the brand
+//Complete names
 
 export default App;

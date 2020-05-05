@@ -1,4 +1,6 @@
+/* TODO Erase */
 .main-wrapper {
+  margin-top: 3rem;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
