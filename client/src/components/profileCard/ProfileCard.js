@@ -16,8 +16,6 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
-
-
 const theme = createMuiTheme({
   palette: {
     primary: teal,
@@ -34,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  addphoto: {
+    display: 'none',
   },
   avatar: {
     width: theme.spacing(12),
@@ -68,16 +69,23 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp () {
   const classes = useStyles();
   const [editMode, setEditMode] = useState(false);
+  const [profilePic, setProfilePic] = useState('https://media-exp1.licdn.com/dms/image/C4D03AQEuhw7UQwbX5A/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=CJ7wNArHAR2JQhlbCWOaTUh2i6JjK6YiuR9bQD3GPCo');
 
   const handleEditMode = () => {
     setEditMode(!editMode);
+  };
+  const handleProfilepic = (e) => {
+    setProfilePic(URL.createObjectURL(e.target.files[0]));
   };
 
   return (
     <MuiThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
-          <Avatar className={classes.avatar} alt="user.image{}" src="https://media-exp1.licdn.com/dms/image/C4D03AQEuhw7UQwbX5A/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=CJ7wNArHAR2JQhlbCWOaTUh2i6JjK6YiuR9bQD3GPCo" />
+          <input accept="image/*" disabled={editMode ? false : true} className={classes.addphoto} id="add-image-file" type="file" onChange={handleProfilepic} />
+          <label htmlFor="add-image-file">
+            <Avatar className={classes.avatar} alt="user.image{}" src={profilePic} />
+          </label>
           <div>
             <Button
               variant="contained"
