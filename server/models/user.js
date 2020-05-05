@@ -1,5 +1,7 @@
 //TODO: Confirm mandatory fields!
 
+const Event = require('./event')
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     user_id: {
@@ -43,5 +45,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
   });
+
   return User;
 };

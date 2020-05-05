@@ -36,10 +36,11 @@ async function addUser(req, res) {
 async function getActiveUsers(req, res) {
   try {
     const activeUsers = await db.User.findAll({
-      where: {
-        active: true,
-      },
-      order: [['userName', 'DESC']],
+      // where: {
+      //   active: true,
+      // },
+      // order: [['userName', 'DESC']],
+      include: [{model: db.Event}]
     });
     res.status(200);
     res.json(activeUsers);

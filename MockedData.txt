@@ -19,11 +19,11 @@ INSERT INTO "Tags" (tag_name, user_id, event_id, org_id, "createdAt", "updatedAt
 ('Keyboards', null, null, '1fbce17f-e211-4d3e-a0e6-ed00a38c454e', NOW(), NOW());
 
 INSERT INTO "Attendances" (user_id, event_id, "createdAt", "updatedAt") VALUES 
-('d9558336-9d65-4040-80cf-72487462e4ef','2b2eab06-148d-4dae-82a6-97e347efe0af', NOW(), NOW() ),
-('62ce26ca-4e91-4d45-88b3-27ff083ad912', '8592d552-a14e-4343-a83d-41a9251a7842', NOW(), NOW() ),
-('629970f2-dba9-480e-bb0d-b273dc498a7c', 'e95a8486-9484-4c37-8418-cb323a5e781e', NOW(), NOW() ),
-('b939bcf0-04ab-4e65-97ad-197fa86dae15', 'c1a9f707-0495-48f3-b3bb-557b38f2fbd7', NOW(), NOW() ),
-('b939bcf0-04ab-4e65-97ad-197fa86dae15', '1584c771-5fe6-46df-b3e7-cc63033b56fb', NOW(), NOW() );
+('d9558336-9d65-4040-80cf-72487462e4ef','2b2eab06-148d-4dae-82a6-97e347efe0af', NOW(), NOW()),
+('62ce26ca-4e91-4d45-88b3-27ff083ad912', '8592d552-a14e-4343-a83d-41a9251a7842', NOW(), NOW()),
+('629970f2-dba9-480e-bb0d-b273dc498a7c', 'e95a8486-9484-4c37-8418-cb323a5e781e', NOW(), NOW()),
+('b939bcf0-04ab-4e65-97ad-197fa86dae15', 'c1a9f707-0495-48f3-b3bb-557b38f2fbd7', NOW(), NOW()),
+('b939bcf0-04ab-4e65-97ad-197fa86dae15', '1584c771-5fe6-46df-b3e7-cc63033b56fb', NOW(), NOW());
 
 INSERT INTO "Events" (event_id, event_name, event_owner_id, description, start_date, finish_date, latitude, longitude, location, picture, cancelled, "createdAt", "updatedAt") VALUES 
 ('2b2eab06-148d-4dae-82a6-97e347efe0af', 'Scott Birthday', 'c468a1ce-e9a1-44e5-b0c9-971efdbe52bb', 'Scott birthday party with ping pong and beer', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'Munich', 'http:// leonard.com/bday', false, NOW(), NOW()),
