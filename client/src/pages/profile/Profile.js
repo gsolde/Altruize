@@ -12,8 +12,10 @@ function Profile () {
         <ProfileCard />
       </div>
       <div className="dashboard">
-        <h1>Upcoming events</h1>
-        <JobList />
+        <h1>My upcoming events</h1>
+        <div className="disable-scrollbars">
+          <JobList />
+        </div>
       </div>
     </div>
   );

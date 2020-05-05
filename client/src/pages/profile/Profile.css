@@ -17,20 +17,51 @@
       -ms-flex: 1;
           flex: 1;
   min-width: 350px;
-  margin-right: 10px;
-  border: 1px solid black;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  -webkit-box-shadow: 0 0 5px 1px rgba(52, 49, 49, 0.2);
+          box-shadow: 0 0 5px 1px rgba(52, 49, 49, 0.2);
+  border-radius: 5px;
 }
 
 .profile .dashboard {
   -webkit-box-flex: 3;
       -ms-flex: 3;
           flex: 3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   min-width: 350px;
-  margin-right: 10px;
-  border: 1px solid black;
-  height: 100vh;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  -webkit-box-shadow: 0 0 5px 1px rgba(52, 49, 49, 0.2);
+          box-shadow: 0 0 5px 1px rgba(52, 49, 49, 0.2);
+  border-radius: 5px;
+}
+
+.profile .dashboard h1 {
+  text-align: center;
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.profile .dashboard .disable-scrollbars::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+  /* Chrome/Safari/Webkit */
+}
+
+.profile .dashboard .disable-scrollbars {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+  height: 90vh;
   overflow: hidden;
   overflow-y: auto;
-  scrollbar-width: none;
 }
 /*# sourceMappingURL=Profile.css.map */
