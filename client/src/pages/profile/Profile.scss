@@ -1,0 +1,26 @@
+.profile {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-width: 300px;
+  flex-wrap: wrap;
+
+  .card {
+    flex: 1;
+    min-width: 350px;
+    margin-right: 10px;
+    border: 1px solid black;
+    height: 100vh;
+  }
+
+  .dashboard {
+    flex: 3;
+    min-width: 350px;
+    margin-right: 10px;
+    border: 1px solid black;
+    height: 100vh;
+    overflow: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+}
