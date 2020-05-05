@@ -1,13 +1,21 @@
 .footer-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-evenly;
-  background-color: #04a381;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  background-color: #009688;
   margin-top: auto;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .footer-wrapper .about {
-  width: 60%;
+  width: 50%;
+  min-width: 350px;
   margin-top: 10px;
+  padding: 0 10px;
 }
 
 .footer-wrapper .about p {
@@ -23,27 +31,36 @@
 }
 
 .footer-wrapper .social-media {
-  width: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  min-width: 350px;
+  margin-top: 10px;
+  padding: 0 10px;
 }
 
 .footer-wrapper .social-media .social-media-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .footer-wrapper .social-media span {
   color: white;
 }
 
+.footer-wrapper .social-media ul {
+  padding: 0;
+}
+
 .footer-wrapper .social-media li {
   list-style-type: none;
+  margin-top: 15px;
 }
 
 .footer-wrapper .social-media a {
   text-decoration: none;
   color: white;
+  padding-right: 5px;
 }
 /*# sourceMappingURL=Footer.css.map */

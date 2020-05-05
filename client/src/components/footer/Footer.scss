@@ -1,14 +1,17 @@
-$base-color: rgb(4, 163, 129);
+$base-color:#009688;
 
 .footer-wrapper {
   display: flex;
   justify-content: space-evenly;
   background-color: $base-color;
   margin-top: auto;
+  flex-wrap: wrap;
 
   .about {
-    width: 60%;
+    width: 50%;
+    min-width: 350px;
     margin-top: 10px;
+    padding: 0 10px;
 
     p {
       color: white;
@@ -24,10 +27,9 @@ $base-color: rgb(4, 163, 129);
   }
 
   .social-media {
-    width: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    min-width: 350px;
+    margin-top: 10px;
+    padding: 0 10px;
 
     .social-media-links {
       display: flex;
@@ -38,14 +40,19 @@ $base-color: rgb(4, 163, 129);
       color: white;
     }
 
+    ul {
+      padding: 0;
+    }
+
     li {
       list-style-type: none;
-
+      margin-top: 15px;
     }
 
     a {
       text-decoration: none;
       color: white;
+      padding-right: 5px;
     }
   }
 }

@@ -61,7 +61,7 @@
 
 .job-item .job-card .job-main-info .date {
   font-weight: 500;
-  color: #04a381;
+  color: #009688;
 }
 
 .job-item .job-card .job-main-info .title {
@@ -86,7 +86,7 @@
 }
 
 .job-item .job-card .job-main-info .tag {
-  border: 1px solid #04a381;
+  border: 1px solid #009688;
   border-radius: 10px;
   margin-right: 5px;
   padding: 2px 6px 4px 6px;
@@ -133,7 +133,7 @@
 
 .job-item .job-extra button {
   border: none;
-  background-color: #04a381;
+  background-color: #009688;
   border-radius: 3px;
   margin-right: 5px;
   padding: 10px 10px;
