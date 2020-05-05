@@ -1,5 +1,7 @@
 const db = require('../models/index');
 
+const user = require('./user');
+
 async function getAllTags(req, res) {
   try {
     const tagList = await db.Tag.findAll({});
@@ -30,6 +32,7 @@ async function addTag(req, res) {
 module.exports = {
   getAllTags,
   addTag,
+  usersByTag,
 };
 
 // Queries

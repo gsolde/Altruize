@@ -7,7 +7,8 @@ INSERT INTO "Tags" (tag_name, user_id, event_id, org_id, "createdAt", "updatedAt
 ('Beach', null, '2b2eab06-148d-4dae-82a6-97e347efe0af', null, NOW(), NOW()),
 ('Beach', null, null, 'a72879b4-19c6-4c1f-9b95-a45ed8c16362', NOW(), NOW()),
 ('Beach', null, null, 'b5bbe80f-3511-46da-b438-bf6692bc0f23', NOW(), NOW()),
-('Beach', null, null, '1fbce17f-e211-4d3e-a0e6-ed00a38c454e', NOW(), NOW());
+('Beach', null, null, '1fbce17f-e211-4d3e-a0e6-ed00a38c454e', NOW(), NOW()),
+('Keyboards', null, null, 'c468a1ce-e9a1-44e5-b0c9-971efdbe52bb', NOW(), NOW());
 
 INSERT INTO "Attendances" (user_id, event_id, "createdAt", "updatedAt") VALUES 
 ('d9558336-9d65-4040-80cf-72487462e4ef','2b2eab06-148d-4dae-82a6-97e347efe0af', NOW(), NOW() ),

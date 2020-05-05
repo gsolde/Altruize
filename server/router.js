@@ -24,5 +24,6 @@ router.post('/attendances', attendance.addAttendance);
 
 router.get('/tags', tag.getAllTags);
 router.post('/tags', tag.addTag);
+router.post('/tags/usersByTag', tag.usersByTag);
 
 module.exports = router;
