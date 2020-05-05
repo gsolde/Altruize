@@ -82,7 +82,10 @@ export default function SignUp () {
             Sign up
           </Typography>
           <Typography className={classes.caption} component="subtitle1" variant="caption">
-            If your are an NGO that wants to create & manage Events, flip the switch.
+            {checked ?
+              'You want to find events to help near you? Flip the switch and go for a USER account.'
+              :
+              'If your are an NGO that wants to create & manage Events, flip the switch.'}
           </Typography>
           <ToggleSwitch toggleChecked={toggleChecked} checked={checked} />
           <form className={classes.form} noValidate>
