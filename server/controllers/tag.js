@@ -1,12 +1,30 @@
 const db = require('../models/index');
-
-const user = require('./user');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 async function getAllTags(req, res) {
   try {
     const tagList = await db.Tag.findAll({});
     res.status(200);
     res.json(tagList);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
+async function usersByTag(req, res) {
+  try {
+    const usersByTag = await db.Tag.findAll({
+      where: {
+        tag_name: req.body.tag_name,  
+        user_id: {[Op.not]: null}
+      },
+      order: [['tag_name', 'DESC']],
+      attributes: ['user_id'],
+    });
+    res.status(201);
+    res.json(usersByTag);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

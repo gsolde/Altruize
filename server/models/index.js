@@ -43,4 +43,7 @@ fs.readdirSync(__dirname)
 
 db.sync(); //! db.sync({force:true}) to drop the tables (if changes on the models are made)
 
+
+db.User.hasMany(db.Tag)
+
 module.exports = db;
