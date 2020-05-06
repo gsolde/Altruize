@@ -17,6 +17,7 @@ router.post('/orgs', org.addOrg); // ok
 router.get('/users/active', user.getActiveUsers); //ok
 router.get('/users', user.getAllUsers); //ok
 router.post('/users', user.addUser); //ok
+router.post('/users/addEvent', user.addEvent);
 
 router.get('/tags', tag.getAllTags); // ok
 router.post('/tags', tag.addTag); // ok

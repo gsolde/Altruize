@@ -50,8 +50,25 @@ async function getActiveUsers(req, res) {
   }
 }
 
+async function addEvent(req, res) {
+  try {
+    const user = await db.User.findOne({
+      where: {
+        id: req.body.user_id,
+      },
+    });
+    const addedEvent = await user.addEvent(req.body.event_id);
+    res.status(201);
+    res.json(addedEvent);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
 module.exports = {
   getAllUsers,
   getActiveUsers,
   addUser,
+  addEvent,
 };
