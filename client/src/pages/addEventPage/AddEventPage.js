@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -7,7 +7,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { teal, grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -15,36 +14,73 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 
 export default function AddEventPage() {
   const classes = useStyles();
+  const [eventPic, setEventPic] = useState('');
+  const [editMode, setEditMode] = useState(false);
+
+  const handleEditMode = () => {
+    setEditMode(!editMode);
+  };
+
+  const handleEventPic = (e) => {
+    setEventPic(URL.createObjectURL(e.target.files[0]));
+  };
 
   return (
     <MuiThemeProvider theme={theme}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Container component="main" maxWidth="xs" className={classes.paper}>
           <React.Fragment>
-            <Typography variant="h6" gutterBottom color="primary">
+            <Typography variant="h5" gutterBottom color="primary" className={classes.title}>
               Create Event
         </Typography>
+            <input
+              accept="image/*"
+              disabled={editMode ? false : true}
+              className={classes.addphoto}
+              id="add-image-file"
+              type="file"
+              onChange={handleEventPic}
+            />
+            <label htmlFor="add-image-file">
+              <AddAPhotoIcon
+                // className={classes.avatar}
+                alt="user.image{}" src={eventPic}
+                fontSize="large"
+                onClick={handleEditMode}
+              />
+            </label>
             <div className={classes.dateTime}>
               <KeyboardDatePicker
                 required
                 className={classes.form}
                 disableToolbar
                 variant="inline"
-                format="MM/dd/yyyy"
+                format="dd/MM/yyyy"
                 id="date-picker-inline"
                 label="Date"
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
               />
+            </div>
+            <div className={classes.dateTime}>
               <KeyboardTimePicker
                 required
                 className={classes.time}
                 id="time-picker"
-                label="Time"
+                label="Start"
+                KeyboardButtonProps={{
+                  'aria-label': 'change time',
+                }}
+              />
+              <KeyboardTimePicker
+                required
+                id="time-picker"
+                label="Finish"
                 KeyboardButtonProps={{
                   'aria-label': 'change time',
                 }}
@@ -68,7 +104,7 @@ export default function AddEventPage() {
               fullWidth
               autoComplete="locname"
             />
-            <TextField
+            {/* <TextField
               className={classes.form}
               required
               id="tags"
@@ -76,7 +112,7 @@ export default function AddEventPage() {
               label="Tags"
               fullWidth
               autoComplete="tagname"
-            />
+            /> */}
             <TextField
               required
               className={classes.description}
@@ -119,17 +155,30 @@ const useStyles = makeStyles((theme) => ({
   },
   description: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(5),
+    marginTop: theme.spacing(6),
   },
   submit: {
     margin: theme.spacing(4, 0, 6),
   },
   dateTime: {
+    width: '100%', // Fix IE 11 issue.
     display: 'flex',
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(1),
   },
   time: {
-    marginLeft: theme.spacing(1),
-    marginTop: theme.spacing(1),
-  }
+    width: '100%', // Fix IE 11 issue.
+    display: 'flex',
+    marginRight: theme.spacing(3),
+  },
+  title: {
+    marginBottom: theme.spacing(2),
+    fontWeight: 'bold'
+  },
+  avatar: {
+    width: theme.spacing(12),
+    height: theme.spacing(12),
+  },
+  addphoto: {
+    display: 'none',
+  },
 }));
