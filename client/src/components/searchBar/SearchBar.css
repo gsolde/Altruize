@@ -1,7 +1,6 @@
 .search-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
+
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -21,6 +20,7 @@
       -ms-flex-align: center;
           align-items: center;
   border: 1px solid #9c9a9a;
+
   border-radius: 3px;
   width: 55%;
   height: 3rem;
@@ -44,5 +44,9 @@
 
 .search-wrapper .input .search:focus {
   outline: none;
+}
+
+.search-wrapper .button {
+  margin: 10px 0;
 }
 /*# sourceMappingURL=SearchBar.css.map */

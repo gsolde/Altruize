@@ -1,5 +1,6 @@
 .search-wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-bottom: 2rem;
 
@@ -30,5 +31,9 @@
         outline: none;
     }
     }
+  }
+
+  .button {
+    margin: 10px 0;
   }
 }
