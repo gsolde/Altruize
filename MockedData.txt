@@ -1,12 +1,10 @@
-
-
 INSERT INTO "Events" (event_name, description, start_date, finish_date, latitude, longitude, location, picture, cancelled, "createdAt", "updatedAt") VALUES 
 ('Scott Birthday', 'Scott birthday party with ping pong and beer', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'Munich', 'http:// leonard.com/bday', false, NOW(), NOW()),
 ('Mass haircut for charity', 'if you are a barber, come shave peoples heads for a good cause ', '2020-07-22T00:28:00.840Z', '2020-07-23T00:28:00.840Z', 0, 0, 'Munich', 'http://headshave.com/', false, NOW(), NOW()),
 ('help clean donkeys', 'Our dirty donkeys need to be cleaned, come help clean them', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'donkeyfarm', 'http:// donkeys.com/bday', false, NOW(), NOW()),
 ('give blood for charity', 'A very sick man Mr C Drakula requires blood to live, please donate!', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'Transylvania', 'http://vampyre.com/bday', false, NOW(), NOW()),
 ('Make burritos for the homeless ', 'feed the homeless with burritos and beer', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'Munich', 'http:// leonard.com/bday', false, NOW(), NOW()),
-( 'Giving the homeless a bath', 'give some worthy people a sponge bath', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'Munich', 'http:// leonard.com/bday', false, NOW(), NOW());
+('Giving the homeless a bath', 'give some worthy people a sponge bath', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'Munich', 'http:// leonard.com/bday', false, NOW(), NOW());
 
 INSERT INTO "Orgs" (reg_number, phone_number, verified, org_name, about, email, password, address, profile_pic, active, notes, "createdAt", "updatedAt") VALUES
 ('1234DEQWT5FW4E', '4465685234534', true, 'Greenpace', 'We believe that a billion acts of courage can spark a brighter tomorrow', 'greenpace@greeenpace.com', 'password', 'allgreen 23, Manchester', 'not yet', true, 'No notes yet', NOW(), NOW()),
@@ -38,11 +36,11 @@ INSERT INTO "Tags" ("createdAt", "updatedAt",tag_name) VALUES
 (NOW(), NOW(),'Party');
 
 INSERT INTO "EventsOrg" ("createdAt", "updatedAt", "OrgId", "EventId") VALUES 
-(NOW(), NOW(), 1, 2),
-(NOW(), NOW(), 2, 3),
-(NOW(), NOW(), 3, 4),
-(NOW(), NOW(), 2, 4),
-(NOW(), NOW(), 4, 2);
+(NOW(), NOW(), 1, 1),
+(NOW(), NOW(), 2, 2),
+(NOW(), NOW(), 3, 3),
+(NOW(), NOW(), 5, 4),
+(NOW(), NOW(), 4, 5);
 
 
 
