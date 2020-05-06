@@ -40,7 +40,8 @@ async function getActiveOrgs(req, res) {
       where: {
         active: true,
       },
-      order: [['orgName', 'DESC']],
+      order: [['org_name', 'DESC']],
+      include: [{ model: db.Event }]
     });
     res.status(200);
     res.json(activeOrgs);

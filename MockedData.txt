@@ -37,6 +37,13 @@ INSERT INTO "Tags" ("createdAt", "updatedAt",tag_name) VALUES
 (NOW(), NOW(),'Beach'),
 (NOW(), NOW(),'Party');
 
+INSERT INTO "EventsOrg" ("createdAt", "updatedAt", "OrgId", "EventId") VALUES 
+(NOW(), NOW(), 1, 2),
+(NOW(), NOW(), 2, 3),
+(NOW(), NOW(), 3, 4),
+(NOW(), NOW(), 2, 4),
+(NOW(), NOW(), 4, 2);
+
 
 
 

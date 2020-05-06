@@ -39,7 +39,7 @@ async function getActiveEvents(req, res) {
     const activeEvents = await db.Event.findAll({
       where: {
         cancelled: false,
-        start_date: { [Op.gt]: new Date() },
+        start_date: { [Op.gt]: new Date() }, // Op.gt --> operation greater than
       },
       order: [['start_date', 'DESC']],
       include: [{ model: db.User }],
