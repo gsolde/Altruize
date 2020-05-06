@@ -15,10 +15,11 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import Avatar from '@material-ui/core/Avatar';
 
 export default function AddEventPage() {
   const classes = useStyles();
-  const [eventPic, setEventPic] = useState('');
+  const [eventPic, setEventPic] = useState('https://media-exp1.licdn.com/dms/image/C4D03AQEuhw7UQwbX5A/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=CJ7wNArHAR2JQhlbCWOaTUh2i6JjK6YiuR9bQD3GPCo');
   const [editMode, setEditMode] = useState(false);
 
   const handleEditMode = () => {
@@ -46,12 +47,21 @@ export default function AddEventPage() {
               onChange={handleEventPic}
             />
             <label htmlFor="add-image-file">
+              {eventPic.length > 0 ?
+                <Avatar
+                className={classes.avatar}
+                alt="user.image{}" src={eventPic}
+                fontSize="large"
+                onClick={handleEditMode}
+              />
+              :
               <AddAPhotoIcon
                 // className={classes.avatar}
                 alt="user.image{}" src={eventPic}
                 fontSize="large"
                 onClick={handleEditMode}
               />
+              }
             </label>
             <div className={classes.dateTime}>
               <KeyboardDatePicker
