@@ -19,29 +19,29 @@ export default function Footer () {
           <li className="social-media-links">
             <span>Gerard Soldevilla </span>
             <div>
-              <a href="https://github.com/gsolde" target="_blank"><FontAwesomeIcon icon={faGithub} /> </a>
-              <a href="https://www.linkedin.com/in/gerard-soldevila-lafoz-91ab46125/" target="_blank"><FontAwesomeIcon icon={faLinkedinIn} /></a>
+              <a href="https://github.com/gsolde" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /> </a>
+              <a href="https://www.linkedin.com/in/gerard-soldevila-lafoz-91ab46125/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedinIn} /></a>
             </div>
           </li>
           <li className="social-media-links">
             <span>Scott Burgess </span>
             <div>
-              <a href="https://github.com/Scottburg" target="_blank"><FontAwesomeIcon icon={faGithub} /> </a>
-              <a href="https://www.linkedin.com/in/scott-burgess-a6368815/?originalSubdomain=uk" target="_blank"><FontAwesomeIcon icon={faLinkedinIn} /></a>
+              <a href="https://github.com/Scottburg" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /> </a>
+              <a href="https://www.linkedin.com/in/scott-burgess-a6368815/?originalSubdomain=uk" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedinIn} /></a>
             </div>
           </li>
           <li className="social-media-links">
             <span>Alejandro Gutiérrez</span>
             <div>
-              <a href="https://github.com/AlejandroGutierrezB" target="_blank"><FontAwesomeIcon icon={faGithub} /> </a>
-              <a href="https://www.linkedin.com/in/alejandro-guti%C3%A9rrez-barcenilla-283b9811b/?originalSubdomain=es" target="_blank"><FontAwesomeIcon icon={faLinkedinIn} /></a>
+              <a href="https://github.com/AlejandroGutierrezB" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /> </a>
+              <a href="https://www.linkedin.com/in/alejandro-guti%C3%A9rrez-barcenilla-283b9811b/?originalSubdomain=es" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedinIn} /></a>
             </div>
           </li>
           <li className="social-media-links">
             <span>Leonard Schilcher</span>
             <div>
-              <a href="https://github.com/LeonardvS" target="_blank"><FontAwesomeIcon icon={faGithub} /> </a>
-              <a href="https://www.linkedin.com/in/leonard-von-schilcher-758a7437/" target="_blank"><FontAwesomeIcon icon={faLinkedinIn} /></a>
+              <a href="https://github.com/LeonardvS" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /> </a>
+              <a href="https://www.linkedin.com/in/leonard-von-schilcher-758a7437/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedinIn} /></a>
             </div>
           </li>
         </ul>

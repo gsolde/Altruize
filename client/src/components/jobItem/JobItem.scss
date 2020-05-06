@@ -66,17 +66,11 @@ $base-color: #009688;
         padding: 2px 6px 4px 6px;
       }
 
-      .job-attendees {
+      .job-footer {
         display: flex;
         flex-wrap: wrap;
-        justify-content: flex-start;
-      }
-
-      .attendee {
-        margin-right: 10px;
-        color: darkgray;
-        font-style: italic;
-
+        align-items: center;
+        justify-content: space-between;
       }
     }
   }
@@ -92,23 +86,6 @@ $base-color: #009688;
       text-align: justify;
       margin-bottom : 2rem ;
 
-    }
-
-    button {
-      border: none;
-      background-color: $base-color;
-      border-radius: 3px;
-      margin-right: 5px;
-      padding: 10px 10px;
-      color: white;
-      font-weight: 700;
-      transition: all .2s ease-in-out;
-    }
-
-    button:hover {
-      cursor: pointer;
-      transform: scale(1.1);
-      background-color: rgb(43, 192, 160);
     }
   }
 }
