@@ -92,23 +92,6 @@
   padding: 2px 6px 4px 6px;
 }
 
-.job-item .job-card .job-main-info .job-attendees {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-}
-
-.job-item .job-card .job-main-info .attendee {
-  margin-right: 10px;
-  color: darkgray;
-  font-style: italic;
-}
-
 .job-item .job-extra {
   display: -webkit-box;
   display: -ms-flexbox;

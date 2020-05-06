@@ -2,14 +2,30 @@ import React, { useState } from 'react';
 import './JobItem.css';
 
 import moment from 'moment';
+import Avatar from '@material-ui/core/Avatar';
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
+import { withStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
 
+
+const StyledAvatarGroup = withStyles((theme) => ({
+  root: {
+    marginLeft: theme.spacing(1),
+  },
+  avatar: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+    fontSize: '1rem',
+  },
+
+}))(AvatarGroup);
+
 // TODO: change cursor
-export default function JobItem({ job }) {
+export default function JobItem ({ job }) {
   const [clicked, setClicked] = useState(true);
 
-  function onClickHandler() {
+  function onClickHandler () {
     return setClicked(!clicked);
   }
 
@@ -29,11 +45,13 @@ export default function JobItem({ job }) {
             {` ${job.location}`}
           </div>
           <div className="job-tags">{job.tags.map((tag) => {
-            return <div className="tag" key={tag}>{tag}</div>
+            return <div className="tag" key={tag}>{tag}</div>;
           })}</div>
-          <div className="job-attendees">{job.attendees.map((attendee) => {
-            return <div className="attendee" key={attendee}>{attendee}</div>
-          })}</div>
+          <StyledAvatarGroup max={4}>
+            {job.attendees.map((attendee) => {
+              return <Avatar key={attendee} alt={attendee} src={`${attendee.img}`} />;
+            })}
+          </StyledAvatarGroup>
         </div>
       </div>
       {/* {clicked ?
