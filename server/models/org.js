@@ -2,35 +2,36 @@ module.exports = (sequelize, DataTypes) => {
   const Org = sequelize.define('Org', {
     reg_number: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     phone_number: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     verified: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
+      defaultValue: true,
     },
     org_name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     about: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     address: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     profile_pic: {
       type: DataTypes.STRING,
@@ -38,7 +39,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     active: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: true,
     },
     notes: {
       type: DataTypes.TEXT,

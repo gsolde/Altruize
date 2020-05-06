@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     cancelled: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
     },
   });
 

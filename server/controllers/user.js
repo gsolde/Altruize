@@ -2,7 +2,9 @@ const db = require('../models/index');
 
 async function getAllUsers(req, res) {
   try {
-    const UserList = await db.User.findAll({});
+    const UserList = await db.User.findAll({
+      include: [{ model: db.Event }],
+    });
     res.status(200);
     res.json(UserList);
   } catch (error) {

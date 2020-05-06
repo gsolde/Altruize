@@ -4,22 +4,21 @@ const user = require('./controllers/user');
 const org = require('./controllers/org');
 const tag = require('./controllers/tag');
 
-router.get('/events', event.getAllEvents); 
-router.get('/events/active', event.getActiveEvents); 
-router.get('/events/past', event.getPastEvents); 
-router.get('/events/cancelled', event.getCancelledEvents); 
-router.post('/events', event.addEvent);
+router.get('/events', event.getAllEvents); // OK Organisations not coming through
+router.get('/events/active', event.getActiveEvents); // OK Organisations not coming through
+router.get('/events/past', event.getPastEvents); // OK Organisations not coming through
+router.get('/events/cancelled', event.getCancelledEvents); // OK Organisations not coming through
+router.post('/events', event.addEvent); // Ok but not creating connection to org
 
-router.get('/orgs/active', org.getActiveOrgs);
-router.get('/orgs', org.getAllOrgs);
-router.post('/orgs', org.addOrg);
+router.get('/orgs/active', org.getActiveOrgs); //ok
+router.get('/orgs', org.getAllOrgs); //ok
+router.post('/orgs', org.addOrg); // ok
 
-router.get('/users/active', user.getActiveUsers);
-router.get('/users', user.getAllUsers);
-router.post('/users', user.addUser);
+router.get('/users/active', user.getActiveUsers); //ok
+router.get('/users', user.getAllUsers); //ok
+router.post('/users', user.addUser); //ok
 
-router.get('/tags', tag.getAllTags);
-router.post('/tags', tag.addTag);
-router.post('/tags/usersByTag', tag.usersByTag);
+router.get('/tags', tag.getAllTags); // ok
+router.post('/tags', tag.addTag); // ok
 
 module.exports = router;

@@ -14,10 +14,10 @@ async function getAllOrgs(req, res) {
 async function addOrg(req, res) {
   try {
     const addedOrg = await db.Org.create({
-      reg_number: req.body.regNumber,
+      reg_number: req.body.reg_number,
       phone_number: req.body.phoneNumber,
       verified: req.body.verified,
-      org_name: req.body.orgName,
+      org_name: req.body.org_name,
       about: req.body.about,
       email: req.body.email,
       password: req.body.password,
@@ -41,7 +41,7 @@ async function getActiveOrgs(req, res) {
         active: true,
       },
       order: [['org_name', 'DESC']],
-      include: [{ model: db.Event }]
+      include: [{ model: db.Event }],
     });
     res.status(200);
     res.json(activeOrgs);

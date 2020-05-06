@@ -5,7 +5,7 @@ const Op = Sequelize.Op;
 async function getAllEvents(req, res) {
   try {
     const eventList = await db.Event.findAll({
-      include: [{ model: db.User }]
+      include: [{ model: db.User }, { model: db.Org }],
     });
     res.status(200);
     res.json(eventList);
@@ -23,7 +23,7 @@ async function getActiveEvents(req, res) {
         finish_date: { [Op.gt]: new Date() }, // Op.gt --> operation greater than
       },
       order: [['start_date', 'DESC']],
-      include: [{ model: db.User }],
+      include: [{ model: db.User }, { model: db.Org }],
     });
     res.status(200);
     res.json(activeEvents);
@@ -40,7 +40,7 @@ async function getPastEvents(req, res) {
         finish_date: { [Op.lt]: new Date() }, // Op.lt --> operation less than
       },
       order: [['start_date', 'DESC']],
-      include: [{ model: db.User }],
+      include: [{ model: db.User }, { model: db.Org }],
     });
     res.status(200);
     res.json(pastEvents);
@@ -57,7 +57,7 @@ async function getCancelledEvents(req, res) {
         cancelled: true,
       },
       order: [['start_date', 'DESC']],
-      include: [{ model: db.User }],
+      include: [{ model: db.User }, { model: db.Org }],
     });
     res.status(200);
     res.json(cancelledEvents);
@@ -88,11 +88,10 @@ async function addEvent(req, res) {
   }
 }
 
-
 module.exports = {
   getAllEvents,
   addEvent,
   getActiveEvents,
-  getPastEvents, 
+  getPastEvents,
   getCancelledEvents,
 };
