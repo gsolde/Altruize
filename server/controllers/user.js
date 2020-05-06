@@ -50,7 +50,7 @@ async function getActiveUsers(req, res) {
   }
 }
 
-async function addEvent(req, res) {
+async function addEventToUser(req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -70,5 +70,5 @@ module.exports = {
   getAllUsers,
   getActiveUsers,
   addUser,
-  addEvent,
+  addEventToUser,
 };
