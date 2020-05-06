@@ -43,7 +43,21 @@ fs.readdirSync(__dirname)
 
 db.sync(); // db.sync({force:true}) to drop the tables (if changes on the models are made)
 
+// Data relationships - creates junction tables through sequelize
+
 db.User.belongsToMany(db.Event, { through: 'UsersEvents' });
 db.Event.belongsToMany(db.User, { through: 'UsersEvents' });
+
+db.Event.belongsTo(db.Org, { through: 'EventsOrg' });
+db.Org.belongsToMany(db.Event, { through: 'EventsOrg' });
+
+db.Tag.belongsToMany(db.User, { through: 'TagsUsers' });
+db.User.belongsToMany(db.Tag, { through: 'TagsUsers' });
+
+db.Tag.belongsToMany(db.Org, { through: 'TagsOrgs' });
+db.Org.belongsToMany(db.Tag, { through: 'TagsOrgs' });
+
+db.Tag.belongsToMany(db.Event, { through: 'TagsEvents' });
+db.Event.belongsToMany(db.Tag, { through: 'TagsEvents' });
 
 module.exports = db;

@@ -1,13 +1,9 @@
 //TODO: Confirm mandatory fields!
 
-const Event = require('./event')
+const Event = require('./event');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    user_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-    },
     user_name: {
       type: DataTypes.STRING,
       allowNull: true,

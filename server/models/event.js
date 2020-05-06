@@ -1,16 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Event = sequelize.define('Event', {
-    event_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-    },
     event_name: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    event_owner_id: {
-      type: DataTypes.UUID,
-      allowNull: true,
     },
     description: {
       type: DataTypes.TEXT,

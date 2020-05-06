@@ -4,18 +4,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    user_id: {
-      type: DataTypes.UUID,
-      allowNull: true,
-    },
-    event_id: {
-      type: DataTypes.UUID,
-      allowNull: true,
-    },
-    org_id: {
-      type: DataTypes.UUID,
-      allowNull: true,
-    },
   });
 
   return Tag;

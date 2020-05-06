@@ -1,9 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
   const Org = sequelize.define('Org', {
-    org_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-    },
     reg_number: {
       type: DataTypes.STRING,
       allowNull: false,

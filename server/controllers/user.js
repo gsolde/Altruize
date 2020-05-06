@@ -14,7 +14,6 @@ async function getAllUsers(req, res) {
 async function addUser(req, res) {
   try {
     const addedUser = await db.User.create({
-      user_id: req.body.user_id,
       user_name: req.body.user_name,
       about_me: req.body.about_me,
       email: req.body.email,
@@ -39,7 +38,7 @@ async function getActiveUsers(req, res) {
       where: {
         active: true,
       },
-      include: [{model: db.Event}]
+      include: [{ model: db.Event }],
     });
     res.status(200);
     res.json(activeUsers);

@@ -16,9 +16,7 @@ async function getAllEvents(req, res) {
 async function addEvent(req, res) {
   try {
     const addedEvent = await db.Event.create({
-      event_id: req.body.event_id,
       event_name: req.body.event_name,
-      event_owner_id: req.body.event_owner_id,
       description: req.body.description,
       start_date: req.body.start_date,
       finish_date: req.body.finish_date,
@@ -44,7 +42,7 @@ async function getActiveEvents(req, res) {
         start_date: { [Op.gt]: new Date() },
       },
       order: [['start_date', 'DESC']],
-      include: [{model: db.User}]
+      include: [{ model: db.User }],
     });
     res.status(200);
     res.json(activeEvents);

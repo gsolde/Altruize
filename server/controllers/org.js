@@ -14,7 +14,6 @@ async function getAllOrgs(req, res) {
 async function addOrg(req, res) {
   try {
     const addedOrg = await db.Org.create({
-      org_id: req.body.orgId,
       reg_number: req.body.regNumber,
       phone_number: req.body.phoneNumber,
       verified: req.body.verified,
