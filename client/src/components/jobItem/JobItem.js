@@ -81,7 +81,7 @@ export default function JobItem ({ job }) {
           })}
           </div>
           <div className="job-footer">
-            <StyledAvatarGroup max={6}>
+            <StyledAvatarGroup max={4}>
               {job.attendees.map((attendee) => {
                 return <Avatar key={attendee} alt={attendee} src={`${attendee.img}`} />;
               })}
