@@ -25,7 +25,6 @@ export default function SearchBar () {
           className="search"
           type="text"
           placeholder="Search..."
-          startIcon={<SearchIcon />}
           onChange={handleSearch}
         />
       </div>
