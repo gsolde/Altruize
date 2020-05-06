@@ -10,7 +10,6 @@ import StyledAvatarGroup from '../styledAvatarGroup/StyledAvatarGroup';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
-import CardActions from '@material-ui/core/CardActions';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -87,7 +86,6 @@ export default function JobItem ({ job }) {
               })}
             </StyledAvatarGroup>
             <div className="job-actions">
-              {/* <CardActions> */}
               <IconButton aria-label="add to favorites" onClick={handleLikedClick}>
                 <CheckCircleIcon className={liked ? classes.liked : null} />
               </IconButton>
@@ -101,7 +99,6 @@ export default function JobItem ({ job }) {
               >
                 <ExpandMoreIcon />
               </IconButton>
-              {/* </CardActions> */}
             </div>
           </div>
         </div>
