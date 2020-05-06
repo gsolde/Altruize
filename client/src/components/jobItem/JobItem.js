@@ -2,24 +2,13 @@ import React, { useState } from 'react';
 import './JobItem.css';
 
 import moment from 'moment';
+
 import Avatar from '@material-ui/core/Avatar';
-import AvatarGroup from '@material-ui/lab/AvatarGroup';
-import { withStyles } from '@material-ui/core/styles';
+import StyledAvatarGroup from '../styledAvatarGroup/StyledAvatarGroup';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
 
-
-const StyledAvatarGroup = withStyles((theme) => ({
-  root: {
-    marginLeft: theme.spacing(1),
-  },
-  avatar: {
-    width: theme.spacing(3),
-    height: theme.spacing(3),
-    fontSize: '1rem',
-  },
-
-}))(AvatarGroup);
 
 // TODO: change cursor
 export default function JobItem ({ job }) {
