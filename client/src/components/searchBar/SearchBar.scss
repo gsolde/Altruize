@@ -1,8 +1,6 @@
 .search-wrapper {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-
   margin-bottom: 2rem;
 
   .input {
@@ -11,7 +9,6 @@
     align-content: center;
     align-items: center;
     border: 1px solid rgb(156, 154, 154);
-
     border-radius: 3px;
     width: 55%;
     height: 3rem;
@@ -33,9 +30,5 @@
         outline: none;
     }
     }
-  }
-
-  .button {
-    margin: 10px 0;
   }
 }
