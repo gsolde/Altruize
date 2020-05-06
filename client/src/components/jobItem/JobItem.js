@@ -36,7 +36,7 @@ export default function JobItem ({ job }) {
           <div className="job-tags">{job.tags.map((tag) => {
             return <div className="tag" key={tag}>{tag}</div>;
           })}</div>
-          <StyledAvatarGroup max={4}>
+          <StyledAvatarGroup max={6}>
             {job.attendees.map((attendee) => {
               return <Avatar key={attendee} alt={attendee} src={`${attendee.img}`} />;
             })}

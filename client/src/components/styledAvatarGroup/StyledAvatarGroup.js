@@ -9,7 +9,7 @@ const StyledAvatarGroup = withStyles((theme) => ({
   avatar: {
     width: theme.spacing(3),
     height: theme.spacing(3),
-    fontSize: '1rem',
+    fontSize: '0.8rem',
   },
 
 }))(AvatarGroup);
