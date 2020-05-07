@@ -17,9 +17,10 @@ router.post('/orgs', org.addOrg);
 router.post('/orgs/addTagToOrg', org.addTagToOrg);
 
 router.get('/users/active', user.getActiveUsers);
+router.post('/users/getUserByName', user.getUser);
 router.get('/users', user.getAllUsers);
 router.post('/users', user.addUser);
-router.post('/users/addEventToUser', user.addEventToUser); // Associate event to a certain user.
+router.post('/users/addEventToUser', user.addEventToUser);
 router.post('/users/addTagToUser', user.addTagToUser);
 
 router.get('/tags', tag.getAllTags);

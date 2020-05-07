@@ -2,11 +2,27 @@ const db = require('../models/index');
 
 async function getAllUsers(req, res) {
   try {
-    const UserList = await db.User.findAll({
+    const userList = await db.User.findAll({
       include: [{ model: db.Event }, {model: db.Tag}],
     });
     res.status(200);
-    res.json(UserList);
+    res.json(userList);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
+async function getUser(req, res) {
+  try {
+    const user = await db.User.findOne({
+      where: {
+        user_name: req.body.user_name,
+      },
+      include: [{ model: db.Event }, {model: db.Tag}]
+    });
+    res.status(200);
+    res.json(user);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -84,6 +100,7 @@ async function addTagToUser(req, res) {
 
 module.exports = {
   getAllUsers,
+  getUser,
   getActiveUsers,
   addUser,
   addEventToUser,
