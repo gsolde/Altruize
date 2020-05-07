@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Nav.css';
 import { Link } from "react-router-dom";
 
@@ -11,7 +11,7 @@ import fakeAuth from '../../FakeAuth';
 
 export default function Nav () {
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -38,7 +38,6 @@ export default function Nav () {
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
-            keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
