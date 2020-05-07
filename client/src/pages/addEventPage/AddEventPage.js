@@ -36,6 +36,7 @@ export default function AddEventPage() {
       [event.target.name]: event.target.value,
     });
   }
+
   function resetInputFields() {
     return setFormData({
       date: null,
@@ -64,36 +65,11 @@ export default function AddEventPage() {
   return (
     <MuiThemeProvider theme={theme}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Container component="main" maxWidth="xs" className={classes.paper}>
-          <React.Fragment>
+        <form onSubmit={handleSubmit}>
+          <Container component="main" maxWidth="xs" className={classes.paper}>
             <Typography variant="h5" gutterBottom color="primary" className={classes.title}>
               Create Event
-        </Typography>
-            <input
-              accept="image/*"
-              disabled={editMode ? false : true}
-              className={classes.addphoto}
-              id="add-image-file"
-              type="file"
-              onChange={handleEventPic}
-            />
-            <label htmlFor="add-image-file">
-              {eventPic.length > 0 ?
-                <Avatar
-                  className={classes.avatar}
-                  alt="user.image{}" src={eventPic}
-                  fontSize="large"
-                  onClick={handleEditMode}
-                />
-                :
-                <AddAPhotoIcon
-                  // className={classes.avatar}
-                  alt="user.image{}" src={eventPic}
-                  fontSize="large"
-                  onClick={handleEditMode}
-                />
-              }
-            </label>
+            </Typography>
             <div className={classes.dateTime}>
               <KeyboardDatePicker
                 required
@@ -124,7 +100,7 @@ export default function AddEventPage() {
                   startTime: event
                 })}
                 className={classes.time}
-                id="time-picker"
+                id="startTime-picker"
                 label="Start"
                 KeyboardButtonProps={{
                   'aria-label': 'change time',
@@ -138,7 +114,7 @@ export default function AddEventPage() {
                   ...formData,
                   finishTime: event
                 })}
-                id="time-picker"
+                id="finishTime-picker"
                 label="Finish"
                 KeyboardButtonProps={{
                   'aria-label': 'change time',
@@ -183,12 +159,11 @@ export default function AddEventPage() {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={handleSubmit}
             >
               Add Event
           </Button>
-          </React.Fragment>
-        </Container>
+          </Container>
+        </form>
       </MuiPickersUtilsProvider>
     </MuiThemeProvider>
   );
