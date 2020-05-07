@@ -64,6 +64,7 @@ export default function JobItem ({ job }) {
   function handleExpandClick () {
     setExpanded(!expanded);
   };
+
   function handleLikedClick () {
     let event_id = job.id;
     let user_id = fakeUser.id;
@@ -78,7 +79,8 @@ export default function JobItem ({ job }) {
     <div className="job-item">
       <div className="job-card">
         <div className="job-img-owner">
-          <img className="img" src={job.picture} alt={job.event_name} />
+          <img className="img" src={"https://images.unsplash.com/photo-1569254983547-44dc559f038f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80"} alt={job.event_name} />
+          {/* <img className="img" src={job.picture} alt={job.event_name} /> */}
           <div className="event-owner">{job.Orgs[0] !== undefined ? job.Orgs[0].org_name : null}</div>
         </div>
         <div className="job-main-info">
