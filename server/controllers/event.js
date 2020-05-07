@@ -15,22 +15,6 @@ async function getAllEvents(req, res) {
   }
 }
 
-async function getEvent(req, res) {
-  try {
-    const event = await db.Event.findOne({
-      where: {
-        id: req.body.event_id,
-      },
-      include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
-    });
-    res.status(200);
-    res.json(event);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
-}
-
 async function getActiveEvents(req, res) {
   try {
     const activeEvents = await db.Event.findAll({
@@ -83,6 +67,22 @@ async function getCancelledEvents(req, res) {
   }
 }
 
+async function getEvent(req, res) {
+  try {
+    const event = await db.Event.findOne({
+      where: {
+        id: req.body.event_id,
+      },
+      include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
+    });
+    res.status(200);
+    res.json(event);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
 async function addEvent(req, res) {
   try {
     const addedEvent = await db.Event.create({
@@ -120,6 +120,29 @@ async function addTagToEvent(req, res) {
   }
 }
 
+async function updateEvent(req, res) {
+  try {
+    const updatedEvent = await db.Event.update(
+      {
+        event_name: req.body.event_name,
+        description: req.body.description,
+        start_date: req.body.start_date,
+        finish_date: req.body.finish_date,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
+        location: req.body.location,
+        picture: req.body.picture
+      },
+      { where: { id: req.body.event_id } }
+    );
+    res.status(201);
+    res.json(updatedEvent);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
 module.exports = {
   getAllEvents,
   getEvent,
@@ -128,4 +151,5 @@ module.exports = {
   getPastEvents,
   getCancelledEvents,
   addTagToEvent,
+  updateEvent
 };
