@@ -3,7 +3,7 @@ const db = require('../models/index');
 async function getAllUsers(req, res) {
   try {
     const userList = await db.User.findAll({
-      include: [{ model: db.Event }, {model: db.Tag}],
+      include: [{ model: db.Event }, { model: db.Tag }],
     });
     res.status(200);
     res.json(userList);
@@ -19,12 +19,28 @@ async function getUser(req, res) {
       where: {
         user_name: req.body.user_name,
       },
-      include: [{ model: db.Event }, {model: db.Tag}]
+      include: [{ model: db.Event }, { model: db.Tag }]
     });
     res.status(200);
     res.json(user);
   } catch (error) {
     console.log(error);
+    res.sendStatus(500);
+  }
+}
+
+async function getActiveUsers(req, res) {
+  try {
+    const activeUsers = await db.User.findAll({
+      where: {
+        active: true,
+      },
+      include: [{ model: db.Event }],
+    });
+    res.status(200);
+    res.json(activeUsers);
+  } catch (error) {
+    console.log(error); //eslint-disable-line
     res.sendStatus(500);
   }
 }
@@ -50,18 +66,22 @@ async function addUser(req, res) {
   }
 }
 
-async function getActiveUsers(req, res) {
+async function updateUser(req, res) {
   try {
-    const activeUsers = await db.User.findAll({
-      where: {
-        active: true,
+    const updatedUser = await db.User.update(
+      {
+        user_name: req.body.user_name,
+        about_me: req.body.about_me,
+        email: req.body.email,
+        address: req.body.address,
+        profile_pic: req.body.profile_pic
       },
-      include: [{ model: db.Event }],
-    });
-    res.status(200);
-    res.json(activeUsers);
+      { where: { id: req.body.user_id } }
+    );
+    res.status(201);
+    res.json(updatedUser);
   } catch (error) {
-    console.log(error); //eslint-disable-line
+    console.log(error);
     res.sendStatus(500);
   }
 }
@@ -104,5 +124,6 @@ module.exports = {
   getActiveUsers,
   addUser,
   addEventToUser,
-  addTagToUser
+  addTagToUser,
+  updateUser,
 };

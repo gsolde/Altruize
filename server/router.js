@@ -24,6 +24,7 @@ router.post('/users', user.addUser);
 router.post('/users/getUserByName', user.getUser);
 router.post('/users/addEventToUser', user.addEventToUser);
 router.post('/users/addTagToUser', user.addTagToUser);
+router.put('/users/updateUser', user.updateUser);
 
 router.get('/tags', tag.getAllTags);
 router.post('/tags', tag.addTag);
