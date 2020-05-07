@@ -2,7 +2,9 @@ const db = require('../models/index');
 
 async function getAllOrgs(req, res) {
   try {
-    const orgList = await db.Org.findAll({});
+    const orgList = await db.Org.findAll({
+      include: [{ model: db.Event }, {model: db.Tag}]
+    });
     res.status(200);
     res.json(orgList);
   } catch (error) {
@@ -51,8 +53,25 @@ async function getActiveOrgs(req, res) {
   }
 }
 
+async function addTagToOrg(req, res) {
+  try {
+    const org = await db.Org.findOne({
+      where: {
+        id: req.body.org_id,
+      },
+    });
+    const addedTag = await org.addTag(req.body.tag_id);
+    res.status(201);
+    res.json(addedTag);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
 module.exports = {
   getAllOrgs,
   getActiveOrgs,
   addOrg,
+  addTagToOrg
 };

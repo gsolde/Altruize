@@ -5,7 +5,7 @@ const Op = Sequelize.Op;
 async function getAllEvents(req, res) {
   try {
     const eventList = await db.Event.findAll({
-      include: [{ model: db.User }, { model: db.Org }],
+      include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
     });
     res.status(200);
     res.json(eventList);
@@ -88,10 +88,27 @@ async function addEvent(req, res) {
   }
 }
 
+async function addTagToEvent(req, res) {
+  try {
+    const event = await db.Event.findOne({
+      where: {
+        id: req.body.event_id,
+      },
+    });
+    const addedTag = await event.addTag(req.body.tag_id);
+    res.status(201);
+    res.json(addedTag);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
 module.exports = {
   getAllEvents,
   addEvent,
   getActiveEvents,
   getPastEvents,
   getCancelledEvents,
+  addTagToEvent,
 };

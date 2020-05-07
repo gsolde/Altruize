@@ -9,15 +9,18 @@ router.get('/events/active', event.getActiveEvents);
 router.get('/events/past', event.getPastEvents);
 router.get('/events/cancelled', event.getCancelledEvents);
 router.post('/events', event.addEvent);
+router.post('/events/addTagToEvent', event.addTagToEvent);
 
 router.get('/orgs/active', org.getActiveOrgs);
 router.get('/orgs', org.getAllOrgs);
 router.post('/orgs', org.addOrg);
+router.post('/orgs/addTagToOrg', org.addTagToOrg);
 
 router.get('/users/active', user.getActiveUsers);
 router.get('/users', user.getAllUsers);
 router.post('/users', user.addUser);
 router.post('/users/addEventToUser', user.addEventToUser); // Associate event to a certain user.
+router.post('/users/addTagToUser', user.addTagToUser);
 
 router.get('/tags', tag.getAllTags);
 router.post('/tags', tag.addTag);
