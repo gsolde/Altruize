@@ -3,7 +3,6 @@ import './JobList.css';
 import JobItem from '../jobItem/JobItem.js';
 import { getAllActiveEvents } from '../../services/EventsAPI';
 
-import jobs from '../../mockData.json';
 
 export default function JobList () {
 

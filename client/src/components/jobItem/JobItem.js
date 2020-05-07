@@ -15,6 +15,8 @@ import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
+import { addEventToUser } from '../../services/UsersAPI';
+
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -46,6 +48,14 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function JobItem ({ job }) {
+
+  //! fake user for development purposes
+  const fakeUser = {
+    id: 4,
+    user_name: 'Rob',
+  };
+  //!
+
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -55,6 +65,12 @@ export default function JobItem ({ job }) {
     setExpanded(!expanded);
   };
   function handleLikedClick () {
+    let event_id = job.id;
+    let user_id = fakeUser.id;
+    addEventToUser({
+      user_id,
+      event_id
+    });
     setLiked(!liked);
   };
 
