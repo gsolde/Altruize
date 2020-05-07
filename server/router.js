@@ -5,14 +5,16 @@ const org = require('./controllers/org');
 const tag = require('./controllers/tag');
 
 router.get('/events', event.getAllEvents);
+router.post('/events/getEventById', event.getEvent);
 router.get('/events/active', event.getActiveEvents);
 router.get('/events/past', event.getPastEvents);
 router.get('/events/cancelled', event.getCancelledEvents);
 router.post('/events', event.addEvent);
 router.post('/events/addTagToEvent', event.addTagToEvent);
 
-router.get('/orgs/active', org.getActiveOrgs);
 router.get('/orgs', org.getAllOrgs);
+router.post('/orgs/getOrgByName', org.getOrg);
+router.get('/orgs/active', org.getActiveOrgs);
 router.post('/orgs', org.addOrg);
 router.post('/orgs/addTagToOrg', org.addTagToOrg);
 

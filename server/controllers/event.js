@@ -15,6 +15,22 @@ async function getAllEvents(req, res) {
   }
 }
 
+async function getEvent(req, res) {
+  try {
+    const event = await db.Event.findOne({
+      where: {
+        id: req.body.event_id,
+      },
+      include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
+    });
+    res.status(200);
+    res.json(event);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
 async function getActiveEvents(req, res) {
   try {
     const activeEvents = await db.Event.findAll({
@@ -106,6 +122,7 @@ async function addTagToEvent(req, res) {
 
 module.exports = {
   getAllEvents,
+  getEvent,
   addEvent,
   getActiveEvents,
   getPastEvents,

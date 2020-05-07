@@ -13,6 +13,22 @@ async function getAllOrgs(req, res) {
   }
 }
 
+async function getOrg(req, res) {
+  try {
+    const org = await db.Org.findOne({
+      where: {
+        org_name: req.body.org_name,
+      },
+      include: [{ model: db.Event }, {model: db.Tag}]
+    });
+    res.status(200);
+    res.json(org);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
 async function addOrg(req, res) {
   try {
     const addedOrg = await db.Org.create({
@@ -71,6 +87,7 @@ async function addTagToOrg(req, res) {
 
 module.exports = {
   getAllOrgs,
+  getOrg,
   getActiveOrgs,
   addOrg,
   addTagToOrg
