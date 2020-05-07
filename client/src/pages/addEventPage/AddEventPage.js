@@ -14,13 +14,9 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import Avatar from '@material-ui/core/Avatar';
 
 export default function AddEventPage() {
   const classes = useStyles();
-  const [eventPic, setEventPic] = useState('https://media-exp1.licdn.com/dms/image/C4D03AQEuhw7UQwbX5A/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=CJ7wNArHAR2JQhlbCWOaTUh2i6JjK6YiuR9bQD3GPCo');
-  const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
     date: null,
     startTime: null,
@@ -54,42 +50,31 @@ export default function AddEventPage() {
     resetInputFields();
   }
 
-  const handleEditMode = () => {
-    setEditMode(!editMode);
-  };
-
-  const handleEventPic = (event) => {
-    setEventPic(URL.createObjectURL(event.target.files[0]));
-  };
-
   return (
     <MuiThemeProvider theme={theme}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           <Container component="main" maxWidth="xs" className={classes.paper}>
             <Typography variant="h5" gutterBottom color="primary" className={classes.title}>
               Create Event
             </Typography>
-            <div className={classes.dateTime}>
-              <KeyboardDatePicker
-                required
-                name="date"
-                value={formData.date}
-                onChange={event => setFormData({
-                  ...formData,
-                  date: event
-                })}
-                className={classes.form}
-                disableToolbar
-                variant="inline"
-                format="dd/MM/yyyy"
-                id="date-picker-inline"
-                label="Date"
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-              />
-            </div>
+            <KeyboardDatePicker
+              required
+              name="date"
+              value={formData.date}
+              onChange={event => setFormData({
+                ...formData,
+                date: event
+              })}
+              className={classes.form}
+              variant="inline"
+              format="dd/MM/yyyy"
+              id="date-picker-inline"
+              label="Date"
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+              }}
+            />
             <div className={classes.dateTime}>
               <KeyboardTimePicker
                 name="startTime"
@@ -140,7 +125,6 @@ export default function AddEventPage() {
               name="location"
               label="Location"
               fullWidth
-              autoComplete="locname"
             />
             <TextField
               required
