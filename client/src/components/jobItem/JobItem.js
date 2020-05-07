@@ -50,7 +50,6 @@ export default function JobItem ({ job }) {
   const [expanded, setExpanded] = useState(false);
   const [liked, setLiked] = useState(false);
 
-  console.log('job: ', job.Orgs[0]);
 
   function handleExpandClick () {
     setExpanded(!expanded);
@@ -85,7 +84,7 @@ export default function JobItem ({ job }) {
           <div className="job-footer">
             <StyledAvatarGroup max={4}>
               {job.Users.map((attendee) => {
-                return <Avatar key={attendee} alt={attendee} src={`${attendee.profile_pic}`} />;
+                return <Avatar key={attendee.id} alt={attendee.user_name} src={`${attendee.profile_pic}`} />;
               })}
             </StyledAvatarGroup>
             <div className="job-actions">
