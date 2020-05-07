@@ -21,13 +21,44 @@ export default function AddEventPage() {
   const classes = useStyles();
   const [eventPic, setEventPic] = useState('https://media-exp1.licdn.com/dms/image/C4D03AQEuhw7UQwbX5A/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=CJ7wNArHAR2JQhlbCWOaTUh2i6JjK6YiuR9bQD3GPCo');
   const [editMode, setEditMode] = useState(false);
+  const [formData, setFormData] = useState({
+    date: null,
+    startTime: null,
+    finishTime: null,
+    eventName: "",
+    location: "",
+    description: ""
+  });
+
+  function updateFormData(event) {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  }
+  function resetInputFields() {
+    return setFormData({
+      date: null,
+      startTime: null,
+      finishTime: null,
+      eventName: "",
+      location: "",
+      description: ""
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(formData);
+    resetInputFields();
+  }
 
   const handleEditMode = () => {
     setEditMode(!editMode);
   };
 
-  const handleEventPic = (e) => {
-    setEventPic(URL.createObjectURL(e.target.files[0]));
+  const handleEventPic = (event) => {
+    setEventPic(URL.createObjectURL(event.target.files[0]));
   };
 
   return (
@@ -49,23 +80,29 @@ export default function AddEventPage() {
             <label htmlFor="add-image-file">
               {eventPic.length > 0 ?
                 <Avatar
-                className={classes.avatar}
-                alt="user.image{}" src={eventPic}
-                fontSize="large"
-                onClick={handleEditMode}
-              />
-              :
-              <AddAPhotoIcon
-                // className={classes.avatar}
-                alt="user.image{}" src={eventPic}
-                fontSize="large"
-                onClick={handleEditMode}
-              />
+                  className={classes.avatar}
+                  alt="user.image{}" src={eventPic}
+                  fontSize="large"
+                  onClick={handleEditMode}
+                />
+                :
+                <AddAPhotoIcon
+                  // className={classes.avatar}
+                  alt="user.image{}" src={eventPic}
+                  fontSize="large"
+                  onClick={handleEditMode}
+                />
               }
             </label>
             <div className={classes.dateTime}>
               <KeyboardDatePicker
                 required
+                name="date"
+                value={formData.date}
+                onChange={event => setFormData({
+                  ...formData,
+                  date: event
+                })}
                 className={classes.form}
                 disableToolbar
                 variant="inline"
@@ -79,7 +116,13 @@ export default function AddEventPage() {
             </div>
             <div className={classes.dateTime}>
               <KeyboardTimePicker
+                name="startTime"
                 required
+                value={formData.startTime}
+                onChange={event => setFormData({
+                  ...formData,
+                  startTime: event
+                })}
                 className={classes.time}
                 id="time-picker"
                 label="Start"
@@ -89,6 +132,12 @@ export default function AddEventPage() {
               />
               <KeyboardTimePicker
                 required
+                name="finishTime"
+                value={formData.finishTime}
+                onChange={event => setFormData({
+                  ...formData,
+                  finishTime: event
+                })}
                 id="time-picker"
                 label="Finish"
                 KeyboardButtonProps={{
@@ -99,34 +148,31 @@ export default function AddEventPage() {
             <TextField
               className={classes.form}
               required
+              value={formData.eventName}
+              onChange={event => updateFormData(event)}
               id="eventName"
               name="eventName"
               label="Event"
               fullWidth
-              autoComplete="ename"
             />
             <TextField
               className={classes.form}
               required
+              onChange={event => updateFormData(event)}
+              value={formData.location}
               id="location"
               name="location"
               label="Location"
               fullWidth
               autoComplete="locname"
             />
-            {/* <TextField
-              className={classes.form}
-              required
-              id="tags"
-              name="tags"
-              label="Tags"
-              fullWidth
-              autoComplete="tagname"
-            /> */}
             <TextField
               required
               className={classes.description}
-              id="outlined-multiline-static"
+              onChange={event => updateFormData(event)}
+              value={formData.description}
+              id="description"
+              name="description"
               label="Description"
               multiline
               rows={4}
@@ -137,6 +183,7 @@ export default function AddEventPage() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={handleSubmit}
             >
               Add Event
           </Button>
