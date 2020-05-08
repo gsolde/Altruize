@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { isUserLoggedIn } from '../../actions';
 import fakeAuth from '../../FakeAuth';
+import { isUserLoggedIn, userId, orgId } from '../../actions';
 
 
 function AuthButton () {
@@ -17,6 +17,8 @@ function AuthButton () {
       onClick={() => {
         fakeAuth.signout(() => history.push("/"));
         dispatch(isUserLoggedIn());
+        dispatch(userId(2));
+        dispatch(orgId(3));
       }}
     >
       Log out

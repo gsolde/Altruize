@@ -23,7 +23,7 @@ async function getActiveEvents(req, res) {
         finish_date: { [Op.gt]: new Date() }, // Op.gt --> operation greater than
       },
       order: [['start_date', 'DESC']],
-      include: [{ model: db.User }, { model: db.Org }],
+      include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
     });
     res.status(200);
     res.json(activeEvents);
