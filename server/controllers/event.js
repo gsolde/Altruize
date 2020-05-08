@@ -120,6 +120,22 @@ async function addTagToEvent(req, res) {
   }
 }
 
+async function addOrgToEvent(req, res) {
+  try {
+    const event = await db.Event.findOne({
+      where: {
+        id: req.body.event_id,
+      },
+    });
+    const addedOrg = await event.addOrg(req.body.org_id);
+    res.status(201);
+    res.json(addedOrg);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
 async function updateEvent(req, res) {
   try {
     const updatedEvent = await db.Event.update(
@@ -151,5 +167,6 @@ module.exports = {
   getPastEvents,
   getCancelledEvents,
   addTagToEvent,
-  updateEvent
+  updateEvent,
+  addOrgToEvent
 };
