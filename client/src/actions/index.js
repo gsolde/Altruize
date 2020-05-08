@@ -3,3 +3,17 @@ export const isUserLoggedIn = () => {
     type: 'LOG_IN'
   };
 };
+
+export const userId = (id) => {
+  return {
+    type: 'LOG_IN_USER',
+    payload: id
+  };
+};
+
+export const orgId = (id) => {
+  return {
+    type: 'LOG_IN_ORG',
+    payload: id
+  };
+};
