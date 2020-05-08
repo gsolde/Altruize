@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { addEvent } from '../../services/EventsAPI';
+import { useSelector } from 'react-redux';
 
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -17,12 +18,14 @@ import {
 
 export default function AddEventPage() {
   const classes = useStyles();
+  const orgId = useSelector((state) => state.orgId);
   const [formData, setFormData] = useState({
     start_date: null,
     finish_date: null,
-    event_name: "",
-    location: "",
-    description: ""
+    event_name: '',
+    location: '',
+    description: '',
+    picture: ''
   });
 
   function updateFormData(event) {
@@ -36,16 +39,16 @@ export default function AddEventPage() {
     return setFormData({
       start_date: null,
       finish_date: null,
-      event_name: "",
-      location: "",
-      description: ""
+      event_name: '',
+      location: '',
+      description: '',
+      picture: ''
     });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
-    addEvent(formData);
+    addEvent(formData, orgId);
     resetInputFields();
   }
 
@@ -109,6 +112,16 @@ export default function AddEventPage() {
               id="location"
               name="location"
               label="Location"
+              fullWidth
+            />
+            <TextField
+              className={classes.form}
+              required
+              onChange={event => updateFormData(event)}
+              value={formData.picture}
+              id="picture"
+              name="picture"
+              label="Add an image url"
               fullWidth
             />
             <TextField

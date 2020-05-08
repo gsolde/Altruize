@@ -10,4 +10,5 @@ const allReducers = combineReducers(
     userId: isLoggedInUserReducer,
   }
 );
+
 export default allReducers;

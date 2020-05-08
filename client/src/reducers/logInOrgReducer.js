@@ -1,4 +1,4 @@
-const isLoggedInOrgReducer = (state = 2, action) => {
+const isLoggedInOrgReducer = (state = 5, action) => {
   switch (action.type) {
     case 'LOG_IN_ORG':
       return action.payload;

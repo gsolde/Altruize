@@ -17,8 +17,32 @@ export default function SignUp() {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
   const [user, setUser] = useState({
-
+      user_name: '',
+      email: '',
+      password: ''
   });
+
+  function updateUser(event) {
+    setUser({
+      ...user,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  function resetInputFields() {
+    return setUser({
+      user_name: '',
+      email: '',
+      password: ''
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(user);
+    addUser(user);
+    resetInputFields();
+  }
 
   const toggleChecked = () => {
     setChecked(!checked);
@@ -41,24 +65,26 @@ export default function SignUp() {
               'If your are an NGO that wants to create & manage Events, flip the switch.'}
           </Typography>
           <ToggleSwitch toggleChecked={toggleChecked} checked={checked} />
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="fname"
-                  name={checked ? 'NGO Name' : 'firstName'}
+                  name={checked ? 'NGO Name' : 'user_name'}
                   variant="outlined"
                   required
                   fullWidth
-                  id={checked ? 'NGO Name' : 'firstName'}
-                  label={checked ? 'NGO Name' : 'First Name'}
+                  id={checked ? 'NGO Name' : 'user_name'}
+                  label={checked ? 'NGO Name' : 'User Name'}
                   autoFocus
+                  value={user.user_name}
+                  onChange={event => updateUser(event)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
-                  required
+                  // required
                   fullWidth
                   id={checked ? 'Register code' : 'lastName'}
                   label={checked ? 'Register code' : 'Last Name'}
@@ -75,6 +101,8 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={user.email}
+                  onChange={event => updateUser(event)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -87,6 +115,8 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  value={user.password}
+                  onChange={event => updateUser(event)}
                 />
               </Grid>
               {!checked ?

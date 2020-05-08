@@ -11,9 +11,27 @@ export async function getAllPastEvents() {
   return response.json();
 };
 
-export async function addEvent(body) {
-  console.log("addEvent -> body", JSON.stringify(body))
+export async function addEvent(body, org_id) {
   const response = await fetch(`${API_URL}/events`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+
+  const res = await response.json();
+  addOrgToEvent(org_id, res.id)
+  return res;
+};
+
+async function addOrgToEvent(org_id, event_id) {
+  const body = {
+    "org_id": org_id,
+    "event_id": event_id
+  };
+
+  const response = await fetch(`${API_URL}/events/addOrgToEvent`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
@@ -23,4 +41,3 @@ export async function addEvent(body) {
   return response.json();
 };
 
-//TODO update the relationship between event and org when creating event.
