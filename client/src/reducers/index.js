@@ -6,8 +6,8 @@ import isLoggedInOrgReducer from './logInOrgReducer';
 const allReducers = combineReducers(
   {
     isLoggedIn: isLoggedInReducer,
-    isLoggedInOrg: isLoggedInOrgReducer,
-    isLoggedInUser: isLoggedInUserReducer
+    orgId: isLoggedInOrgReducer,
+    userId: isLoggedInUserReducer
   }
 );
 export default allReducers;

@@ -29,6 +29,22 @@ async function getUser(req, res) {
   }
 }
 
+async function getUserById(req, res) {
+  try {
+    const user = await db.User.findOne({
+      where: {
+        id: req.body.user_id,
+      },
+      include: [{ model: db.Event }, { model: db.Tag }]
+    });
+    res.status(200);
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
 async function getActiveUsers(req, res) {
   try {
     const activeUsers = await db.User.findAll({
@@ -121,6 +137,7 @@ async function addTagToUser(req, res) {
 module.exports = {
   getAllUsers,
   getUser,
+  getUserById,
   getActiveUsers,
   addUser,
   addEventToUser,

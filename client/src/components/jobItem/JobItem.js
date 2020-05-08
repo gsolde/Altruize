@@ -17,6 +17,9 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 import { addEventToUser } from '../../services/UsersAPI';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { isUserLoggedIn, userId, orgId } from '../../actions';
+
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -48,13 +51,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function JobItem ({ job }) {
-
-  //! fake user for development purposes
-  const fakeUser = {
-    id: 4,
-    user_name: 'Rob',
-  };
-  //!
+  const fakeId= useSelector(state => state.userId);
+  const attendees = job.Users.map((attendee) => attendee);
+  console.log(attendees);
 
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
@@ -67,7 +66,7 @@ export default function JobItem ({ job }) {
 
   function handleLikedClick () {
     let event_id = job.id;
-    let user_id = fakeUser.id;
+    let user_id = fakeId;
     addEventToUser({
       user_id,
       event_id
