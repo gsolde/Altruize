@@ -13,7 +13,7 @@ export default function JobList () {
   
   useEffect(() => {
     getActiveEvents();
-  }, []);
+  }, [jobs]);
 
   return (
     <div className="list-wrapper">
