@@ -3,16 +3,14 @@ import './JobList.css';
 import JobItem from '../jobItem/JobItem.js';
 import { getAllActiveEvents } from '../../services/EventsAPI';
 
-
 export default function JobList () {
-
   const [jobs, setJobs] = useState([]);
 
   const getActiveEvents = async () => {
     const jobList = await getAllActiveEvents();
     setJobs(jobList);
   };
-
+  
   useEffect(() => {
     getActiveEvents();
   }, []);

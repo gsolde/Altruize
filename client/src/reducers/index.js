@@ -7,7 +7,7 @@ const allReducers = combineReducers(
   {
     isLoggedIn: isLoggedInReducer,
     orgId: isLoggedInOrgReducer,
-    userId: isLoggedInUserReducer
+    userId: isLoggedInUserReducer,
   }
 );
 
