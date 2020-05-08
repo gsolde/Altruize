@@ -11,8 +11,29 @@ export async function getUserByName(user) {
   return response.json();
 };
 
+export async function getUserById(user) {
+  const response = await fetch(`${API_URL}/users/getUserById`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
+  return response.json();
+};
+
 export async function addEventToUser(event) {
   const response = await fetch(`${API_URL}/users/addEventToUser`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(event),
+  });
+  return response.json();
+};
+export async function deleteEventFromUser(event) {
+  const response = await fetch(`${API_URL}/users/deleteEventFromUser`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',

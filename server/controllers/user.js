@@ -118,6 +118,22 @@ async function addEventToUser(req, res) {
   }
 }
 
+async function deleteEventFromUser(req, res) {
+  try {
+    const user = await db.User.findOne({
+      where: {
+        id: req.body.user_id,
+      },
+    });
+    const deletedEvent = await user.removeEvent(req.body.event_id);
+    res.status(201);
+    res.json(deletedEvent);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
 async function addTagToUser(req, res) {
   try {
     const user = await db.User.findOne({
@@ -141,6 +157,7 @@ module.exports = {
   getActiveUsers,
   addUser,
   addEventToUser,
+  deleteEventFromUser,
   addTagToUser,
   updateUser,
 };

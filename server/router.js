@@ -26,6 +26,7 @@ router.post('/users', user.addUser);
 router.post('/users/getUserByName', user.getUser);
 router.post('/users/getUserById', user.getUserById);
 router.post('/users/addEventToUser', user.addEventToUser);
+router.post('/users/deleteEventFromUser', user.deleteEventFromUser);
 router.post('/users/addTagToUser', user.addTagToUser);
 router.put('/users/updateUser', user.updateUser);
 
