@@ -11,7 +11,6 @@ export async function getAllPastEvents() {
   return response.json();
 };
 
-
 export async function addEvent(body) {
   console.log("addEvent -> body", JSON.stringify(body))
   const response = await fetch(`${API_URL}/events`, {
