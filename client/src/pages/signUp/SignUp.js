@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+import { addUser } from '../../services/UsersAPI';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import { indigo, pink, red, teal } from '@material-ui/core/colors';
@@ -7,63 +10,15 @@ import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
 
-
-
-
-const theme = createMuiTheme({
-  palette: {
-    primary: teal,
-    secondary: pink,
-  },
-});
-
-
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatarUser: {
-    margin: theme.spacing(1),
-    backgroundColor: teal[200],
-  },
-  avatarNGO: {
-    margin: theme.spacing(1),
-    backgroundColor: pink[200],
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  caption: {
-    margin: theme.spacing(2),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  google: {
-    margin: theme.spacing(0.5, 0, 0.5),
-    backgroundColor: red.A200,
-    color: 'white',
-  },
-  facebook: {
-    margin: theme.spacing(0.5, 0, 0.5),
-    backgroundColor: indigo[800],
-    color: 'white',
-  },
-}));
-
-export default function SignUp () {
+export default function SignUp() {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
+  const [user, setUser] = useState({
+
+  });
 
   const toggleChecked = () => {
     setChecked(!checked);
@@ -106,7 +61,7 @@ export default function SignUp () {
                   required
                   fullWidth
                   id={checked ? 'Register code' : 'lastName'}
-                  label={checked ? 'Register code' : 'LastName'}
+                  label={checked ? 'Register code' : 'Last Name'}
                   name={checked ? 'Register code' : 'Last Name'}
                   autoComplete="lname"
                 />
@@ -180,3 +135,48 @@ export default function SignUp () {
     </MuiThemeProvider>
   );
 }
+
+const theme = createMuiTheme({
+  palette: {
+    primary: teal,
+    secondary: pink,
+  },
+});
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatarUser: {
+    margin: theme.spacing(1),
+    backgroundColor: teal[200],
+  },
+  avatarNGO: {
+    margin: theme.spacing(1),
+    backgroundColor: pink[200],
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  caption: {
+    margin: theme.spacing(2),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  google: {
+    margin: theme.spacing(0.5, 0, 0.5),
+    backgroundColor: red.A200,
+    color: 'white',
+  },
+  facebook: {
+    margin: theme.spacing(0.5, 0, 0.5),
+    backgroundColor: indigo[800],
+    color: 'white',
+  },
+}));

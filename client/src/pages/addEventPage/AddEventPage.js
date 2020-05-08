@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { addEvent } from '../../services/EventsAPI';
 
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -11,17 +12,15 @@ import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
+  KeyboardDateTimePicker,
 } from '@material-ui/pickers';
 
 export default function AddEventPage() {
   const classes = useStyles();
   const [formData, setFormData] = useState({
-    date: null,
-    startTime: null,
-    finishTime: null,
-    eventName: "",
+    start_date: null,
+    finish_date: null,
+    event_name: "",
     location: "",
     description: ""
   });
@@ -35,10 +34,9 @@ export default function AddEventPage() {
 
   function resetInputFields() {
     return setFormData({
-      date: null,
-      startTime: null,
-      finishTime: null,
-      eventName: "",
+      start_date: null,
+      finish_date: null,
+      event_name: "",
       location: "",
       description: ""
     });
@@ -47,6 +45,7 @@ export default function AddEventPage() {
   function handleSubmit(event) {
     event.preventDefault();
     console.log(formData);
+    addEvent(formData);
     resetInputFields();
   }
 
@@ -58,61 +57,47 @@ export default function AddEventPage() {
             <Typography variant="h5" gutterBottom color="primary" className={classes.title}>
               Create Event
             </Typography>
-            <KeyboardDatePicker
+            <KeyboardDateTimePicker
               required
-              name="date"
-              value={formData.date}
+              name="start_date"
+              value={formData.start_date}
               onChange={event => setFormData({
                 ...formData,
-                date: event
+                start_date: event
               })}
               className={classes.form}
               variant="inline"
-              format="dd/MM/yyyy"
+              format="dd/MM/yyyy hh:mm a"
               id="date-picker-inline"
-              label="Date"
+              label="Start"
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
             />
-            <div className={classes.dateTime}>
-              <KeyboardTimePicker
-                name="startTime"
-                required
-                value={formData.startTime}
-                onChange={event => setFormData({
-                  ...formData,
-                  startTime: event
-                })}
-                className={classes.time}
-                id="startTime-picker"
-                label="Start"
-                KeyboardButtonProps={{
-                  'aria-label': 'change time',
-                }}
-              />
-              <KeyboardTimePicker
-                required
-                name="finishTime"
-                value={formData.finishTime}
-                onChange={event => setFormData({
-                  ...formData,
-                  finishTime: event
-                })}
-                id="finishTime-picker"
-                label="Finish"
-                KeyboardButtonProps={{
-                  'aria-label': 'change time',
-                }}
-              />
-            </div>
+            <KeyboardDateTimePicker
+              required
+              name="finish_date"
+              value={formData.finish_date}
+              onChange={event => setFormData({
+                ...formData,
+                finish_date: event
+              })}
+              className={classes.form}
+              variant="inline"
+              format="dd/MM/yyyy hh:mm a"
+              id="date-picker-inline"
+              label="Finish"
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+              }}
+            />
             <TextField
               className={classes.form}
               required
-              value={formData.eventName}
+              value={formData.event_name}
               onChange={event => updateFormData(event)}
-              id="eventName"
-              name="eventName"
+              id="event_name"
+              name="event_name"
               label="Event"
               fullWidth
             />
