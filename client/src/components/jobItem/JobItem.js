@@ -79,8 +79,8 @@ export default function JobItem ({ job }) {
     <div className="job-item">
       <div className="job-card">
         <div className="job-img-owner">
-          <img className="img" src={"https://images.unsplash.com/photo-1569254983547-44dc559f038f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80"} alt={job.event_name} />
-          {/* <img className="img" src={job.picture} alt={job.event_name} /> */}
+          {/* for development only <img className="img" src={"https://images.unsplash.com/photo-1569254983547-44dc559f038f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80"} alt={job.event_name} /> */}
+          <img className="img" src={job.picture} alt={job.event_name} />
           <div className="event-owner">{job.Orgs[0] !== undefined ? job.Orgs[0].org_name : null}</div>
         </div>
         <div className="job-main-info">
@@ -91,9 +91,9 @@ export default function JobItem ({ job }) {
             <FontAwesomeIcon icon={faMapMarker} />
             {` ${job.location}`}
           </div>
-          {job.tags ?
-            <div className="job-tags">{job.tags.map((tag) => {
-              return <div className="tag" key={tag}>{tag}</div>;
+          {job.Tags ?
+            <div className="job-tags">{job.Tags.map((tag) => {
+              return <div className="tag" key={tag.id}>{tag.tag_name}</div>;
             })}
             </div>
             :
