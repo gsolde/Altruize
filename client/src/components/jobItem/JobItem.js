@@ -15,6 +15,8 @@ import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
+import { addEventToUser } from '../../services/UsersAPI';
+
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -45,18 +47,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
-// TODO: change cursor
 export default function JobItem ({ job }) {
+
+  //! fake user for development purposes
+  const fakeUser = {
+    id: 4,
+    user_name: 'Rob',
+  };
+  //!
+
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [liked, setLiked] = useState(false);
 
+
   function handleExpandClick () {
     setExpanded(!expanded);
   };
+
   function handleLikedClick () {
+    let event_id = job.id;
+    let user_id = fakeUser.id;
+    addEventToUser({
+      user_id,
+      event_id
+    });
     setLiked(!liked);
   };
 
@@ -64,25 +79,30 @@ export default function JobItem ({ job }) {
     <div className="job-item">
       <div className="job-card">
         <div className="job-img-owner">
-          <img className="img" src={job.profilePic} alt={job.name} />
-          <div className="event-owner">{job.eventOwner}</div>
+          {/* for development only <img className="img" src={"https://images.unsplash.com/photo-1569254983547-44dc559f038f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80"} alt={job.event_name} /> */}
+          <img className="img" src={job.picture} alt={job.event_name} />
+          <div className="event-owner">{job.Orgs[0] !== undefined ? job.Orgs[0].org_name : null}</div>
         </div>
         <div className="job-main-info">
-          <div className="date">{moment(job.startDate).format('Do, MMMM YYYY, h:mm a')}</div>
-          {/* <div>{job.finishDate}</div> */}
-          <div className="title">{job.name.toUpperCase()}</div>
+          <div className="date">{moment(job.start_date).format('Do, MMMM YYYY, h:mm a')}</div>
+          {/* <div>{job.finish_date}</div> */}
+          <div className="title">{job.event_name.toUpperCase()}</div>
           <div className="location">
             <FontAwesomeIcon icon={faMapMarker} />
             {` ${job.location}`}
           </div>
-          <div className="job-tags">{job.tags.map((tag) => {
-            return <div className="tag" key={tag}>{tag}</div>;
-          })}
-          </div>
+          {job.Tags ?
+            <div className="job-tags">{job.Tags.map((tag) => {
+              return <div className="tag" key={tag.id}>{tag.tag_name}</div>;
+            })}
+            </div>
+            :
+            <div className="tag" >No tags</div>
+          }
           <div className="job-footer">
             <StyledAvatarGroup max={4}>
-              {job.attendees.map((attendee) => {
-                return <Avatar key={attendee} alt={attendee} src={`${attendee.img}`} />;
+              {job.Users.map((attendee) => {
+                return <Avatar key={attendee.id} alt={attendee.user_name} src={`${attendee.profile_pic}`} />;
               })}
             </StyledAvatarGroup>
             <div className="job-actions">
@@ -108,7 +128,6 @@ export default function JobItem ({ job }) {
           <div className="job-description">{job.description}</div>
           <Button
             variant="contained"
-            // color={liked ? 'grey' : 'primary'}
             className={liked ? classes.likeBtn : classes.waitBtn}
             startIcon={liked ? <CheckIcon /> : <PlaylistAddIcon />}
             onClick={handleLikedClick}
