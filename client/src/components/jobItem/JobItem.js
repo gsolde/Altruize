@@ -76,6 +76,7 @@ export default function JobItem ({ job }) {
       });
     }
     setLiked(!liked);
+    
   };
 
   return (
