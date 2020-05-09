@@ -22,7 +22,7 @@ async function getActiveEvents(req, res) {
         cancelled: false,
         finish_date: { [Op.gt]: new Date() }, // Op.gt --> operation greater than
       },
-      order: [['start_date', 'DESC']],
+      order: [['start_date', 'ASC']],
       include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
     });
     res.status(200);
@@ -39,7 +39,7 @@ async function getPastEvents(req, res) {
       where: {
         finish_date: { [Op.lt]: new Date() }, // Op.lt --> operation less than
       },
-      order: [['start_date', 'DESC']],
+      order: [['start_date', 'ASC']],
       include: [{ model: db.User }, { model: db.Org }],
     });
     res.status(200);
@@ -56,7 +56,7 @@ async function getCancelledEvents(req, res) {
       where: {
         cancelled: true,
       },
-      order: [['start_date', 'DESC']],
+      order: [['start_date', 'ASC']],
       include: [{ model: db.User }, { model: db.Org }],
     });
     res.status(200);

@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { teal, grey } from '@material-ui/core/colors';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { eventSelection } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
@@ -52,12 +52,6 @@ export default function ListMenu() {
             onClick={handleClick}
           >
             MY EVENTS
-          </Button>
-          <Button
-            variant={selected === "UP NEXT" ? "contained" : "outlined"}
-            onClick={handleClick}
-          >
-            UP NEXT
           </Button>
           <Button
             variant={selected === "RECOMMENDED" ? "contained" : "outlined"}
