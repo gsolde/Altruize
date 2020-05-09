@@ -35,7 +35,7 @@ async function getUserById(req, res) {
       where: {
         id: req.body.user_id,
       },
-      include: [{ model: db.Event }, { model: db.Tag }]
+      include: [{ model: db.Event , include: [{model: db.User}, {model: db.Org}, {model: db.Tag}]}, { model: db.Tag }]
     });
     res.status(200);
     res.json(user);
