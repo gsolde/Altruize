@@ -25,7 +25,6 @@ export default function JobList() {
 
   const getMyEvents = async () => {
     const myEventList = await getUserById({user_id: userId});
-    console.log(myEventList.Events);
     setJobs(myEventList.Events);
   }
 
