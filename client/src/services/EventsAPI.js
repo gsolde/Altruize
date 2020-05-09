@@ -1,6 +1,5 @@
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
-
 export async function getAllActiveEvents() {
   const response = await fetch(`${API_URL}/events/active`);
   return response.json();

@@ -17,3 +17,23 @@ export const orgId = (id) => {
     payload: id
   };
 };
+
+export const getTags = () => {
+  return {
+    type: 'GET_TAGS',
+  };
+};
+
+// export const getTagsSuccess = (tags) => {
+//   return {
+//     type: 'GET_TAGS_SUCCESS',
+//     data: tags
+//   };
+// };
+
+// export const getTagsError = (error) => {
+//   return {
+//     type: 'GET_TAGS_ERROR',
+//     error
+//   };
+// };

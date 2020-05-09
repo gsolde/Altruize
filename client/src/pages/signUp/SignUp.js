@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { addUser } from '../../services/UsersAPI';
+import { addOrg } from '../../services/OrgsAPI';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -16,11 +17,9 @@ import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
 export default function SignUp() {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
-  const [user, setUser] = useState({
-      user_name: '',
-      email: '',
-      password: ''
-  });
+  const [user, setUser] = useState({ user_name: '', email: '', password: ''});
+  const [org, setOrg] = useState({ org_name: '', email: '', password: '', reg_number: '' });
+
 
   function updateUser(event) {
     setUser({
@@ -29,18 +28,37 @@ export default function SignUp() {
     });
   }
 
-  function resetInputFields() {
-    return setUser({
-      user_name: '',
-      email: '',
-      password: ''
+  function updateOrg(event) {
+    setOrg({
+      ...org,
+      [event.target.name]: event.target.value,
     });
+  }
+
+  function resetInputFields() {
+    if (checked) {
+      return setOrg({
+        org_name: '',
+        email: '',
+        password: ''
+      });
+    } else {
+      return setUser({
+        user_name: '',
+        email: '',
+        password: ''
+      });
+    }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(user);
-    addUser(user);
+    console.log(org);
+    if (checked) {
+      addOrg(org);
+    } else {
+      addUser(user);
+    }
     resetInputFields();
   }
 
@@ -65,20 +83,20 @@ export default function SignUp() {
               'If your are an NGO that wants to create & manage Events, flip the switch.'}
           </Typography>
           <ToggleSwitch toggleChecked={toggleChecked} checked={checked} />
-          <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="fname"
-                  name={checked ? 'NGO Name' : 'user_name'}
                   variant="outlined"
                   required
                   fullWidth
-                  id={checked ? 'NGO Name' : 'user_name'}
-                  label={checked ? 'NGO Name' : 'User Name'}
+                  id={checked ? 'org_name' : 'user_name'}
+                  name={checked ? 'org_name' : 'user_name'}
+                  label={checked ? 'Organization' : 'User Name'}
                   autoFocus
-                  value={user.user_name}
-                  onChange={event => updateUser(event)}
+                  value={checked ? org.org_name : user.user_name}
+                  onChange={checked ? event => updateOrg(event) : event => updateUser(event)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -86,9 +104,9 @@ export default function SignUp() {
                   variant="outlined"
                   // required
                   fullWidth
-                  id={checked ? 'Register code' : 'lastName'}
-                  label={checked ? 'Register code' : 'Last Name'}
-                  name={checked ? 'Register code' : 'Last Name'}
+                  id={checked ? 'reg_number' : 'lastName'}
+                  name={checked ? 'reg_number' : 'lastName'}
+                  label={checked ? 'Registration number' : 'Last Name'}
                   autoComplete="lname"
                 />
               </Grid>
@@ -98,11 +116,11 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
                   name="email"
+                  label="Email Address"
                   autoComplete="email"
-                  value={user.email}
-                  onChange={event => updateUser(event)}
+                  value={checked ? org.email : user.email}
+                  onChange={checked ? event => updateOrg(event) : event => updateUser(event)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -115,8 +133,8 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
-                  value={user.password}
-                  onChange={event => updateUser(event)}
+                  value={checked ? org.password : user.password}
+                  onChange={checked ? event => updateOrg(event) : event => updateUser(event)}
                 />
               </Grid>
               {!checked ?
