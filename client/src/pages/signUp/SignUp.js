@@ -53,7 +53,6 @@ export default function SignUp() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(org);
     if (checked) {
       addOrg(org);
     } else {
