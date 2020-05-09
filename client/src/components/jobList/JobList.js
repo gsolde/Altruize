@@ -3,17 +3,34 @@ import './JobList.css';
 import JobItem from '../jobItem/JobItem.js';
 import { getAllActiveEvents } from '../../services/EventsAPI';
 
-export default function JobList () {
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserById } from '../../services/UsersAPI';
+
+export default function JobList() {
+
+  const dispatch = useDispatch();
+  const userId = useSelector(state => state.userId); // we can pass it to children an take it form JobItem
   const [jobs, setJobs] = useState([]);
+  const eventQuerySelector = useSelector((state) => state.eventSelection);
+
+  const getEvents = async () => {
+    if(eventQuerySelector === "ALL EVENTS") getActiveEvents();
+    if(eventQuerySelector === "MY EVENTS") getMyEvents();
+  }
 
   const getActiveEvents = async () => {
     const jobList = await getAllActiveEvents();
     setJobs(jobList);
   };
-  
+
+  const getMyEvents = async () => {
+    const myEventList = await getUserById({user_id: userId});
+    setJobs(myEventList.Events);
+  }
+
   useEffect(() => {
-    getActiveEvents();
-  }, []);
+    getEvents();
+  }, [eventQuerySelector]);
 
   return (
     <div className="list-wrapper">

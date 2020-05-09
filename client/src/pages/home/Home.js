@@ -4,7 +4,7 @@ import SearchBar from '../../components/searchBar/SearchBar';
 import ListMenu from '../../components/listMenu/ListMenu';
 
 
-function Home () {
+function Home() {
   return (
     <div className="Home">
       <SearchBar />

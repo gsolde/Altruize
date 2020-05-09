@@ -18,22 +18,9 @@ export const orgId = (id) => {
   };
 };
 
-export const getTags = () => {
+export const eventSelection = (selection) => {
   return {
-    type: 'GET_TAGS',
-  };
+    type: 'EVENT_SELECTION',
+    payload: selection
+  }
 };
-
-// export const getTagsSuccess = (tags) => {
-//   return {
-//     type: 'GET_TAGS_SUCCESS',
-//     data: tags
-//   };
-// };
-
-// export const getTagsError = (error) => {
-//   return {
-//     type: 'GET_TAGS_ERROR',
-//     error
-//   };
-// };
