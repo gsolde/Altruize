@@ -9,7 +9,7 @@ const allReducers = combineReducers(
     isLoggedIn: isLoggedInReducer,
     orgId: isLoggedInOrgReducer,
     userId: isLoggedInUserReducer,
-    eventSelection: eventListSelectorReducer,
+    eventSelection: eventListSelectorReducer
   }
 );
 
