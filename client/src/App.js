@@ -6,7 +6,6 @@ import {
   Route,
 } from "react-router-dom";
 
-
 import Nav from './components/Nav/Nav';
 import Footer from './components/footer/Footer';
 import Home from './pages/home/Home';
@@ -18,8 +17,7 @@ import NotFound from './pages/notfound/NotFound';
 import SignUp from './pages/signUp/SignUp';
 import PrivateRoute from './pages/PrivateRoute';
 
-
-function App () {
+function App() {
   return (
     <Router>
       <div className="App">
@@ -44,9 +42,5 @@ function App () {
     </Router>
   );
 }
-//TODO make all pages load under the nabvar div wrapper
-//TODO make footer always at the bottom and get in touch should go under about (progressive)
-//add copyright to the brand
-//Complete names
 
 export default App;

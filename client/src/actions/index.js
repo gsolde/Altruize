@@ -17,3 +17,10 @@ export const orgId = (id) => {
     payload: id
   };
 };
+
+export const eventSelection = (selection) => {
+  return {
+    type: 'EVENT_SELECTION',
+    payload: selection
+  }
+};
