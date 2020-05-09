@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import fakeAuth from '../../FakeAuth';
-import { isUserLoggedIn, userId, orgId, getTags } from '../../actions';
+import { isUserLoggedIn, userId, orgId } from '../../actions';
 
 
 function AuthButton() {
@@ -28,7 +28,6 @@ function AuthButton() {
           dispatch(isUserLoggedIn());
           dispatch(userId(1));
           dispatch(orgId(1));
-          dispatch(getTags());
         }}
       >
         Log in
