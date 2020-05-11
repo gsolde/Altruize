@@ -9,7 +9,7 @@ export async function getUserByName(user) {
     body: JSON.stringify(user),
   });
   return response.json();
-};
+}
 
 export async function getUserById(user) {
   const response = await fetch(`${API_URL}/users/getUserById`, {
@@ -20,7 +20,7 @@ export async function getUserById(user) {
     body: JSON.stringify(user),
   });
   return response.json();
-};
+}
 
 export async function addEventToUser(event) {
   const response = await fetch(`${API_URL}/users/addEventToUser`, {
@@ -31,7 +31,7 @@ export async function addEventToUser(event) {
     body: JSON.stringify(event),
   });
   return response.json();
-};
+}
 export async function deleteEventFromUser(event) {
   const response = await fetch(`${API_URL}/users/deleteEventFromUser`, {
     method: 'POST',
@@ -41,7 +41,7 @@ export async function deleteEventFromUser(event) {
     body: JSON.stringify(event),
   });
   return response.json();
-};
+}
 
 export async function addUser(user) {
   const response = await fetch(`${API_URL}/users`, {
@@ -52,4 +52,16 @@ export async function addUser(user) {
     body: JSON.stringify(user),
   });
   return response.json();
-};
+}
+
+export async function updateUser(user) {
+  console.log(`IN API CALL ${user}`);
+  const response = await fetch(`${API_URL}/users/updateuser`, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
+  return response.json();
+}

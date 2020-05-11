@@ -23,16 +23,16 @@ const theme = createMuiTheme({
   palette: {
     primary: teal,
     secondary: grey,
-  }
+  },
 });
 
 export default function ListMenu() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [selected, setSelected] = useState("ALL EVENTS");
+  const [selected, setSelected] = useState('ALL EVENTS');
 
   function handleClick(e) {
-    const eventSelector = (e.target.innerText);
+    const eventSelector = e.target.innerText;
     setSelected(eventSelector);
     dispatch(eventSelection(eventSelector));
   }
@@ -42,19 +42,19 @@ export default function ListMenu() {
       <div className={classes.root}>
         <ButtonGroup color="primary" aria-label="outlined primary button group">
           <Button
-            variant={selected === "ALL EVENTS" ? "contained" : "outlined"}
+            variant={selected === 'ALL EVENTS' ? 'contained' : 'outlined'}
             onClick={handleClick}
           >
             ALL EVENTS
           </Button>
           <Button
-            variant={selected === "MY EVENTS" ? "contained" : "outlined"}
+            variant={selected === 'MY EVENTS' ? 'contained' : 'outlined'}
             onClick={handleClick}
           >
             MY EVENTS
           </Button>
           <Button
-            variant={selected === "RECOMMENDED" ? "contained" : "outlined"}
+            variant={selected === 'RECOMMENDED' ? 'contained' : 'outlined'}
             onClick={handleClick}
           >
             RECOMMENDED

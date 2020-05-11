@@ -3,9 +3,13 @@ import Button from '@material-ui/core/Button';
 import { pink, teal, grey } from '@material-ui/core/colors';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
+import {
+  createMuiTheme,
+  makeStyles,
+  MuiThemeProvider,
+} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -14,7 +18,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUser } from '../../services/UsersAPI';
 
 const theme = createMuiTheme({
   palette: {
@@ -22,8 +27,6 @@ const theme = createMuiTheme({
     secondary: pink,
   },
 });
-
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -66,12 +69,54 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp () {
+export default function SignUp() {
   const classes = useStyles();
+  const userInfo = useSelector((state) => state.userInfo);
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    // console.log(userInfo);
+    setUserName(userInfo.user_name);
+  }, [userInfo]);
+  console.log(userInfo);
+
   const [editMode, setEditMode] = useState(false);
-  const [profilePic, setProfilePic] = useState('https://media-exp1.licdn.com/dms/image/C4D03AQEuhw7UQwbX5A/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=CJ7wNArHAR2JQhlbCWOaTUh2i6JjK6YiuR9bQD3GPCo');
+  const [profilePic, setProfilePic] = useState(
+    'https://media-exp1.licdn.com/dms/image/C4D03AQEuhw7UQwbX5A/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=CJ7wNArHAR2JQhlbCWOaTUh2i6JjK6YiuR9bQD3GPCo'
+  );
+  const body2 = {
+    user_id: 1,
+    user_name: 'Alejandro',
+    about_me: 'I like coating birds in peanut butter!',
+    email: 'adonkey1@yahoo.es(opens in new tab)',
+    password: 'Alexdonk',
+    address: '72 Great avenue',
+    profile_pic:
+      'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80',
+  };
 
   const handleEditMode = () => {
+    setEditMode(!editMode);
+  };
+  const handleUserName = (e) => {
+    console.log(e.target.value);
+    setUserName(e.target.value);
+  };
+  const handleSubmit = () => {
+    console.log('SignUp -> userInfo', userInfo.user_name);
+    console.log('SUBMIT!!');
+    const body = {
+      user_id: 1,
+      user_name: 'Alejandro',
+      about_me: 'I like coating birds in peanut butter!',
+      email: 'adonkey1@yahoo.es(opens in new tab)',
+      password: 'Alexdonk',
+      address: '72 Great avenue',
+      profile_pic:
+        'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80',
+    };
+    console.log(JSON.stringify(body));
+    updateUser(body);
     setEditMode(!editMode);
   };
   const handleProfilepic = (e) => {
@@ -82,9 +127,20 @@ export default function SignUp () {
     <MuiThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
-          <input accept="image/*" disabled={editMode ? false : true} className={classes.addphoto} id="add-image-file" type="file" onChange={handleProfilepic} />
+          <input
+            accept="image/*"
+            disabled={editMode ? false : true}
+            className={classes.addphoto}
+            id="add-image-file"
+            type="file"
+            onChange={handleProfilepic}
+          />
           <label htmlFor="add-image-file">
-            <Avatar className={classes.avatar} alt="user.image{}" src={profilePic} />
+            <Avatar
+              className={classes.avatar}
+              alt="user.image{}"
+              src={profilePic}
+            />
           </label>
           <div>
             <Button
@@ -101,8 +157,10 @@ export default function SignUp () {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="fname"
+                  // autoComplete="fname"
+                  onChange={handleUserName}
                   name="firstName"
+                  value={userName}
                   variant="outlined"
                   disabled={editMode ? false : true}
                   required
@@ -121,24 +179,27 @@ export default function SignUp () {
                   id="lastName"
                   label="lastName"
                   name="lastName"
-                  autoComplete="lname"
+                  defaultValue="Hello World"
+                  // autoComplete="lname"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
+                  value={userInfo.address}
                   required
                   fullWidth
                   disabled={editMode ? false : true}
                   id="location"
                   label="Location"
                   name="location"
-                  autoComplete="Location"
+                  // autoComplete="Location"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
+                  value={userInfo.about_me}
                   required
                   fullWidth
                   multiline
@@ -148,8 +209,8 @@ export default function SignUp () {
                   name="about"
                   label="About me"
                   id="multiline"
-                // type="password"
-                // autoComplete="current-password"
+                  // type="password"
+                  // autoComplete="current-password"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -159,7 +220,9 @@ export default function SignUp () {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                   >
-                    <Typography className={classes.heading}>Account Settings</Typography>
+                    <Typography className={classes.heading}>
+                      Account Settings
+                    </Typography>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
                     <TextField
@@ -170,6 +233,7 @@ export default function SignUp () {
                       id="email"
                       label="Email"
                       name="email"
+                      value={userInfo.email}
                       autoComplete="email"
                     />
                   </ExpansionPanelDetails>
@@ -183,27 +247,25 @@ export default function SignUp () {
                       label="Password"
                       name="password"
                       type="password"
+                      value={userInfo.password}
                       autoComplete="current-password"
                     />
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
               </Grid>
-              {editMode ?
-                (
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color={editMode ? 'secondary' : 'primary'}
-                    className={classes.submit}
-                    startIcon={editMode ? <SaveIcon /> : <EditIcon />}
-                    onClick={handleEditMode}
-                  >
-                    {editMode ? 'Save changes' : 'Edit Profile'}
-                  </Button>
-                )
-                : null
-              }
+              {editMode ? (
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color={editMode ? 'secondary' : 'primary'}
+                  className={classes.submit}
+                  startIcon={editMode ? <SaveIcon /> : <EditIcon />}
+                  onClick={handleSubmit}
+                >
+                  {editMode ? 'Save changes' : 'Edit Profile'}
+                </Button>
+              ) : null}
             </Grid>
           </form>
         </div>
