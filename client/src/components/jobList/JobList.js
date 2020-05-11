@@ -6,6 +6,8 @@ import { getAllActiveEvents } from '../../services/EventsAPI';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserById } from '../../services/UsersAPI';
 
+import { allEventsList, myEventsList } from '../../actions';
+
 export default function JobList() {
 
   const dispatch = useDispatch();
@@ -20,11 +22,13 @@ export default function JobList() {
 
   const getActiveEvents = async () => {
     const jobList = await getAllActiveEvents();
+    dispatch(allEventsList(jobList));
     setJobs(jobList);
   };
-
+  
   const getMyEvents = async () => {
     const myEventList = await getUserById({user_id: userId});
+    dispatch(myEventsList(myEventList.Events));
     setJobs(myEventList.Events);
   }
 

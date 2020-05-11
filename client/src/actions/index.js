@@ -45,3 +45,17 @@ export const orgInfo = (selection) => {
     payload: selection,
   };
 };
+
+export const allEventsList = (allEventsList) => {
+  return {
+    type: 'ALL_EVENTS_LIST',
+    payload: allEventsList
+  }
+}
+
+export const myEventsList = (myEventsList) => {
+  return {
+    type: 'MY_EVENTS_LIST',
+    payload: myEventsList
+  }
+}
