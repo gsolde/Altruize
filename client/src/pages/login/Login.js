@@ -1,63 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import fakeAuth from '../../FakeAuth';
-import {
-  isUserLoggedIn,
-  userId,
-  orgId,
-  tags,
-  orgInfo,
-  userInfo,
-} from '../../actions';
-import { getAllTags } from '../../services/TagsAPI';
-import { getOrgByName } from '../../services/OrgsAPI';
-import { getUserByName } from '../../services/UsersAPI';
+import { isUserLoggedIn, userId, orgId } from '../../actions';
+import LoginForm from '../../components/loginForm/LoginForm';
 
-function AuthButton() {
+
+function Login () {
   const dispatch = useDispatch();
   let history = useHistory();
   let location = useLocation();
   let { from } = location.state || { from: { pathname: '/' } };
 
-  return fakeAuth.isAuthenticated ? (
-    <button
-      onClick={() => {
-        fakeAuth.signout(() => history.push('/'));
-      }}
-    >
-      Log out
-    </button>
-  ) : (
-    <button
-      onClick={async () => {
-        fakeAuth.authenticate(() => {
-          history.replace(from);
-        });
-        const allTags = await getAllTags();
-        const loggedInOrg = await getOrgByName({ org_name: 'Greenpace' }); //Update for the actual Org or User Log in when ready.
-        const loggedInUser = await getUserByName({ user_name: 'Alejandro' }); //Update for the actual Org or User Log in when ready.
-
-        dispatch(isUserLoggedIn());
-        dispatch(userId(1));
-        dispatch(orgId(1));
-        dispatch(tags(allTags));
-        dispatch(orgInfo(loggedInOrg));
-        dispatch(userInfo(loggedInUser));
-      }}
-    >
-      Log in
-    </button>
-  );
-}
-
-function Login() {
-  return (
-    <div>
-      <h1>Login Page!</h1>
-      <AuthButton />
-    </div>
-  );
+  return fakeAuth.isAuthenticated ?
+    (
+      <div>
+        <h1>Logout Page</h1>
+        <button
+          onClick={() => {
+            fakeAuth.signout(() => history.push("/"));
+            dispatch(isUserLoggedIn());
+            dispatch(userId(''));
+            dispatch(orgId(''));
+          }}
+        >
+          Log out
+        </button>
+      </div>
+    ) :
+    <LoginForm />;
 }
 
 export default Login;
