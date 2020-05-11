@@ -8,7 +8,7 @@ import { teal, grey } from '@material-ui/core/colors';
 import { Redirect } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { eventSelection, userId, orgId } from '../../actions';
+import { eventSelectionButton, userId, orgId } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +31,7 @@ const theme = createMuiTheme({
 export default function ListMenu() {
   const userId =  useSelector((state) => state.userId);
   const orgId =  useSelector((state) => state.orgId);
-  const eventSelectionTag = useSelector((state) => state.eventSelection)
+  const eventSelectionTag = useSelector((state) => state.eventSelectionButton)
 
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -40,7 +40,7 @@ export default function ListMenu() {
   function handleClick(e) {
     const eventSelector = e.target.innerText;
     setSelected(eventSelector);
-    dispatch(eventSelection(eventSelector));
+    dispatch(eventSelectionButton(eventSelector));
   }
   
   if(!userId && eventSelectionTag !== 'ALL EVENTS') return (<Redirect to='/login'/>);

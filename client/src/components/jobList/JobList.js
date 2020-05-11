@@ -11,7 +11,7 @@ export default function JobList() {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.userId); // we can pass it to children an take it form JobItem
   const [jobs, setJobs] = useState([]);
-  const eventQuerySelector = useSelector((state) => state.eventSelection);
+  const eventQuerySelector = useSelector((state) => state.eventSelectionButton);
 
   const getEvents = async () => {
     if(eventQuerySelector === "ALL EVENTS") getActiveEvents();

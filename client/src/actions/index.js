@@ -18,9 +18,9 @@ export const orgId = (id) => {
   };
 };
 
-export const eventSelection = (selection) => {
+export const eventSelectionButton = (selection) => {
   return {
-    type: 'EVENT_SELECTION',
+    type: 'EVENT_SELECTION', // EVENT_SELECTION_BUTTON
     payload: selection,
   };
 };
