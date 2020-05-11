@@ -56,7 +56,7 @@ export default function LoginForm () {
     }
 
     if (loggedElement === 'Invalid email or password') {
-      setMessage('Invalid email or password');
+      setMessage('Invalid email or password. Make sure you log in with the correct account type');
       setError(true);
 
     } else {
