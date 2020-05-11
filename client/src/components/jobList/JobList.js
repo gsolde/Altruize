@@ -68,7 +68,7 @@ export default function JobList() {
   } else if (eventList === []) {
     return (
       <div>
-       <p>GERARD</p>
+       <p>No events match your search</p>
       </div>
     )
   }

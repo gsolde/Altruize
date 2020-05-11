@@ -8,7 +8,7 @@ import { teal, grey } from '@material-ui/core/colors';
 import { Redirect } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { eventSelectionButton, userId, orgId } from '../../actions';
+import { eventSelectionButton } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
