@@ -12,7 +12,6 @@ import { useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { isUserLoggedIn, orgId, userId } from '../../actions';
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
-import fakeAuth from '../../FakeAuth';
 import { getOrgLogin } from '../../services/OrgsAPI';
 import { getUserLogin } from '../../services/UsersAPI';
 
@@ -64,9 +63,7 @@ export default function LoginForm () {
       setMessage('Succesfully logged in!');
       dispatch(isUserLoggedIn());
       checked ? dispatch(orgId(loggedElement.id)) : dispatch(userId(loggedElement.id));
-      fakeAuth.authenticate(() => {
-        history.replace(from);
-      });
+      return history.replace(from);
     };
 
     resetInputFields();
