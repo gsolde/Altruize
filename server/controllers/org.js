@@ -1,6 +1,6 @@
 const db = require('../models/index');
 
-async function getAllOrgs(req, res) {
+async function getAllOrgs (req, res) {
   try {
     const orgList = await db.Org.findAll({
       include: [{ model: db.Event }, { model: db.Tag }]
@@ -13,7 +13,7 @@ async function getAllOrgs(req, res) {
   }
 }
 
-async function getActiveOrgs(req, res) {
+async function getActiveOrgs (req, res) {
   try {
     const activeOrgs = await db.Org.findAll({
       where: {
@@ -30,7 +30,7 @@ async function getActiveOrgs(req, res) {
   }
 }
 
-async function getOrg(req, res) {
+async function getOrg (req, res) {
   try {
     const org = await db.Org.findOne({
       where: {
@@ -46,7 +46,38 @@ async function getOrg(req, res) {
   }
 }
 
-async function addOrg(req, res) {
+async function getOrgLogin (req, res) {
+  try {
+    const org = await db.Org.findOne({
+      where: {
+        email: req.body.org_email,
+        password: req.body.org_password,
+      },
+      include: [
+        {
+          model: db.Event,
+          include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
+        },
+        { model: db.Tag }],
+      order: [
+        [db.Event, 'start_date', 'ASC']
+      ],
+    });
+    if (org === null) {
+      res.status(400);
+      const err = 'Invalid email or password';
+      res.json(err);
+    } else {
+      res.status(200);
+      res.json(org);
+    };
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
+async function addOrg (req, res) {
   try {
     const addedOrg = await db.Org.create({
       reg_number: req.body.reg_number,
@@ -69,7 +100,7 @@ async function addOrg(req, res) {
   }
 }
 
-async function addTagToOrg(req, res) {
+async function addTagToOrg (req, res) {
   try {
     const org = await db.Org.findOne({
       where: {
@@ -85,7 +116,7 @@ async function addTagToOrg(req, res) {
   }
 }
 
-async function updateOrg(req, res) {
+async function updateOrg (req, res) {
   try {
     const updatedOrg = await db.Org.update(
       {
@@ -113,5 +144,6 @@ module.exports = {
   getActiveOrgs,
   addOrg,
   addTagToOrg,
-  updateOrg
+  updateOrg,
+  getOrgLogin
 };

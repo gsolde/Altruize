@@ -1,6 +1,6 @@
 const db = require('../models/index');
 
-async function getAllUsers(req, res) {
+async function getAllUsers (req, res) {
   try {
     const userList = await db.User.findAll({
       include: [{ model: db.Event }, { model: db.Tag }],
@@ -13,7 +13,7 @@ async function getAllUsers(req, res) {
   }
 }
 
-async function getUser(req, res) {
+async function getUser (req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -29,7 +29,7 @@ async function getUser(req, res) {
   }
 }
 
-async function getUserById(req, res) {
+async function getUserById (req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -40,7 +40,9 @@ async function getUserById(req, res) {
           model: db.Event,
           include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
         },
-        { model: db.Tag },
+        { model: db.Tag }],
+      order: [
+        [db.Event, 'start_date', 'ASC']
       ],
       order: [[db.Event, 'start_date', 'ASC']],
     });
@@ -51,8 +53,38 @@ async function getUserById(req, res) {
     res.sendStatus(500);
   }
 }
+async function getUserLogin (req, res) {
+  try {
+    const user = await db.User.findOne({
+      where: {
+        email: req.body.user_email,
+        password: req.body.user_password,
+      },
+      include: [
+        {
+          model: db.Event,
+          include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
+        },
+        { model: db.Tag }],
+      order: [
+        [db.Event, 'start_date', 'ASC']
+      ],
+    });
+    if (user === null) {
+      res.status(400);
+      const err = 'Invalid email or password';
+      res.json(err);
+    } else {
+      res.status(200);
+      res.json(user);
+    };
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
 
-async function getActiveUsers(req, res) {
+async function getActiveUsers (req, res) {
   try {
     const activeUsers = await db.User.findAll({
       where: {
@@ -68,7 +100,7 @@ async function getActiveUsers(req, res) {
   }
 }
 
-async function addUser(req, res) {
+async function addUser (req, res) {
   try {
     const addedUser = await db.User.create({
       user_name: req.body.user_name,
@@ -89,7 +121,7 @@ async function addUser(req, res) {
   }
 }
 
-async function updateUser(req, res) {
+async function updateUser (req, res) {
   try {
     const updatedUser = await db.User.update(
       {
@@ -109,7 +141,7 @@ async function updateUser(req, res) {
   }
 }
 
-async function addEventToUser(req, res) {
+async function addEventToUser (req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -125,7 +157,7 @@ async function addEventToUser(req, res) {
   }
 }
 
-async function deleteEventFromUser(req, res) {
+async function deleteEventFromUser (req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -141,7 +173,7 @@ async function deleteEventFromUser(req, res) {
   }
 }
 
-async function addTagToUser(req, res) {
+async function addTagToUser (req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -167,4 +199,5 @@ module.exports = {
   deleteEventFromUser,
   addTagToUser,
   updateUser,
+  getUserLogin
 };

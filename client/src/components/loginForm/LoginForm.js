@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import { indigo, pink, red, teal } from '@material-ui/core/colors';
@@ -9,16 +7,17 @@ import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-
-import { useHistory, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from "react-router-dom";
-import fakeAuth from '../../FakeAuth';
-import { isUserLoggedIn, userId, orgId } from '../../actions';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { isUserLoggedIn, orgId, userId } from '../../actions';
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
+import fakeAuth from '../../FakeAuth';
+import { getOrgLogin } from '../../services/OrgsAPI';
+import { getUserLogin } from '../../services/UsersAPI';
 
-import { addUser } from '../../services/UsersAPI';
-import { addOrg } from '../../services/OrgsAPI';
+
+
 
 export default function LoginForm () {
   const classes = useStyles();
@@ -26,6 +25,9 @@ export default function LoginForm () {
   const history = useHistory();
   const location = useLocation();
   const [checked, setChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState(null);
   const [user, setUser] = useState({ email: '', password: '' });
   const { from } = location.state || { from: { pathname: "/" } };
 
@@ -44,25 +46,35 @@ export default function LoginForm () {
     });
   }
 
-  function handleSubmit (event) {
+  async function handleSubmit (event) {
     event.preventDefault();
-    //TODO check if user valid with correct API call
-    // if (checked) {
-    //   addOrg(user);
-    // } else {
-    //   addUser(user);
-    // }
-    //TODO await response to pass payload to dispatch
-    //if error show message
-    //if succes show message and dispatch
-    dispatch(isUserLoggedIn());
-    dispatch(userId(1));
-    dispatch(orgId(1));
+    setLoading(true);
+    let loggedElement;
+    if (checked) {
+      loggedElement = await getOrgLogin({ org_email: user.email, org_password: user.password });
+    } else {
+      loggedElement = await getUserLogin({ user_email: user.email, user_password: user.password });
+    }
+
+    if (loggedElement === 'Invalid email or password') {
+      setMessage('Invalid email or password');
+      setError(true);
+
+    } else {
+      setMessage('Succesfully logged in!');
+      dispatch(isUserLoggedIn());
+      checked ? dispatch(orgId(loggedElement.id)) : dispatch(userId(loggedElement.id));
+      fakeAuth.authenticate(() => {
+        history.replace(from);
+      });
+    };
+
     resetInputFields();
-    //TODO set time out to show a Succesfull or error login before redirecting
-    fakeAuth.authenticate(() => {
-      history.replace(from);
-    });
+    setTimeout(() => {
+      setLoading(false);
+      setError(false);
+      setMessage(null);
+    }, 3000);
   }
 
   const toggleChecked = () => {
@@ -79,7 +91,7 @@ export default function LoginForm () {
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
-          <Typography className={classes.caption} component="subtitle1" variant="caption">
+          <Typography className={classes.caption} variant="caption">
             {checked ?
               'Login as a NGO, if you are a Person, flip the switch'
               :
@@ -95,6 +107,7 @@ export default function LoginForm () {
                   fullWidth
                   id="email"
                   name="email"
+                  type="email"
                   label="Email Address"
                   autoComplete="email"
                   value={user.email}
@@ -110,7 +123,7 @@ export default function LoginForm () {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="current-password"
+                  autoComplete="password"
                   value={user.password}
                   onChange={event => updateUser(event)}
                 />
@@ -119,25 +132,27 @@ export default function LoginForm () {
                 (
                   <Grid item xs={12}>
                     <Button
-                      type="login"
                       fullWidth
                       variant="contained"
-                      color="blue"
                       className={classes.facebook}
                     >
                       Facebook
                 </Button>
                     <Button
-                      type="login"
                       fullWidth
                       variant="contained"
-                      color="red"
                       className={classes.google}
                     >
                       Google
                 </Button>
                   </Grid>
                 )
+                : null
+              }
+              {loading ?
+                <Typography className={error ? classes.error : classes.success} variant="caption">
+                  {message}
+                </Typography>
                 : null
               }
             </Grid>
@@ -191,6 +206,14 @@ const useStyles = makeStyles((theme) => ({
   },
   caption: {
     margin: theme.spacing(2),
+  },
+  error: {
+    margin: theme.spacing(2),
+    color: 'red',
+  },
+  success: {
+    margin: theme.spacing(2),
+    color: 'green',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
