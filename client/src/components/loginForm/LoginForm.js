@@ -157,8 +157,7 @@ export default function LoginForm () {
               type="submit"
               fullWidth
               variant="contained"
-              color={checked ? 'secondary' : 'primary'}
-              className={classes.submit}
+              className={checked ? classes.submitNGO : classes.submit}
             >
               Log In
             </Button>
@@ -214,6 +213,13 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: teal[500],
+    color: 'white',
+  },
+  submitNGO: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: pink[500],
+    color: 'white',
   },
   google: {
     margin: theme.spacing(0.5, 0, 0.5),
