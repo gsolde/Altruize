@@ -11,9 +11,11 @@ import { allEventsList, myEventsList } from '../../actions';
 export default function JobList() {
 
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.userId); // we can pass it to children an take it form JobItem
-  const [jobs, setJobs] = useState([]);
+  const userId = useSelector(state => state.userId);
   const eventQuerySelector = useSelector((state) => state.eventSelectionButton);
+  const eventList = useSelector((state) => state.searchedEventsList);
+  
+  const [jobs, setJobs] = useState([]);
 
   const getEvents = async () => {
     if(eventQuerySelector === "ALL EVENTS") getActiveEvents();
@@ -36,10 +38,12 @@ export default function JobList() {
     getEvents();
   }, [eventQuerySelector]);
 
-  return (
-    <div className="list-wrapper">
+
+  if (eventList) {
+    return (
+      <div className="list-wrapper">
       <div className="list">
-        {jobs.map((job) => {
+        {eventList.map((job) => {
           return <JobItem
             key={job.id}
             job={job}
@@ -47,5 +51,25 @@ export default function JobList() {
         })}
       </div>
     </div>
-  );
+    ) 
+  } else if (eventList === null) {
+    return (
+      <div className="list-wrapper">
+        <div className="list">
+          {jobs.map((job) => {
+            return <JobItem
+              key={job.id}
+              job={job}
+            />;
+          })}
+        </div>
+      </div>
+    );
+  } else if (eventList === []) {
+    return (
+      <div>
+       <p>GERARD</p>
+      </div>
+    )
+  }
 }

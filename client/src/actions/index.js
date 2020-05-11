@@ -59,3 +59,10 @@ export const myEventsList = (myEventsList) => {
     payload: myEventsList
   }
 }
+
+export const searchedEventsList = (searchedEventsList) => {
+  return {
+    type: 'SEARCHED_EVENTS_LIST',
+    payload: searchedEventsList
+  }
+}

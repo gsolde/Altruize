@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './SearchBar.css';
 import SearchIcon from '@material-ui/icons/Search';
-
 import { filterEvents } from '../../services/EventsAPI' 
+import { useDispatch } from 'react-redux';
+import { searchedEventsList } from '../../actions';
 
 export default function SearchBar () {
-  const [searchInput, setSearchInput] = useState(null);
+  const [searchInput, setSearchInput] = useState('');
+  const dispatch = useDispatch();
 
-  function handleSearch ({ target }) {
-    setSearchInput(target.value);
-    getSearchedEvents();
-    console.log('***',searchInput);
+  function handleSearch (e) {
+    const inputValue = e.target.value
+    setSearchInput(inputValue);
   }
 
   const getSearchedEvents = async () => {
     const eventsList = await filterEvents({ search_input: searchInput});
-    console.log('!!!!',eventsList);
+    dispatch(searchedEventsList(eventsList));
   }
+
+  useEffect(() => {
+    getSearchedEvents();
+  })
 
   return (
     <form className="search-wrapper">
@@ -28,7 +33,7 @@ export default function SearchBar () {
           className="search"
           type="text"
           placeholder="Search..."
-          onChange={handleSearch}
+          onKeyUp={handleSearch}
         />
       </div>
     </form>
