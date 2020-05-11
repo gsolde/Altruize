@@ -1,22 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SearchBar.css';
 import SearchIcon from '@material-ui/icons/Search';
 
+import { filterEvents } from '../../services/EventsAPI' 
+
 export default function SearchBar () {
-  const [search, setSearch] = useState(null);
+  const [searchInput, setSearchInput] = useState(null);
 
   function handleSearch ({ target }) {
-    setSearch(target.value);
+    setSearchInput(target.value);
+    getSearchedEvents();
+    console.log('***',searchInput);
   }
 
-  // TODO: reset input on submit (might not be working because we currently aren't doing anything with the input)
-  function submitHandler (event) {
-    event.preventDefault();
-    setSearch(null);
+  const getSearchedEvents = async () => {
+    const eventsList = await filterEvents({ search_input: searchInput});
+    console.log('!!!!',eventsList);
   }
 
   return (
-    <form className="search-wrapper" onSubmit={submitHandler}>
+    <form className="search-wrapper">
       <div className="input">
         <div className="icon">
           <SearchIcon />

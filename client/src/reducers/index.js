@@ -19,7 +19,9 @@ const allReducers = combineReducers({
   orgInfo: orgInfoReducer,
   userInfo: userInfoReducer,
   allEvents: allEventsListReducer,
-  myEvents: myEventsListReducer
+  myEvents: myEventsListReducer,
+  allEventsList: allEventsListReducer,
+  myEventsList: myEventsListReducer
 });
 
 export default allReducers;
