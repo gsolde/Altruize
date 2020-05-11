@@ -1,47 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import fakeAuth from '../../FakeAuth';
 import { isUserLoggedIn, userId, orgId } from '../../actions';
+import LoginForm from '../../components/loginForm/LoginForm';
 
 
-function AuthButton() {
+function Login () {
   const dispatch = useDispatch();
   let history = useHistory();
   let location = useLocation();
   let { from } = location.state || { from: { pathname: "/" } };
 
-  return fakeAuth.isAuthenticated ? (
-    <button
-      onClick={() => {
-        fakeAuth.signout(() => history.push("/"));
-      }}
-    >
-      Log out
-    </button>
-  ) : (
-      <button
-        onClick={() => {
-          fakeAuth.authenticate(() => {
-            history.replace(from);
-          });
-          dispatch(isUserLoggedIn());
-          dispatch(userId(1));
-          dispatch(orgId(1));
-        }}
-      >
-        Log in
-      </button>
-    );
-}
-
-function Login() {
-  return (
-    <div>
-      <h1>Login Page!</h1>
-      <AuthButton />
-    </div>
-  );
+  return fakeAuth.isAuthenticated ?
+    (
+      <div>
+        <h1>Logout Page</h1>
+        <button
+          onClick={() => {
+            fakeAuth.signout(() => history.push("/"));
+            dispatch(isUserLoggedIn());
+            dispatch(userId(''));
+            dispatch(orgId(''));
+          }}
+        >
+          Log out
+        </button>
+      </div>
+    ) :
+    <LoginForm />;
 }
 
 export default Login;
