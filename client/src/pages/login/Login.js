@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import fakeAuth from '../../FakeAuth';
-import { isUserLoggedIn, userId, orgId } from '../../actions';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { isUserLoggedIn, orgId, userId } from '../../actions';
 import LoginForm from '../../components/loginForm/LoginForm';
+import fakeAuth from '../../FakeAuth';
 
 
 function Login () {
   const dispatch = useDispatch();
   let history = useHistory();
-  let location = useLocation();
-  let { from } = location.state || { from: { pathname: "/" } };
 
   return fakeAuth.isAuthenticated ?
     (
