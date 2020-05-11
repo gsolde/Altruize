@@ -20,22 +20,21 @@ export default function SignUp() {
   const [user, setUser] = useState({ user_name: '', email: '', password: ''});
   const [org, setOrg] = useState({ org_name: '', email: '', password: '', reg_number: '' });
 
-
-  function updateUser(event) {
+  const updateUser = (event) => {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
   }
 
-  function updateOrg(event) {
+  const updateOrg = (event) => {
     setOrg({
       ...org,
       [event.target.name]: event.target.value,
     });
   }
 
-  function resetInputFields() {
+  const resetInputFields = () => {
     if (checked) {
       return setOrg({
         org_name: '',
@@ -51,12 +50,19 @@ export default function SignUp() {
     }
   }
 
-  function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (checked) {
       addOrg(org);
     } else {
-      addUser(user);
+      const response = await addUser(user);
+      if (response.status === 403) {
+        alert('User already exists');
+        // change color on input, show warning
+      } else {
+        addUser(user);
+        // set timout and redirect to home
+      }
     }
     resetInputFields();
   }
