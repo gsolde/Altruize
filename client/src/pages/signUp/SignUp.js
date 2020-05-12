@@ -2,31 +2,28 @@ import React, { useState } from 'react';
 import './SignUp.css'
 import { addUser } from '../../services/UsersAPI';
 import { addOrg } from '../../services/OrgsAPI';
-import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
+import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import { indigo, pink, red, teal, green } from '@material-ui/core/colors';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
+import { indigo, pink, red, teal, green } from '@material-ui/core/colors';
+import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
 
 export default function SignUp() {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
   const [checkIfUserExists, setCheckIfUserExists] = useState(false);
-  const [user, setUser] = useState({ user_name: '', email: '', password: '' });
   const [userCreated, setUserCreated] = useState(false);
+  const [user, setUser] = useState({ user_name: '', email: '', password: '' });
   const [org, setOrg] = useState({ org_name: '', email: '', password: '', reg_number: '' });
-
   const history = useHistory();
   const { from } = { from: { pathname: "/login" } };
-
-
 
   const updateUser = (event) => {
     setUser({
@@ -44,17 +41,9 @@ export default function SignUp() {
 
   const resetInputFields = () => {
     if (checked) {
-      return setOrg({
-        org_name: '',
-        email: '',
-        password: ''
-      });
+      return setOrg({ org_name: '', email: '', password: '' });
     } else {
-      return setUser({
-        user_name: '',
-        email: '',
-        password: ''
-      });
+      return setUser({ user_name: '', email: '', password: '' });
     }
   }
 
@@ -63,14 +52,14 @@ export default function SignUp() {
     if (checked) {
       addOrg(org);
     } else {
+      // TODO: handle case where email already exists
       const response = await addUser(user);
       if (response.status === 403) {
         setCheckIfUserExists(!checkIfUserExists);
       } else {
         setUserCreated(!userCreated);
-        setTimeout(() => {
-          return history.replace(from);
-        }, 2000)
+        setCheckIfUserExists(false);
+        setTimeout(() => history.replace(from), 3000);
       }
     }
     resetInputFields();
@@ -79,8 +68,6 @@ export default function SignUp() {
   const toggleChecked = () => {
     setChecked(!checked);
   };
-
-  // TODO Redirect
 
   return (
     <MuiThemeProvider theme={theme}>
@@ -100,14 +87,14 @@ export default function SignUp() {
           </Typography>
           <ToggleSwitch toggleChecked={toggleChecked} checked={checked} />
           <form className={classes.form} onSubmit={handleSubmit}>
-            <Typography className="created-message">
-              {userCreated ? 'User successfully created. Please wait while being redirected!' : ''}
-            </Typography>
+            <p className="created-message">
+              {userCreated ? 'Success. Please wait while being redirected!' : ''}
+            </p>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   error={checkIfUserExists ? true : false}
-                  helperText={checkIfUserExists ? 'User name already exists' : ''}
+                  helperText={checkIfUserExists ? 'Account name already exists' : ''}
                   autoComplete="fname"
                   variant="outlined"
                   required
