@@ -13,7 +13,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { isUserLoggedIn, orgId, userId } from '../../actions';
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
 import { getOrgLogin } from '../../services/OrgsAPI';
-import { getUserLogin } from '../../services/UsersAPI';
+import { getUserLogin, getUserById } from '../../services/UsersAPI';
 
 
 
@@ -48,24 +48,26 @@ export default function LoginForm () {
   async function handleSubmit (event) {
     event.preventDefault();
     setLoading(true);
-    let loggedElement;
+    let authToken;
     if (checked) {
-      loggedElement = await getOrgLogin({ org_email: user.email, org_password: user.password });
+      authToken = await getOrgLogin({ org_email: user.email, org_password: user.password });
     } else {
-      loggedElement = await getUserLogin({ user_email: user.email, user_password: user.password });
+      authToken = await getUserLogin({ user_email: user.email, user_password: user.password });
     }
 
-    if (loggedElement === 'Invalid email or password') {
+    if (authToken === 'Invalid email or password') {
       setMessage('Invalid email or password. Make sure you log in with the correct account type');
       setError(true);
 
     } else {
       setMessage('Succesfully logged in!');
+      localStorage.setItem('token', authToken);
+      const loggedUser = await getUserById();
+      console.log('user: ', loggedUser);
       dispatch(isUserLoggedIn());
-      checked ? dispatch(orgId(loggedElement.id)) : dispatch(userId(loggedElement.id));
+      checked ? dispatch(orgId(loggedUser.id)) : dispatch(userId(loggedUser.id));
       return history.replace(from);
     };
-
     resetInputFields();
     setTimeout(() => {
       setLoading(false);
