@@ -17,7 +17,7 @@ function Home() {
         <JobList />
       </div>
     );
-  } else {
+  } else if (eventQuerySelector === 'MY EVENTS'){
       return (
         <div className="Home">
           <ListMenu />

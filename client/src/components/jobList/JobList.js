@@ -8,8 +8,6 @@ import { getUserById } from '../../services/UsersAPI';
 
 import { allEventsList, myEventsList, searchedEventsList, eventSelectionButton } from '../../actions';
 
-import useDeepCompareEffect from 'use-deep-compare-effect'
-
 export default function JobList() {
 
   const dispatch = useDispatch();
@@ -18,8 +16,6 @@ export default function JobList() {
   const searchedEvents = useSelector((state) => state.searchedEventsList);
   
   const [jobs, setJobs] = useState([]);
-
-  console.log(jobs);
 
   const getEvents = async () => {
     if(eventQuerySelector === "ALL EVENTS") getActiveEvents();

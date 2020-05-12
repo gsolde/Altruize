@@ -15,7 +15,7 @@ const allReducers = combineReducers({
   orgId: isLoggedInOrgReducer,
   userId: isLoggedInUserReducer,
   eventSelection: eventListSelectorReducer,
-  // eventSelectionButton: eventListSelectorReducer
+  eventSelectionButton: eventListSelectorReducer,
   tags: tagsReducer,
   orgInfo: orgInfoReducer,
   userInfo: userInfoReducer,

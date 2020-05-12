@@ -20,7 +20,7 @@ export const orgId = (id) => {
 
 export const eventSelectionButton = (selection) => {
   return {
-    type: 'EVENT_SELECTION', // EVENT_SELECTION_BUTTON
+    type: 'EVENT_SELECTION_BUTTON', // EVENT_SELECTION_BUTTON
     payload: selection,
   };
 };
