@@ -24,7 +24,7 @@ export default function SearchBar () {
   })
 
   return (
-    <form className="search-wrapper">
+    <form className="search-wrapper" onSubmit={e => e.preventDefault()}>
       <div className="input">
         <div className="icon">
           <SearchIcon />
