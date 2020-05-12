@@ -3,6 +3,7 @@ const event = require('./controllers/event');
 const user = require('./controllers/user');
 const org = require('./controllers/org');
 const tag = require('./controllers/tag');
+const verifyJWT = require('./middleware/VerifyJWT');
 
 router.get('/events', event.getAllEvents);
 router.get('/events/active', event.getActiveEvents);
@@ -18,6 +19,8 @@ router.get('/orgs', org.getAllOrgs);
 router.get('/orgs/active', org.getActiveOrgs);
 router.post('/orgs', org.addOrg);
 router.post('/orgs/getOrgByName', org.getOrg);
+router.post('/orgs/getOrgById', verifyJWT, org.getOrgById);
+router.post('/orgs/getOrgLogin', org.getOrgLogin);
 router.post('/orgs/addTagToOrg', org.addTagToOrg);
 router.put('/orgs/updateOrg', org.updateOrg);
 
@@ -25,7 +28,8 @@ router.get('/users/active', user.getActiveUsers);
 router.get('/users', user.getAllUsers);
 router.post('/users', user.addUser);
 router.post('/users/getUserByName', user.getUser);
-router.post('/users/getUserById', user.getUserById);
+router.post('/users/getUserById', verifyJWT, user.getUserById);
+router.post('/users/getUserLogin', user.getUserLogin);
 router.post('/users/addEventToUser', user.addEventToUser);
 router.post('/users/deleteEventFromUser', user.deleteEventFromUser);
 router.post('/users/addTagToUser', user.addTagToUser);

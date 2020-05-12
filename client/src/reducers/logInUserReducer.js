@@ -1,4 +1,4 @@
-const isLoggedInUserReducer = (state = 2, action) => {
+const isLoggedInUserReducer = (state = '', action) => {
   switch (action.type) {
     case 'LOG_IN_USER':
       return action.payload;

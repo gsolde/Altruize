@@ -1,14 +1,15 @@
 import React from 'react';
 import { Redirect, Route } from "react-router-dom";
-import fakeAuth from '../FakeAuth';
+import { useSelector } from 'react-redux';
 
 
 export default function PrivateRoute ({ children, ...rest }) {
+  const isLoggedIn = useSelector(state => state.isLoggedIn);
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        fakeAuth.isAuthenticated ? (
+        isLoggedIn ? (
           children
         ) : (
             <Redirect
