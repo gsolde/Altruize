@@ -15,9 +15,6 @@ import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
 import { getOrgLogin, getOrgById } from '../../services/OrgsAPI';
 import { getUserLogin, getUserById } from '../../services/UsersAPI';
 
-
-
-
 export default function LoginForm () {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -50,13 +47,13 @@ export default function LoginForm () {
     setLoading(true);
     let authToken;
     let loggedUser;
-
+    
     if (checked) {
       authToken = await getOrgLogin({ org_email: user.email, org_password: user.password });
     } else {
       authToken = await getUserLogin({ user_email: user.email, user_password: user.password });
     }
-
+    
     if (authToken === 'Invalid email or password') {
       setMessage('Invalid email or password. Make sure you log in with the correct account type');
       setError(true);

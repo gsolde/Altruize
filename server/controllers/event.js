@@ -33,6 +33,28 @@ async function getActiveEvents(req, res) {
   }
 }
 
+async function getFilteredActiveEvents(req, res) {
+  try {
+    const activeEvents = await db.Event.findAll({
+      where: {
+        cancelled: false,
+        finish_date: { [Op.gt]: new Date() },
+        [Op.or]: 
+          [
+          {event_name: {[Op.iLike]: '%' + req.body.search_input + '%'}},
+          {location: {[Op.iLike]: '%' + req.body.search_input + '%'}}
+        ]},
+      order: [['start_date', 'ASC']],
+      include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
+    });
+    res.status(200);
+    res.json(activeEvents);
+  } catch (error) {
+    console.log(error); //eslint-disable-line
+    res.sendStatus(500);
+  }
+}
+
 async function getPastEvents(req, res) {
   try {
     const pastEvents = await db.Event.findAll({
@@ -164,6 +186,7 @@ module.exports = {
   getEvent,
   addEvent,
   getActiveEvents,
+  getFilteredActiveEvents,
   getPastEvents,
   getCancelledEvents,
   addTagToEvent,

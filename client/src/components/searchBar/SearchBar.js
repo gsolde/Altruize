@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SearchBar.css';
 import SearchIcon from '@material-ui/icons/Search';
+import { filterEvents } from '../../services/EventsAPI' 
+import { useDispatch } from 'react-redux';
+import { searchedEventsList } from '../../actions';
 
 export default function SearchBar () {
-  const [search, setSearch] = useState(null);
+  const [searchInput, setSearchInput] = useState(null);
+  const dispatch = useDispatch();
 
-  function handleSearch ({ target }) {
-    setSearch(target.value);
+  function handleSearch (e) {
+    const inputValue = e.target.value
+    setSearchInput(inputValue);
   }
 
-  // TODO: reset input on submit (might not be working because we currently aren't doing anything with the input)
-  function submitHandler (event) {
-    event.preventDefault();
-    setSearch(null);
+  const getSearchedEvents = async () => {
+    const eventsList = await filterEvents({ search_input: searchInput});
+    dispatch(searchedEventsList(eventsList));
   }
+
+  useEffect(() => {
+    getSearchedEvents();
+  })
 
   return (
-    <form className="search-wrapper" onSubmit={submitHandler}>
+    <form className="search-wrapper" onSubmit={e => e.preventDefault()}>
       <div className="input">
         <div className="icon">
           <SearchIcon />
@@ -25,7 +33,7 @@ export default function SearchBar () {
           className="search"
           type="text"
           placeholder="Search..."
-          onChange={handleSearch}
+          onKeyUp={handleSearch}
         />
       </div>
     </form>

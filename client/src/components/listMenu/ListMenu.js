@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { teal, grey } from '@material-ui/core/colors';
 
-import { useDispatch } from 'react-redux';
-import { eventSelection } from '../../actions';
+import { Redirect } from 'react-router-dom';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { eventSelectionButton } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +29,10 @@ const theme = createMuiTheme({
 });
 
 export default function ListMenu() {
+  const userId =  useSelector((state) => state.userId);
+  const orgId =  useSelector((state) => state.orgId);
+  const eventSelectionTag = useSelector((state) => state.eventSelectionButton)
+
   const dispatch = useDispatch();
   const classes = useStyles();
   const [selected, setSelected] = useState('ALL EVENTS');
@@ -34,9 +40,11 @@ export default function ListMenu() {
   function handleClick(e) {
     const eventSelector = e.target.innerText;
     setSelected(eventSelector);
-    dispatch(eventSelection(eventSelector));
+    dispatch(eventSelectionButton(eventSelector));
   }
-
+  
+  if(!userId && eventSelectionTag !== 'ALL EVENTS') return (<Redirect to='/login'/>);
+  
   return (
     <MuiThemeProvider theme={theme}>
       <div className={classes.root}>
@@ -44,20 +52,12 @@ export default function ListMenu() {
           <Button
             variant={selected === 'ALL EVENTS' ? 'contained' : 'outlined'}
             onClick={handleClick}
-          >
-            ALL EVENTS
+          >ALL EVENTS
           </Button>
           <Button
             variant={selected === 'MY EVENTS' ? 'contained' : 'outlined'}
             onClick={handleClick}
-          >
-            MY EVENTS
-          </Button>
-          <Button
-            variant={selected === 'RECOMMENDED' ? 'contained' : 'outlined'}
-            onClick={handleClick}
-          >
-            RECOMMENDED
+          >MY EVENTS
           </Button>
         </ButtonGroup>
       </div>

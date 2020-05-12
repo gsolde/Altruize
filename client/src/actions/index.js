@@ -18,9 +18,9 @@ export const orgId = (id) => {
   };
 };
 
-export const eventSelection = (selection) => {
+export const eventSelectionButton = (selection) => {
   return {
-    type: 'EVENT_SELECTION',
+    type: 'EVENT_SELECTION_BUTTON', // EVENT_SELECTION_BUTTON
     payload: selection,
   };
 };
@@ -45,3 +45,24 @@ export const orgInfo = (selection) => {
     payload: selection,
   };
 };
+
+export const allEventsList = (allEventsList) => {
+  return {
+    type: 'ALL_EVENTS_LIST',
+    payload: allEventsList
+  }
+}
+
+export const myEventsList = (myEventsList) => {
+  return {
+    type: 'MY_EVENTS_LIST',
+    payload: myEventsList
+  }
+}
+
+export const searchedEventsList = (searchedEventsList) => {
+  return {
+    type: 'SEARCHED_EVENTS_LIST',
+    payload: searchedEventsList
+  }
+}

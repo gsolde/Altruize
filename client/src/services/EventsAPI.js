@@ -10,6 +10,18 @@ export async function getAllPastEvents() {
   return response.json();
 };
 
+export async function filterEvents(body) {
+  const response = await fetch(`${API_URL}/events/filteredActiveEvents`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+  const res = await response.json();
+  return res;
+}
+
 export async function addEvent(body, org_id) {
   const response = await fetch(`${API_URL}/events`, {
     method: 'POST',

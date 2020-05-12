@@ -3,15 +3,28 @@ import JobList from '../../components/jobList/JobList';
 import SearchBar from '../../components/searchBar/SearchBar';
 import ListMenu from '../../components/listMenu/ListMenu';
 
+import { useSelector } from 'react-redux';
 
 function Home() {
-  return (
-    <div className="Home">
-      <SearchBar />
-      <ListMenu />
-      <JobList />
-    </div>
-  );
+
+  const eventQuerySelector = useSelector((state) => state.eventSelectionButton);
+
+  if (eventQuerySelector === 'ALL EVENTS') {
+    return (
+      <div className="Home">
+        <ListMenu />
+        <SearchBar />
+        <JobList />
+      </div>
+    );
+  } else if (eventQuerySelector === 'MY EVENTS'){
+      return (
+        <div className="Home">
+          <ListMenu />
+          <JobList />
+        </div>
+      );
+  }
 }
 
 export default Home;
