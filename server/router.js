@@ -19,6 +19,7 @@ router.get('/orgs', org.getAllOrgs);
 router.get('/orgs/active', org.getActiveOrgs);
 router.post('/orgs', org.addOrg);
 router.post('/orgs/getOrgByName', org.getOrg);
+router.post('/orgs/getOrgById', verifyJWT, org.getOrgById);
 router.post('/orgs/getOrgLogin', org.getOrgLogin);
 router.post('/orgs/addTagToOrg', org.addTagToOrg);
 router.put('/orgs/updateOrg', org.updateOrg);

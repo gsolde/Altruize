@@ -18,7 +18,6 @@ export async function getUserById () {
       'content-type': 'application/json',
       'authorization': `Bearer ${localStorage.getItem('altruize-token')}`,
     },
-    // body: JSON.stringify(user),
   });
   return response.json();
 };

@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { isUserLoggedIn, orgId, userId } from '../../actions';
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
-import { getOrgLogin } from '../../services/OrgsAPI';
+import { getOrgLogin, getOrgById } from '../../services/OrgsAPI';
 import { getUserLogin, getUserById } from '../../services/UsersAPI';
 
 
@@ -49,6 +49,8 @@ export default function LoginForm () {
     event.preventDefault();
     setLoading(true);
     let authToken;
+    let loggedUser;
+
     if (checked) {
       authToken = await getOrgLogin({ org_email: user.email, org_password: user.password });
     } else {
@@ -58,22 +60,27 @@ export default function LoginForm () {
     if (authToken === 'Invalid email or password') {
       setMessage('Invalid email or password. Make sure you log in with the correct account type');
       setError(true);
-
     } else {
       setMessage('Succesfully logged in!');
       localStorage.setItem('altruize-token', authToken);
-      const loggedUser = await getUserById();
-      console.log('user: ', loggedUser);
+      if (checked) {
+        loggedUser = await getOrgById();
+      } else {
+        loggedUser = await getUserById();
+      };
+
       dispatch(isUserLoggedIn());
       checked ? dispatch(orgId(loggedUser.id)) : dispatch(userId(loggedUser.id));
       return history.replace(from);
     };
+
     resetInputFields();
     setTimeout(() => {
       setLoading(false);
       setError(false);
       setMessage(null);
     }, 3000);
+
   }
 
   const toggleChecked = () => {
