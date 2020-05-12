@@ -19,7 +19,8 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUser } from '../../services/UsersAPI';
+import { updateUser, getUserByName } from '../../services/UsersAPI';
+import { userInfo } from '../../actions';
 
 const theme = createMuiTheme({
   palette: {
@@ -73,52 +74,69 @@ export default function SignUp() {
   const classes = useStyles();
   const userInfo = useSelector((state) => state.userInfo);
   const [userName, setUserName] = useState('');
-
-  useEffect(() => {
-    // console.log(userInfo);
-    setUserName(userInfo.user_name);
-  }, [userInfo]);
-  console.log(userInfo);
-
+  const [address, setAddress] = useState('');
+  const [aboutMe, setAboutMe] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [editMode, setEditMode] = useState(false);
   const [profilePic, setProfilePic] = useState(
     'https://media-exp1.licdn.com/dms/image/C4D03AQEuhw7UQwbX5A/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=CJ7wNArHAR2JQhlbCWOaTUh2i6JjK6YiuR9bQD3GPCo'
   );
-  const body2 = {
-    user_id: 1,
-    user_name: 'Alejandro',
-    about_me: 'I like coating birds in peanut butter!',
-    email: 'adonkey1@yahoo.es(opens in new tab)',
-    password: 'Alexdonk',
-    address: '72 Great avenue',
-    profile_pic:
-      'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80',
-  };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setUserName(userInfo.user_name);
+    setAddress(userInfo.address);
+    setAboutMe(userInfo.about_me);
+    setEmail(userInfo.email);
+    setPassword(userInfo.password);
+    setProfilePic(userInfo.profile_pic);
+  }, [userInfo, editMode]);
 
   const handleEditMode = () => {
     setEditMode(!editMode);
   };
   const handleUserName = (e) => {
-    console.log(e.target.value);
     setUserName(e.target.value);
   };
-  const handleSubmit = () => {
-    console.log('SignUp -> userInfo', userInfo.user_name);
-    console.log('SUBMIT!!');
+
+  const handleAddress = (e) => {
+    setAddress(e.target.value);
+  };
+
+  const handleAboutMe = (e) => {
+    setAboutMe(e.target.value);
+  };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const dispatchUserInfo = (user) => {
+    dispatch(userInfo(user));
+  };
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+  const handleSubmit = async () => {
     const body = {
-      user_id: 1,
-      user_name: 'Alejandro',
-      about_me: 'I like coating birds in peanut butter!',
-      email: 'adonkey1@yahoo.es(opens in new tab)',
-      password: 'Alexdonk',
-      address: '72 Great avenue',
-      profile_pic:
-        'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80',
+      user_id: userInfo.id,
+      user_name: userName,
+      about_me: aboutMe,
+      email: email,
+      password: password,
+      address: address,
+      profile_pic: profilePic,
     };
-    console.log(JSON.stringify(body));
-    updateUser(body);
+    console.log({ ...userInfo, body });
+    const updatedUser = await updateUser(body);
+    console.log('handleSubmit -> updateduser', updatedUser[1]);
+    // const loggedInUser = await getUserByName({ user_name: 'Alejandro' }); //Update for the actual Org or User Log in when ready.
+    // dispatch(userInfo(updatedUser[1][0]));
     setEditMode(!editMode);
   };
+
   const handleProfilepic = (e) => {
     setProfilePic(URL.createObjectURL(e.target.files[0]));
   };
@@ -159,34 +177,22 @@ export default function SignUp() {
                 <TextField
                   // autoComplete="fname"
                   onChange={handleUserName}
-                  name="firstName"
+                  name="User Name"
                   value={userName}
                   variant="outlined"
                   disabled={editMode ? false : true}
                   required
                   fullWidth
-                  id="firstName"
-                  label="firstName"
+                  id="user_name"
+                  label="User Name"
                   autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  disabled={editMode ? false : true}
-                  id="lastName"
-                  label="lastName"
-                  name="lastName"
-                  defaultValue="Hello World"
-                  // autoComplete="lname"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  onChange={handleAddress}
                   variant="outlined"
-                  value={userInfo.address}
+                  value={address}
                   required
                   fullWidth
                   disabled={editMode ? false : true}
@@ -199,7 +205,8 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  value={userInfo.about_me}
+                  onChange={handleAboutMe}
+                  value={aboutMe}
                   required
                   fullWidth
                   multiline
@@ -230,10 +237,11 @@ export default function SignUp() {
                       required
                       fullWidth
                       disabled={editMode ? false : true}
+                      onChange={handleEmail}
                       id="email"
                       label="Email"
                       name="email"
-                      value={userInfo.email}
+                      value={email}
                       autoComplete="email"
                     />
                   </ExpansionPanelDetails>
@@ -244,10 +252,11 @@ export default function SignUp() {
                       fullWidth
                       disabled={editMode ? false : true}
                       id="Password"
+                      onChange={handlePassword}
                       label="Password"
                       name="password"
                       type="password"
-                      value={userInfo.password}
+                      value={password}
                       autoComplete="current-password"
                     />
                   </ExpansionPanelDetails>

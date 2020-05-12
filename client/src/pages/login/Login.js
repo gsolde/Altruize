@@ -36,7 +36,7 @@ function AuthButton() {
         });
         const allTags = await getAllTags();
         const loggedInOrg = await getOrgByName({ org_name: 'Greenpace' }); //Update for the actual Org or User Log in when ready.
-        const loggedInUser = await getUserByName({ user_name: 'Gerard' }); //Update for the actual Org or User Log in when ready.
+        const loggedInUser = await getUserByName({ user_name: 'Alejandro' }); //Update for the actual Org or User Log in when ready.
 
         dispatch(isUserLoggedIn());
         dispatch(userId(1));

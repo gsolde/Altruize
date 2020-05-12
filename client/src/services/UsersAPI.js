@@ -55,7 +55,7 @@ export async function addUser(user) {
 }
 
 export async function updateUser(user) {
-  console.log(`IN API CALL ${user}`);
+  console.log(`IN API CALL ${JSON.stringify(user)}`);
   const response = await fetch(`${API_URL}/users/updateuser`, {
     method: 'PUT',
     headers: {
