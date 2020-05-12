@@ -1,4 +1,5 @@
 const db = require('../models/index');
+const jwt = require('jsonwebtoken');
 
 async function getAllOrgs (req, res) {
   try {
@@ -45,6 +46,21 @@ async function getOrg (req, res) {
     res.sendStatus(500);
   }
 }
+async function getOrgById (req, res) {
+  try {
+    const org = await db.Org.findOne({
+      where: {
+        id: req.user.id,
+      },
+      include: [{ model: db.Event }, { model: db.Tag }]
+    });
+    res.status(200);
+    res.json(org);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
 
 async function getOrgLogin (req, res) {
   try {
@@ -52,24 +68,16 @@ async function getOrgLogin (req, res) {
       where: {
         email: req.body.org_email,
         password: req.body.org_password,
-      },
-      include: [
-        {
-          model: db.Event,
-          include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
-        },
-        { model: db.Tag }],
-      order: [
-        [db.Event, 'start_date', 'ASC']
-      ],
+      }
     });
     if (org === null) {
       res.status(400);
       const err = 'Invalid email or password';
       res.json(err);
     } else {
+      const token = jwt.sign({ user: org }, process.env.TOKEN_SECRET);
       res.status(200);
-      res.json(org);
+      res.json(token);
     };
   } catch (error) {
     console.log(error);
@@ -141,6 +149,7 @@ async function updateOrg (req, res) {
 module.exports = {
   getAllOrgs,
   getOrg,
+  getOrgById,
   getActiveOrgs,
   addOrg,
   addTagToOrg,
