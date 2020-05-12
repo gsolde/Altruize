@@ -34,8 +34,7 @@ async function getUserById (req, res) {
   try {
     const user = await db.User.findOne({
       where: {
-        // id: req.body.user_id,
-        id: req.user.user.id, // using the token
+        id: req.user.id,
       },
       include: [
         {

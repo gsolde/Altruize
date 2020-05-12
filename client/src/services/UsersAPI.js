@@ -16,7 +16,7 @@ export async function getUserById () {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
-      'authorization': `Bearer ${localStorage.getItem('token')}`,
+      'authorization': `Bearer ${localStorage.getItem('altruize-token')}`,
     },
     // body: JSON.stringify(user),
   });

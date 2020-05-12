@@ -61,7 +61,7 @@ export default function LoginForm () {
 
     } else {
       setMessage('Succesfully logged in!');
-      localStorage.setItem('token', authToken);
+      localStorage.setItem('altruize-token', authToken);
       const loggedUser = await getUserById();
       console.log('user: ', loggedUser);
       dispatch(isUserLoggedIn());
