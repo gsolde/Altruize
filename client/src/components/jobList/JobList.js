@@ -6,14 +6,14 @@ import { getAllActiveEvents } from '../../services/EventsAPI';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserById } from '../../services/UsersAPI';
 
-import { allEventsList, myEventsList } from '../../actions';
+import { allEventsList, myEventsList, searchedEventsList } from '../../actions';
 
 export default function JobList() {
 
   const dispatch = useDispatch();
   const userId = useSelector(state => state.userId);
   const eventQuerySelector = useSelector((state) => state.eventSelectionButton);
-  const eventList = useSelector((state) => state.searchedEventsList);
+  const searchedEventList = useSelector((state) => state.searchedEventsList);
   
   const [jobs, setJobs] = useState([]);
 
@@ -31,6 +31,7 @@ export default function JobList() {
   const getMyEvents = async () => {
     const myEventList = await getUserById({user_id: userId});
     dispatch(myEventsList(myEventList.Events));
+    dispatch(searchedEventsList([]));
     setJobs(myEventList.Events);
   }
 
@@ -38,12 +39,11 @@ export default function JobList() {
     getEvents();
   }, [eventQuerySelector]);
 
-
-  if (eventList) {
+  if (searchedEventList.length > 0) {
     return (
       <div className="list-wrapper">
       <div className="list">
-        {eventList.map((job) => {
+        {searchedEventList.map((job) => {
           return <JobItem
             key={job.id}
             job={job}
@@ -52,7 +52,7 @@ export default function JobList() {
       </div>
     </div>
     ) 
-  } else if (eventList === null) {
+  } else {
     return (
       <div className="list-wrapper">
         <div className="list">
@@ -65,11 +65,5 @@ export default function JobList() {
         </div>
       </div>
     );
-  } else if (eventList === []) {
-    return (
-      <div>
-       <p>No events match your search</p>
-      </div>
-    )
-  }
+  } 
 }

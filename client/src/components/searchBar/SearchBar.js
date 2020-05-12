@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { searchedEventsList } from '../../actions';
 
 export default function SearchBar () {
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState(null);
   const dispatch = useDispatch();
 
   function handleSearch (e) {

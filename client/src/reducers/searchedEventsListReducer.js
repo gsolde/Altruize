@@ -1,4 +1,4 @@
-const searchedEventListReducer = (state = null, action) => {
+const searchedEventListReducer = (state = [], action) => {
     switch (action.type) {
       case 'SEARCHED_EVENTS_LIST':
         return action.payload;
