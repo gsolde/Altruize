@@ -134,7 +134,7 @@ export default function JobItem ({ job }) {
             startIcon={liked ? <CheckIcon /> : <PlaylistAddIcon />}
             onClick={handleLikedClick}
           >
-            {liked ? 'Confirmed' : 'I will go!'}
+            {liked ? 'Confirmed' : 'I\'m in!'}
           </Button>
         </div>
         : null

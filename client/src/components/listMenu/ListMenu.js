@@ -59,11 +59,6 @@ export default function ListMenu() {
             onClick={handleClick}
           >MY EVENTS
           </Button>
-          <Button
-            variant={selected === 'RECOMMENDED' ? 'contained' : 'outlined'}
-            onClick={handleClick}
-          >RECOMMENDED
-          </Button>
         </ButtonGroup>
       </div>
     </MuiThemeProvider>

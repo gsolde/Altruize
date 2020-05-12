@@ -13,7 +13,7 @@ export default function JobList() {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.userId);
   const eventQuerySelector = useSelector((state) => state.eventSelectionButton);
-  const searchedEventList = useSelector((state) => state.searchedEventsList);
+  const searchedEvents = useSelector((state) => state.searchedEventsList);
   
   const [jobs, setJobs] = useState([]);
 
@@ -31,7 +31,7 @@ export default function JobList() {
   const getMyEvents = async () => {
     const myEventList = await getUserById({user_id: userId});
     dispatch(myEventsList(myEventList.Events));
-    dispatch(searchedEventsList([]));
+    dispatch(searchedEventsList([]))
     setJobs(myEventList.Events);
   }
 
@@ -39,11 +39,11 @@ export default function JobList() {
     getEvents();
   }, [eventQuerySelector]);
 
-  if (searchedEventList.length > 0) {
+  if (searchedEvents.length >= 1) {
     return (
       <div className="list-wrapper">
       <div className="list">
-        {searchedEventList.map((job) => {
+        {searchedEvents.map((job) => {
           return <JobItem
             key={job.id}
             job={job}
