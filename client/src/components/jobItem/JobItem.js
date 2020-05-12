@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function JobItem ({ job }) {
+export default function JobItem ({ job, updateEvents }) {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.userId);
   const attendeesList = job.Users.map(attendee => attendee.id);
@@ -61,22 +61,24 @@ export default function JobItem ({ job }) {
     setExpanded(!expanded);
   };
 
-  function handleLikedClick () {
+  async function handleLikedClick () {
     let event_id = job.id;
     let user_id = userId;
-    if(liked) {
-      deleteEventFromUser({
+    console.log()
+    if(liked && userId) {
+      await deleteEventFromUser({
         user_id,
         event_id
       })
-    } else {
-      addEventToUser({
+      updateEvents()
+    } else if (userId){
+      await addEventToUser({
         user_id,
         event_id
       });
+      updateEvents();
     }
     setLiked(!liked);
-    
   };
 
   return (
@@ -109,7 +111,7 @@ export default function JobItem ({ job }) {
             </StyledAvatarGroup>
             <div className="job-actions">
               <IconButton aria-label="add to favorites" onClick={handleLikedClick}>
-                <CheckCircleIcon className={liked ? classes.liked : null} />
+                <CheckCircleIcon className={liked && userId ? classes.liked : null} />
               </IconButton>
               <IconButton
                 className={clsx(classes.expand, {

@@ -6,7 +6,9 @@ import { getAllActiveEvents } from '../../services/EventsAPI';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserById } from '../../services/UsersAPI';
 
-import { allEventsList, myEventsList, searchedEventsList } from '../../actions';
+import { allEventsList, myEventsList, searchedEventsList, eventSelectionButton } from '../../actions';
+
+import useDeepCompareEffect from 'use-deep-compare-effect'
 
 export default function JobList() {
 
@@ -17,6 +19,8 @@ export default function JobList() {
   
   const [jobs, setJobs] = useState([]);
 
+  console.log(jobs);
+
   const getEvents = async () => {
     if(eventQuerySelector === "ALL EVENTS") getActiveEvents();
     if(eventQuerySelector === "MY EVENTS") getMyEvents();
@@ -25,6 +29,7 @@ export default function JobList() {
   const getActiveEvents = async () => {
     const jobList = await getAllActiveEvents();
     dispatch(allEventsList(jobList));
+    dispatch(eventSelectionButton('ALL EVENTS'))
     setJobs(jobList);
   };
   
@@ -37,7 +42,7 @@ export default function JobList() {
 
   useEffect(() => {
     getEvents();
-  }, [eventQuerySelector]);
+  }, []); 
 
   if (searchedEvents.length >= 1) {
     return (
@@ -47,6 +52,7 @@ export default function JobList() {
           return <JobItem
             key={job.id}
             job={job}
+            updateEvents={getEvents} //passed to jobItem to rerender on change. Needs to be refactored!
           />;
         })}
       </div>
@@ -56,10 +62,11 @@ export default function JobList() {
     return (
       <div className="list-wrapper">
         <div className="list">
-          {jobs.map((job) => {
+          {jobs && jobs.map((job) => {
             return <JobItem
               key={job.id}
               job={job}
+              updateEvents={getEvents}
             />;
           })}
         </div>
