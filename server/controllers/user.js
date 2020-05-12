@@ -19,7 +19,7 @@ async function getUser(req, res) {
       where: {
         user_name: req.body.user_name,
       },
-      include: [{ model: db.Event }, { model: db.Tag }]
+      include: [{ model: db.Event }, { model: db.Tag }],
     });
     res.status(200);
     res.json(user);
@@ -36,14 +36,13 @@ async function getUserById(req, res) {
         id: req.body.user_id,
       },
       include: [
-        { 
+        {
           model: db.Event,
-          include: [{model: db.User}, {model: db.Org}, {model: db.Tag}], 
-        }, 
-        { model: db.Tag }],
-      order: [
-        [db.Event,'start_date', 'ASC']
+          include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
+        },
+        { model: db.Tag },
       ],
+      order: [[db.Event, 'start_date', 'ASC']],
     });
     res.status(200);
     res.json(user);
@@ -98,9 +97,9 @@ async function updateUser(req, res) {
         about_me: req.body.about_me,
         email: req.body.email,
         address: req.body.address,
-        profile_pic: req.body.profile_pic
+        profile_pic: req.body.profile_pic,
       },
-      { where: { id: req.body.user_id } }
+      { where: { id: req.body.user_id }, returning: true }
     );
     res.status(201);
     res.json(updatedUser);
