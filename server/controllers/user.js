@@ -1,5 +1,6 @@
 const db = require('../models/index');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 async function getAllUsers (req, res) {
   try {
@@ -39,7 +40,7 @@ async function getUserById (req, res) {
       include: [
         {
           model: db.Event,
-          include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
+          include: [{model: db.User}, {model: db.Org}, {model: db.Tag}],
         },
         { model: db.Tag }],
       order: [
@@ -95,19 +96,19 @@ async function getActiveUsers (req, res) {
 
 async function addUser (req, res) {
   try {
-    const addedUser = await db.User.create({
-      user_name: req.body.user_name,
-      about_me: req.body.about_me,
-      email: req.body.email,
-      password: req.body.password,
-      address: req.body.address,
-      profile_pic: req.body.profile_pic,
-      active: req.body.active,
-      karma: req.body.karma,
-      notes: req.body.notes,
-    });
-    res.status(201);
-    res.json(addedUser);
+    const { password, user_name, about_me, email, address, profile_pic, active, karma, notes } = req.body;
+    const user = await db.User.findOne({ where: { user_name } });
+    const checkEmail = await db.User.findOne({ where: { email } });
+    if (user || checkEmail) {
+      res.status(403);
+      res.json('User already exists');
+    } else {
+      const saltRounds = 10;
+      const hash = await bcrypt.hash(password, saltRounds);
+      const newUser = await db.User.create({ password: hash, user_name, about_me, email, address, profile_pic, active, karma, notes });
+      res.status(201);
+      res.json(newUser);
+    }
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
