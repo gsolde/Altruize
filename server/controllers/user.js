@@ -1,4 +1,5 @@
 const db = require('../models/index');
+const jwt = require('jsonwebtoken');
 
 async function getAllUsers (req, res) {
   try {
@@ -74,8 +75,10 @@ async function getUserLogin (req, res) {
       const err = 'Invalid email or password';
       res.json(err);
     } else {
-      res.status(200);
-      res.json(user);
+      const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
+      res.header('auth-token', token).send(token);
+      // res.status(200);
+      // res.json(user);
     };
   } catch (error) {
     console.log(error);
