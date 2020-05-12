@@ -11,13 +11,14 @@ export async function getUserByName (user) {
   return response.json();
 }
 
-export async function getUserById (user) {
+export async function getUserById () {
   const response = await fetch(`${API_URL}/users/getUserById`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
+      'authorization': `Bearer ${localStorage.getItem('token')}`,
     },
-    body: JSON.stringify(user),
+    // body: JSON.stringify(user),
   });
   return response.json();
 };
