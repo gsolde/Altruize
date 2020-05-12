@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
 import './Nav.css';
-import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Avatar from '@material-ui/core/Avatar';
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { makeStyles } from '@material-ui/core/styles';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useHistory } from "react-router-dom";
+import { isUserLoggedIn, orgId, userId } from '../../actions';
 
 
 export default function Nav () {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  let history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
+
   //TODO change when login is connected
   const [fakeUser, setFakeUser] = useState({
     user_name: 'Gerard',
     profile_pic: 'https://media-exp1.licdn.com/dms/image/C4D03AQEuhw7UQwbX5A/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=CJ7wNArHAR2JQhlbCWOaTUh2i6JjK6YiuR9bQD3GPCo',
   });
   //!
+
   const isLoggedIn = useSelector(state => state.isLoggedIn);
 
   const handleClick = (event) => {
@@ -27,6 +32,13 @@ export default function Nav () {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleLogOut = () => {
+    dispatch(isUserLoggedIn());
+    dispatch(userId(''));
+    dispatch(orgId(''));
+    localStorage.removeItem("altruize-token");
+    return history.push("/");
   };
 
 
@@ -58,7 +70,9 @@ export default function Nav () {
             </MenuItem>
             {isLoggedIn ? (
               <MenuItem onClick={handleClose}>
-                <Link className="link-accent" to="/login">Log out</Link>
+                <div onClick={handleLogOut}>
+                  Log out
+                </div>
               </MenuItem>
             ) : (
                 <MenuItem onClick={handleClose}>

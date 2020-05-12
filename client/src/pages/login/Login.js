@@ -1,12 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { isUserLoggedIn, orgId, userId } from '../../actions';
 import LoginForm from '../../components/loginForm/LoginForm';
-import { useSelector } from 'react-redux';
-
 
 function Login () {
+<<<<<<< HEAD
   const dispatch = useDispatch();
   let history = useHistory();
 <<<<<<< HEAD
@@ -18,24 +14,12 @@ function Login () {
 =======
   const isLoggedIn = useSelector(state => state.isLoggedIn);
 >>>>>>> chore: Delete FakeAuth file (no need with proper login)
+=======
+>>>>>>> feat: FrontEnd: Navbar logout button directly logsout
 
-  return isLoggedIn ?
-    (
-      <div>
-        <h1>Logout Page</h1>
-        <button
-          onClick={() => {
-            dispatch(isUserLoggedIn());
-            dispatch(userId(''));
-            dispatch(orgId(''));
-            return history.push("/");
-          }}
-        >
-          Log out
-        </button>
-      </div>
-    ) :
-    <LoginForm />;
+  return (
+    <LoginForm />
+  );
 }
 
 export default Login;

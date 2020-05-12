@@ -7,7 +7,7 @@ module.exports = function (req, res, next) {
 
   jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
     if (err) return res.status(403).send('Invalid Token');
-    req.user = user;
+    req.user = user.user;
     next();
   });
 };
