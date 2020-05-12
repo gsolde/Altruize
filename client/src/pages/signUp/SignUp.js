@@ -1,24 +1,32 @@
 import React, { useState } from 'react';
+import './SignUp.css'
 import { addUser } from '../../services/UsersAPI';
 import { addOrg } from '../../services/OrgsAPI';
+import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import { indigo, pink, red, teal } from '@material-ui/core/colors';
+import { indigo, pink, red, teal, green } from '@material-ui/core/colors';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Link } from "react-router-dom";
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
 
 export default function SignUp() {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
-  const [user, setUser] = useState({ user_name: '', email: '', password: ''});
+  const [checkIfUserExists, setCheckIfUserExists] = useState(false);
+  const [user, setUser] = useState({ user_name: '', email: '', password: '' });
+  const [userCreated, setUserCreated] = useState(false);
   const [org, setOrg] = useState({ org_name: '', email: '', password: '', reg_number: '' });
+
+  const history = useHistory();
+  const { from } = { from: { pathname: "/login" } };
+
+
 
   const updateUser = (event) => {
     setUser({
@@ -57,11 +65,12 @@ export default function SignUp() {
     } else {
       const response = await addUser(user);
       if (response.status === 403) {
-        alert('User already exists');
-        // change color on input, show warning
+        setCheckIfUserExists(!checkIfUserExists);
       } else {
-        addUser(user);
-        // set timout and redirect to home
+        setUserCreated(!userCreated);
+        setTimeout(() => {
+          return history.replace(from);
+        }, 2000)
       }
     }
     resetInputFields();
@@ -70,6 +79,8 @@ export default function SignUp() {
   const toggleChecked = () => {
     setChecked(!checked);
   };
+
+  // TODO Redirect
 
   return (
     <MuiThemeProvider theme={theme}>
@@ -89,9 +100,14 @@ export default function SignUp() {
           </Typography>
           <ToggleSwitch toggleChecked={toggleChecked} checked={checked} />
           <form className={classes.form} onSubmit={handleSubmit}>
+            <Typography className="created-message">
+              {userCreated ? 'User successfully created. Please wait while being redirected!' : ''}
+            </Typography>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
+                  error={checkIfUserExists ? true : false}
+                  helperText={checkIfUserExists ? 'User name already exists' : ''}
                   autoComplete="fname"
                   variant="outlined"
                   required
@@ -104,21 +120,11 @@ export default function SignUp() {
                   onChange={checked ? event => updateOrg(event) : event => updateUser(event)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  // required
-                  fullWidth
-                  id={checked ? 'reg_number' : 'lastName'}
-                  name={checked ? 'reg_number' : 'lastName'}
-                  label={checked ? 'Registration number' : 'Last Name'}
-                  autoComplete="lname"
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
                   required
+                  type="email"
                   fullWidth
                   id="email"
                   name="email"
@@ -193,6 +199,7 @@ const theme = createMuiTheme({
   palette: {
     primary: teal,
     secondary: pink,
+    ternary: green
   },
 });
 
@@ -231,5 +238,5 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0.5, 0, 0.5),
     backgroundColor: indigo[800],
     color: 'white',
-  },
+  }
 }));

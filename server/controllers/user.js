@@ -100,7 +100,7 @@ async function addUser (req, res) {
         user_name: req.body.user_name,
       }
     });
-    if (user === null) {
+    if (user) {
       res.status(403);
       res.json('User already exists');
     } else {
