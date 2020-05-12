@@ -34,7 +34,8 @@ async function getUserById (req, res) {
   try {
     const user = await db.User.findOne({
       where: {
-        id: req.body.user_id,
+        // id: req.body.user_id,
+        id: req.user.user.id, // using the token
       },
       include: [
         {
@@ -60,16 +61,7 @@ async function getUserLogin (req, res) {
       where: {
         email: req.body.user_email,
         password: req.body.user_password,
-      },
-      include: [
-        {
-          model: db.Event,
-          include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
-        },
-        { model: db.Tag }],
-      order: [
-        [db.Event, 'start_date', 'ASC']
-      ],
+      }
     });
     if (user === null) {
       res.status(400);
@@ -77,9 +69,8 @@ async function getUserLogin (req, res) {
       res.json(err);
     } else {
       const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
-      res.header('auth-token', token).send(token);
-      // res.status(200);
-      // res.json(user);
+      res.status(200);
+      res.json(token);
     };
   } catch (error) {
     console.log(error);
