@@ -3,6 +3,7 @@ const event = require('./controllers/event');
 const user = require('./controllers/user');
 const org = require('./controllers/org');
 const tag = require('./controllers/tag');
+const verifyJWT = require('./middleware/VerifyJWT');
 
 router.get('/events', event.getAllEvents);
 router.get('/events/active', event.getActiveEvents);
@@ -26,7 +27,7 @@ router.get('/users/active', user.getActiveUsers);
 router.get('/users', user.getAllUsers);
 router.post('/users', user.addUser);
 router.post('/users/getUserByName', user.getUser);
-router.post('/users/getUserById', user.getUserById);
+router.post('/users/getUserById', verifyJWT, user.getUserById);
 router.post('/users/getUserLogin', user.getUserLogin);
 router.post('/users/addEventToUser', user.addEventToUser);
 router.post('/users/deleteEventFromUser', user.deleteEventFromUser);
