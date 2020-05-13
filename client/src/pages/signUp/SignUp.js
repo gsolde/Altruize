@@ -50,21 +50,17 @@ export default function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (checked) {
-      addOrg(org);
+    const response = checked ? await addOrg(org) : await addUser(user);
+
+    if (response.status === 403) {
+      setCheckIfUserExists(!checkIfUserExists);
+    } else if (response.status === 409) {
+      setCheckIfEmailExists(!checkIfEmailExists);
     } else {
-      // TODO: handle case where email already exists
-      const response = await addUser(user);
-      if (response.status === 403) {
-        setCheckIfUserExists(!checkIfUserExists);
-      } else if (response.status === 409) {
-        setCheckIfEmailExists(!checkIfEmailExists);
-      } else {
-        setUserCreated(!userCreated);
-        setCheckIfUserExists(false);
-        setCheckIfEmailExists(false);
-        setTimeout(() => history.replace(from), 3000);
-      }
+      setUserCreated(!userCreated);
+      setCheckIfUserExists(false);
+      setCheckIfEmailExists(false);
+      setTimeout(() => history.replace(from), 1500);
     }
     resetInputFields();
   }
