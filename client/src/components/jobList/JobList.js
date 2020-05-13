@@ -48,7 +48,6 @@ export default function JobList() {
       const orgEventList = await getOrgById({org_id: orgId});
       dispatch(orgEventsList(orgEventList.Events));
       setJobs(orgEventList.Events);
-      console.log(orgEventList);
     }
   }
 

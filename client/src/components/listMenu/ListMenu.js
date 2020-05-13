@@ -55,7 +55,9 @@ export default function ListMenu() {
   }
 
   function handleRedirection() {
-    history.replace('/addEvent')
+    dispatch(eventSelection('CREATE EVENT'));
+    dispatch(eventSelectionButton('CREATE EVENT'));
+    history.replace('/addEvent');
   }
   
   if (!orgId) {

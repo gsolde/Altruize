@@ -33,7 +33,7 @@ export async function addEvent(body, org_id) {
   });
 
   const res = await response.json();
-  addOrgToEvent(org_id, res.id)
+  await addOrgToEvent(org_id, res.id)
   return res;
 };
 

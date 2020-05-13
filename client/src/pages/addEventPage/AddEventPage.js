@@ -55,11 +55,12 @@ export default function AddEventPage() {
     });
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    addEvent(formData, orgId);
+    await addEvent(formData, orgId);
     resetInputFields();
-    history.push(from);
+    dispatch(eventSelectionButton('MY EVENTS'));
+    history.replace(from);
   }
 
   return (

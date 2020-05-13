@@ -9,15 +9,11 @@ import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 export default function Footer () {
   return (
     <div className="footer-wrapper">
-      <div className="about">
-        <span className="bold">Altruize</span>
-        <p>Bacon ipsum dolor amet salami frankfurter filet mignon shank, chislic biltong ham hock pastrami. Frankfurter meatball burgdoggen, cupim doner pastrami ball tip short loin alcatra landjaeger. Chislic pork chop hamburger short ribs tail doner frankfurter spare ribs t-bone bacon jerky kielbasa tenderloin ground round corned beef. Pork loin t-bone chuck fatback kevin strip steak chicken. Doner filet mignon tail, frankfurter alcatra burgdoggen ribeye sausage short loin ham bacon porchetta andouille.</p>
-      </div>
       <div className="social-media">
         <span className="bold">Get in touch</span>
         <ul>
           <li className="social-media-links">
-            <span>Gerard Soldevilla </span>
+            <span>Gerard Soldevila </span>
             <div>
               <a href="https://github.com/gsolde" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /> </a>
               <a href="https://www.linkedin.com/in/gerard-soldevila-lafoz-91ab46125/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedinIn} /></a>
