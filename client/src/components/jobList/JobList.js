@@ -5,21 +5,29 @@ import { getAllActiveEvents } from '../../services/EventsAPI';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserById } from '../../services/UsersAPI';
+import { getOrgById } from '../../services/OrgsAPI';
 
-import { allEventsList, myEventsList, searchedEventsList, eventSelectionButton } from '../../actions';
+import { 
+  allEventsList, 
+  myEventsList, 
+  searchedEventsList, 
+  eventSelectionButton, 
+  orgEventsList 
+} from '../../actions';
 
 export default function JobList() {
 
   const dispatch = useDispatch();
   const userId = useSelector(state => state.userId);
-  const eventQuerySelector = useSelector((state) => state.eventSelectionButton);
+  const orgId = useSelector(state => state.orgId);
+  const eventQuerySelector = useSelector((state) => state.eventSelection);
   const searchedEvents = useSelector((state) => state.searchedEventsList);
 
   const [jobs, setJobs] = useState([]);
-
+  
   const getEvents = async () => {
-    if(eventQuerySelector === "ALL EVENTS") getActiveEvents();
-    if(eventQuerySelector === "MY EVENTS") getMyEvents();
+    if(eventQuerySelector === 'ALL EVENTS') getActiveEvents();
+    if(eventQuerySelector === 'MY EVENTS') getMyEvents();
   }
 
   const getActiveEvents = async () => {
@@ -30,10 +38,18 @@ export default function JobList() {
   };
 
   const getMyEvents = async () => {
-    const myEventList = await getUserById({user_id: userId});
-    myEventList && dispatch(myEventsList(myEventList.Events));
-    myEventList && setJobs(myEventList.Events);
-    dispatch(searchedEventsList([]));
+    if (userId) {
+      const myEventList = await getUserById({user_id: userId});
+      myEventList && dispatch(myEventsList(myEventList.Events));
+      myEventList && setJobs(myEventList.Events);
+      dispatch(searchedEventsList([]));
+    } 
+    if (orgId) {
+      const orgEventList = await getOrgById({org_id: orgId});
+      dispatch(orgEventsList(orgEventList.Events));
+      setJobs(orgEventList.Events);
+      console.log(orgEventList);
+    }
   }
 
   useEffect(() => {

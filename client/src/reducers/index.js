@@ -9,6 +9,7 @@ import tagsReducer from './tagsReducer';
 import userInfoReducer from './userInfoReducer';
 import orgInfoReducer from './orgInfoReducer';
 import searchedEventListReducer from './searchedEventsListReducer';
+import orgEventListReducer from './orgEventListReducer';
 
 const allReducers = combineReducers({
   isLoggedIn: isLoggedInReducer,
@@ -23,7 +24,8 @@ const allReducers = combineReducers({
   myEvents: myEventsListReducer,
   allEventsList: allEventsListReducer,
   myEventsList: myEventsListReducer,
-  searchedEventsList: searchedEventListReducer
+  searchedEventsList: searchedEventListReducer,
+  orgEventsList: orgEventListReducer,
 });
 
 export default allReducers;

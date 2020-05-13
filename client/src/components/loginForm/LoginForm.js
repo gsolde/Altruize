@@ -20,6 +20,7 @@ import {
   userId,
   userInfo,
   orgInfo,
+  eventSelectionButton
 } from '../../actions';
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
 import { getOrgLogin, getOrgById } from '../../services/OrgsAPI';
@@ -82,14 +83,13 @@ export default function LoginForm() {
       } else {
         loggedUser = await getUserByLoginId();
       };
-      console.log('loggedUser', loggedUser)
 
       dispatch(isUserLoggedIn());
 
-      checked
-        ? dispatch(orgId(loggedUser.id))
-        : dispatch(userId(loggedUser.id));
+      checked ? dispatch(orgId(loggedUser.id)) : dispatch(userId(loggedUser.id));
       checked ? dispatch(orgInfo(loggedUser)) : dispatch(userInfo(loggedUser));
+      checked && dispatch(eventSelectionButton('MY EVENTS'));
+
       return history.replace(from);
     }
 

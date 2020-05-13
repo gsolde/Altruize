@@ -16,7 +16,11 @@ import {
   KeyboardDateTimePicker,
 } from '@material-ui/pickers';
 
+import { useHistory } from 'react-router-dom';
+
 export default function AddEventPage() {
+  const history = useHistory();
+  const { from } = { from: { pathname: "/" } };
   const classes = useStyles();
   const orgId = useSelector((state) => state.orgId);
   const [formData, setFormData] = useState({
@@ -50,6 +54,7 @@ export default function AddEventPage() {
     event.preventDefault();
     addEvent(formData, orgId);
     resetInputFields();
+    history.replace(from)
   }
 
   return (

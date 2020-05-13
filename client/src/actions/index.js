@@ -25,6 +25,13 @@ export const eventSelectionButton = (selection) => {
   };
 };
 
+export const eventSelection = (selection) => {
+  return {
+    type: 'EVENT_SELECTION', // EVENT_SELECTION_BUTTON
+    payload: selection,
+  };
+};
+
 export const tags = (selection) => {
   return {
     type: 'GET_TAGS',
@@ -66,3 +73,11 @@ export const searchedEventsList = (searchedEventsList) => {
     payload: searchedEventsList
   }
 }
+
+export const orgEventsList = (orgEventsList) => {
+  return {
+    type: 'ORG_EVENTS_LIST',
+    payload: orgEventsList
+  }
+}
+

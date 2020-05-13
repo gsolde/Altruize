@@ -45,13 +45,13 @@ export default function Nav () {
         <Link className="link" to="/">ALTRUIZE</Link>
       </div>
       <div className="addEvent-login-options">
-        {
+        {/* {
           organizationId ?  
           <Button aria-controls="add-event-btn" aria-haspopup="true">
             <Link className="link" to="/addEvent">Add Event</Link>
           </Button>
           : null
-        }
+        } */}
         <div className="log-in-btn">
           <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
             {isLoggedIn ?
