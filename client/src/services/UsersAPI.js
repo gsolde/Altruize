@@ -61,7 +61,7 @@ export async function addUser (user) {
     },
     body: JSON.stringify(user),
   });
-  return response.json();
+  return response;
 }
 
 export async function updateUser (user) {

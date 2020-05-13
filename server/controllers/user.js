@@ -43,8 +43,8 @@ async function getUserById (req, res) {
           where: {
             cancelled: false,
           },
-          include: [{model: db.User}, {model: db.Org}, {model: db.Tag}], 
-        }, 
+          include: [{model: db.User}, {model: db.Org}, {model: db.Tag}],
+        },
         { model: db.Tag }],
       order: [
         [db.Event, 'start_date', 'ASC']
