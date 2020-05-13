@@ -19,8 +19,8 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUser } from '../../services/UsersAPI';
-import { userInfo } from '../../actions';
+import { updateOrg } from '../../services/OrgsAPI';
+import { orgInfo } from '../../actions';
 
 const theme = createMuiTheme({
   palette: {
@@ -72,11 +72,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const userProfileInfo = useSelector((state) => state.userInfo);
-  const [userName, setUserName] = useState('');
-  const [address, setAddress] = useState('');
-  const [aboutMe, setAboutMe] = useState('');
+  const orgProfileInfo = useSelector((state) => state.orgInfo);
+  const [orgName, setOrgName] = useState('');
+  const [regNum, setRegNum] = useState('');
+  const [about, setAbout] = useState('');
   const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [phoneNum, setPhoneNum] = useState('');
   const [password, setPassword] = useState('');
   const [editMode, setEditMode] = useState(false);
   const [profilePic, setProfilePic] = useState(
@@ -86,36 +88,40 @@ export default function SignUp() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setUserName(userProfileInfo.user_name);
-    setAddress(userProfileInfo.address);
-    setAboutMe(userProfileInfo.about_me);
-    setEmail(userProfileInfo.email);
-    setPassword(userProfileInfo.password);
-    setProfilePic(userProfileInfo.profile_pic);
-  }, [userProfileInfo, editMode]);
+    setOrgName(orgProfileInfo.org_name);
+    setRegNum(orgProfileInfo.reg_number);
+    setAbout(orgProfileInfo.about);
+    setAddress(orgProfileInfo.address);
+    setPhoneNum(orgProfileInfo.phone_number);
+    setEmail(orgProfileInfo.email);
+    setPassword(orgProfileInfo.password);
+    setProfilePic(orgProfileInfo.profile_pic);
+  }, [orgProfileInfo, editMode]);
 
   const handleEditMode = () => {
     setEditMode(!editMode);
   };
-  const handleUserName = (e) => {
-    setUserName(e.target.value);
+  const handleOrgName = (e) => {
+    setOrgName(e.target.value);
   };
 
+  const handleRegNum = (e) => {
+    setRegNum(e.target.value);
+  };
   const handleAddress = (e) => {
     setAddress(e.target.value);
   };
+  const handlePhoneNum = (e) => {
+    setPhoneNum(e.target.value);
+  };
 
-  const handleAboutMe = (e) => {
-    setAboutMe(e.target.value);
+  const handleAbout = (e) => {
+    setAbout(e.target.value);
   };
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
-
-  // const dispatchUserInfo = (user) => {
-  //   dispatch(userInfo(user));
-  // };
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
@@ -124,16 +130,18 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
-      user_id: userProfileInfo.id,
-      user_name: userName,
-      about_me: aboutMe,
+      org_id: orgProfileInfo.id,
+      org_name: orgName,
+      about: about,
       email: email,
       password: password,
       address: address,
-      profile_pic: profilePic,
+      phoneNumber: phoneNum,
+      reg_number: regNum,
+      profilePic: profilePic,
     };
-    const updatedUser = await updateUser(body);
-    dispatch(userInfo(updatedUser[1][0]));
+    const updatedOrg = await updateOrg(body);
+    dispatch(orgInfo(updatedOrg[1][0]));
     setEditMode(!editMode);
   };
 
@@ -176,16 +184,30 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <TextField
                   // autoComplete="fname"
-                  onChange={handleUserName}
-                  name="User Name"
-                  value={userName}
+                  onChange={handleOrgName}
+                  name="Organisation Name"
+                  value={orgName}
                   variant="outlined"
                   disabled={editMode ? false : true}
                   required
                   fullWidth
-                  id="user_name"
-                  label="User Name"
+                  id="Organisation Name"
+                  label="Organisation Name"
                   autoFocus
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  onChange={handleRegNum}
+                  variant="outlined"
+                  value={regNum}
+                  required
+                  fullWidth
+                  disabled={editMode ? false : true}
+                  id="RegNum"
+                  label="Registration Number"
+                  name="RegNum"
+                  // autoComplete="Location"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -196,17 +218,31 @@ export default function SignUp() {
                   required
                   fullWidth
                   disabled={editMode ? false : true}
-                  id="location"
-                  label="Location"
-                  name="location"
+                  id="address"
+                  label="Address"
+                  name="address"
+                  // autoComplete="Location"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  onChange={handlePhoneNum}
+                  variant="outlined"
+                  value={phoneNum}
+                  required
+                  fullWidth
+                  disabled={editMode ? false : true}
+                  id="phoneNum"
+                  label="Phone Number"
+                  name="phoneNum"
                   // autoComplete="Location"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  onChange={handleAboutMe}
-                  value={aboutMe}
+                  onChange={handleAbout}
+                  value={about}
                   required
                   fullWidth
                   multiline
@@ -214,7 +250,7 @@ export default function SignUp() {
                   rowsMax={4}
                   disabled={editMode ? false : true}
                   name="about"
-                  label="About me"
+                  label="About"
                   id="multiline"
                   // type="password"
                   // autoComplete="current-password"
