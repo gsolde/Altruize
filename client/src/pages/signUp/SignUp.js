@@ -60,7 +60,7 @@ export default function SignUp() {
       setUserCreated(!userCreated);
       setCheckIfUserExists(false);
       setCheckIfEmailExists(false);
-      setTimeout(() => history.replace(from), 3000);
+      setTimeout(() => history.replace(from), 1500);
     }
     resetInputFields();
   }

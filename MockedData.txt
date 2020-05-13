@@ -1,25 +1,25 @@
 INSERT INTO "Events" (event_name, description, start_date, finish_date, latitude, longitude, location, picture, cancelled, "createdAt", "updatedAt") VALUES
-('Clean la Barceloneta', 'Clean the beach', '2020-04-22 01:28:00.84+01', '2020-04-22 01:28:00.84+01', 0, 0, 'Barcelona', 'https://images.unsplash.com/photo-1569254983547-44dc559f038f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80', true, NOW(), NOW()),
-('Mass haircut for charity', 'if you are a barber, come shave peoples heads for a good cause ', '2020-07-22T00:28:00.840Z', '2020-07-23T00:28:00.840Z', 0, 0, 'Munich', 'https://images.unsplash.com/photo-1518398046578-8cca57782e17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', false, NOW(), NOW()),
-('help clean donkeys', 'Our dirty donkeys need to be cleaned, come help clean them', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'donkeyfarm', 'https://images.unsplash.com/photo-1518828822343-6e2f5c4869da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=646&q=80', false, NOW(), NOW()),
-('Donate blood', 'A very sick man Mr C Drakula requires blood to live, please donate!', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'Transylvania', 'https://images.unsplash.com/photo-1579154341184-22069e4614d2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80', false, NOW(), NOW()),
-('Make burritos for the homeless ', 'feed the homeless with burritos and beer', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'London', 'https://images.unsplash.com/photo-1508779544523-dd1b27685be3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80', false, NOW(), NOW()),
-('Art workshop for people in risk of exclusion', 'give some worthy people a sponge bath', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'Madrid', 'https://images.unsplash.com/photo-1519430044529-9a9a57177865?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1361&q=80', false, NOW(), NOW());
+('Clean la Barceloneta', 'Bacon ipsum dolor amet fatback tenderloin cow strip steak drumstick biltong beef ribs pancetta ribeye shank swine. Pastrami pork flank, shankle burgdoggen turducken sirloin bacon ground round alcatra jowl leberkas meatloaf. Porchetta beef ribs swine corned beef burgdoggen meatball, chuck andouille alcatra bacon chicken jowl. Pig meatball pork loin frankfurter bresaola t-bone jowl. Flank capicola jowl swine, biltong cupim tenderloin spare ribs brisket meatball cow. Salami meatball kielbasa beef ribs.', '2020-05-22 01:28:00.84+01', '2020-05-22 01:28:00.84+01', 0, 0, 'Barcelona', 'https://images.unsplash.com/photo-1569254983547-44dc559f038f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80', false, NOW(), NOW()),
+('Mass haircut for charity', 'Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.', '2020-07-22T00:28:00.840Z', '2020-07-23T00:28:00.840Z', 0, 0, 'Munich', 'https://images.unsplash.com/photo-1518398046578-8cca57782e17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', false, NOW(), NOW()),
+('Help clean the English Garden', 'Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'Munich', 'https://images.unsplash.com/photo-1588744349807-e5f0e99abed0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80', false, NOW(), NOW()),
+('Donate blood', 'Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. Sea lettuce lettuce water chestnut eggplant winter purslane fennel azuki bean earthnut pea sierra leone bologi leek soko chicory celtuce parsley jícama salsify.', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'Australia', 'https://images.unsplash.com/photo-1579154341184-22069e4614d2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80', false, NOW(), NOW()),
+('Art workshop for people in risk of exclusion', 'Celery quandong swiss chard chicory earthnut pea potato. Salsify taro catsear garlic gram celery bitterleaf wattle seed collard greens nori. Grape wattle seed kombu beetroot horseradish carrot squash brussels sprout chard.', '2020-06-22T00:28:00.840Z', '2020-07-22T00:28:00.840Z', 0, 0, 'Madrid', 'https://images.unsplash.com/photo-1519430044529-9a9a57177865?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1361&q=80', false, NOW(), NOW()),
+('Introduction to Mexican culture', 'Celery quandong swiss chard chicory earthnut pea potato. Salsify taro catsear garlic gram celery bitterleaf wattle seed collard greens nori. Grape wattle seed kombu beetroot horseradish carrot squash brussels sprout chard.', '2020-06-29T00:28:00.840Z', '2020-07-29T00:28:00.840Z', 0, 0, 'London', 'https://images.unsplash.com/photo-1512813195386-6cf811ad3542?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80', false, NOW(), NOW());
 
 INSERT INTO "Orgs" (reg_number, phone_number, verified, org_name, about, email, password, address, profile_pic, active, notes, "createdAt", "updatedAt") VALUES
-('1234DEQWT5FW4E', '4465685234534', true, 'Greenpace', 'We believe that a billion acts of courage can spark a brighter tomorrow', 'greenpace@greeenpace.com', 'password', 'allgreen 23, Manchester', 'not yet', true, 'No notes yet', NOW(), NOW()),
-('6543WGDVWEAR23', '6543654324432', true, 'Children Care', 'No child should be left unattended', 'childrencare@childrencare.com', 'password', 'children road 24, Barcelona', 'not yet', true, 'No notes yet', NOW(), NOW()),
-('FREWAF5643263F', '6657651432543', true, 'Help the aged', 'Do not let your grandparents down',  'helptheaged@help.com', 'password', 'aged road 38, Paris', 'not yet', true, 'No notes yet', NOW(), NOW()),
-('GTREE7788CEWCC', '6586244556776', true, 'Bruce Grove Association', 'Taking care of the parties is what we do best', 'brucegrove@association.com', 'password', 'bruce grove 10, London', 'not yet', true, 'No notes yet', NOW(), NOW()),
-('PV67653422FVTS', '7632353255777', true, 'Blank Keyboards Association', 'Psychologically helping those who have problems with regular keyboards', 'blankkeyboards@leonard.com', 'password', 'keyboard street 5, Munich', 'not yet', true, 'No notes yet', NOW(), NOW()),
-('REWR764843JJ76', '7687548937689', true, 'Animal Rescue Center', 'Taking care of animals is our passion', 'animals_are_great@lovingdonkies.com', 'password', 'Happy animal road 5, Bratislava', 'not yet', true, 'No notes yet', NOW(), NOW());
+('1234DEQWT5FW4E', '4465685234534', true, 'Greenpeace', 'We believe that a billion acts of courage can spark a brighter tomorrow', 'greenpeace@greenpace.com', '$2b$10$U1Kw2wHxqA.TcaGCrFfvuOKmBvCOOwLV6IAhtTqHeTL.N0Zt3lerq', 'allgreen 23, Manchester', 'not yet', true, 'No notes yet', NOW(), NOW()),
+('6543WGDVWEAR23', '6543654324432', true, 'Children Care', 'No child should be left unattended', 'childrencare@childrencare.com', '$2b$10$U1Kw2wHxqA.TcaGCrFfvuOKmBvCOOwLV6IAhtTqHeTL.N0Zt3lerq', 'children road 24, Barcelona', 'not yet', true, 'No notes yet', NOW(), NOW()),
+('FREWAF5643263F', '6657651432543', true, 'Help the aged', 'Do not let your grandparents down',  'helptheaged@help.com', '$2b$10$U1Kw2wHxqA.TcaGCrFfvuOKmBvCOOwLV6IAhtTqHeTL.N0Zt3lerq', 'aged road 38, Paris', 'not yet', true, 'No notes yet', NOW(), NOW()),
+('GTREE7788CEWCC', '6586244556776', true, 'Bruce Grove Association', 'Taking care of the parties is what we do best', 'brucegrove@association.com', '$2b$10$U1Kw2wHxqA.TcaGCrFfvuOKmBvCOOwLV6IAhtTqHeTL.N0Zt3lerq', 'bruce grove 10, London', 'not yet', true, 'No notes yet', NOW(), NOW()),
+('PV67653422FVTS', '7632353255777', true, 'Blank Keyboards Association', 'Psychologically helping those who have problems with regular keyboards', 'blankkeyboards@leonard.com', '$2b$10$U1Kw2wHxqA.TcaGCrFfvuOKmBvCOOwLV6IAhtTqHeTL.N0Zt3lerq', 'keyboard street 5, Munich', 'not yet', true, 'No notes yet', NOW(), NOW()),
+('REWR764843JJ76', '7687548937689', true, 'Animal Rescue Center', 'Taking care of animals is our passion', 'animals_are_great@lovingdonkies.com', '$2b$10$U1Kw2wHxqA.TcaGCrFfvuOKmBvCOOwLV6IAhtTqHeTL.N0Zt3lerq', 'Happy animal road 5, Bratislava', 'not yet', true, 'No notes yet', NOW(), NOW());
 
 INSERT INTO "Users" (user_name, about_me, email, password, address, profile_pic, active, karma, "createdAt", "updatedAt") VALUES
-('Alejandro', 'I like donkeys', 'adonkey1@yahoo.es', 'Alexdonk', '72 Great avenue', 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80', 'true', -69, NOW(), NOW() ),
-('Leonard', 'Im not that good at ping pong', 'loser@pingpong.es', 'pingpong', '3 Horrible ping pong players street', 'https://images.unsplash.com/photo-1537815749002-de6a533c64db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 'true', 1, NOW(), NOW() ),
-('Mark', 'I like cleaning things', 'mark@yahoo.com', 'mark12345', '1 mark street', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.zimbio.com%2Fphotos%2FMark%2BFoster%2FFoster%2BPeople%2BPerform%2BPrivate%2BConcert%2BNew%2F1AQXcjSqQ7f&psig=AOvVaw23ntt77oHOyGqsE4RCpivf&ust=1588694938063000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJiRz_7LmukCFQAAAAAdAAAAABAD', 'true', 1, NOW(), NOW() ),
-('Rob', 'I like helping homeless people', 'Rob@yahoo.com', 'rob12345', '1 rob street', 'https://images.unsplash.com/photo-1586297098710-0382a496c814?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 'true', 1, NOW(), NOW() ),
-('Gerard', 'I like cleaning birds covered in oil', 'gerard@yahoo.com', 'gerard12', '1 Gerardo street', 'https://media-exp1.licdn.com/dms/image/C4D03AQEuhw7UQwbX5A/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=CJ7wNArHAR2JQhlbCWOaTUh2i6JjK6YiuR9bQD3GPCo', 'true', 1, NOW(), NOW() );
+('Alejandro', 'I like reading, riding horses, painting', 'alejandro@yahoo.es', '$2b$10$U1Kw2wHxqA.TcaGCrFfvuOKmBvCOOwLV6IAhtTqHeTL.N0Zt3lerq', '72 Great avenue', 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80', 'true', -69, NOW(), NOW() ),
+('Leonard', 'Im not that good at ping pong', 'leonard@yahoo.de', '$2b$10$U1Kw2wHxqA.TcaGCrFfvuOKmBvCOOwLV6IAhtTqHeTL.N0Zt3lerq', '3 ping pong street', 'https://images.unsplash.com/photo-1518928286447-dc161b7cd6fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80', 'true', 1, NOW(), NOW() ),
+('Mark', 'I like cleaning things', 'mark@yahoo.com', '$2b$10$U1Kw2wHxqA.TcaGCrFfvuOKmBvCOOwLV6IAhtTqHeTL.N0Zt3lerq', '1 mark street', 'https://images.unsplash.com/photo-1537815749002-de6a533c64db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', 'true', 1, NOW(), NOW() ),
+('Jessica', 'I like helping the ones in need', 'jessi@yahoo.com', '$2b$10$U1Kw2wHxqA.TcaGCrFfvuOKmBvCOOwLV6IAhtTqHeTL.N0Zt3lerq', '1 king street', 'https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80', 'true', 1, NOW(), NOW() ),
+('Gerardine', 'Girlpower to make the world a better place', 'gerardine@yahoo.es', '$2b$10$U1Kw2wHxqA.TcaGCrFfvuOKmBvCOOwLV6IAhtTqHeTL.N0Zt3lerq', '1 Gerardine street', 'https://i.imgur.com/jMeRWuV.png', 'true', 1, NOW(), NOW() );
 
 INSERT INTO "UsersEvents" ("createdAt", "updatedAt", "UserId", "EventId") VALUES
 (NOW(), NOW(), 1, 2),
@@ -29,32 +29,33 @@ INSERT INTO "UsersEvents" ("createdAt", "updatedAt", "UserId", "EventId") VALUES
 (NOW(), NOW(), 2, 5),
 (NOW(), NOW(), 1, 5),
 (NOW(), NOW(), 1, 1),
+(NOW(), NOW(), 5, 6),
 (NOW(), NOW(), 4, 2);
 
-INSERT INTO "Tags" ("createdAt", "updatedAt",tag_name) VALUES
-(NOW(), NOW(),'Starving'),
+INSERT INTO "Tags" ("createdAt", "updatedAt", tag_name) VALUES
+(NOW(), NOW(),'Hunger'),
 (NOW(), NOW(),'Animals'),
 (NOW(), NOW(),'Ecologism'),
 (NOW(), NOW(),'Beach'),
-(NOW(), NOW(),'Party');
+(NOW(), NOW(),'Childcare'),
+(NOW(), NOW(),'Ocean'),
+(NOW(), NOW(),'Homeless'),
+(NOW(), NOW(),'Food'),
+(NOW(), NOW(),'Culture'),
+(NOW(), NOW(),'Migrants'),
+(NOW(), NOW(),'Healthcare');
 
 INSERT INTO "TagsEvents" ("createdAt", "updatedAt","TagId", "EventId") VALUES
-(NOW(), NOW(), 1, 1),
-(NOW(), NOW(), 2, 2),
+(NOW(), NOW(), 4, 1),
+(NOW(), NOW(), 6, 1),
+(NOW(), NOW(), 7, 2),
 (NOW(), NOW(), 3, 3),
 (NOW(), NOW(), 5, 4),
-(NOW(), NOW(), 4, 5),
-(NOW(), NOW(), 1, 2),
-(NOW(), NOW(), 1, 3),
-(NOW(), NOW(), 2, 1),
-(NOW(), NOW(), 2, 5),
-(NOW(), NOW(), 3, 4),
-(NOW(), NOW(), 3, 1),
-(NOW(), NOW(), 4, 1),
-(NOW(), NOW(), 5, 2),
-(NOW(), NOW(), 5, 5),
-(NOW(), NOW(), 1, 6),
-(NOW(), NOW(), 5, 6);
+(NOW(), NOW(), 11, 4),
+(NOW(), NOW(), 7, 5),
+(NOW(), NOW(), 8, 6),
+(NOW(), NOW(), 9, 6),
+(NOW(), NOW(), 10, 6);
 
 INSERT INTO "TagsOrgs" ("createdAt", "updatedAt","TagId", "OrgId") VALUES
 (NOW(), NOW(), 1, 1),
