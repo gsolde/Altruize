@@ -102,10 +102,9 @@ async function addUser (req, res) {
     const { password, user_name, about_me, email, address, profile_pic, active, karma, notes } = req.body;
     const user = await db.User.findOne({ where: { user_name } });
     const checkEmail = await db.User.findOne({ where: { email } });
-    if (user || checkEmail) {
-      res.status(403);
-      res.json('User already exists');
-    } else {
+    if (user) res.status(403).json('User already exists');
+    else if (checkEmail) res.status(409).json('Email already in use');
+    else {
       const saltRounds = 10;
       const hash = await bcrypt.hash(password, saltRounds);
       const newUser = await db.User.create({ password: hash, user_name, about_me, email, address, profile_pic, active, karma, notes });
