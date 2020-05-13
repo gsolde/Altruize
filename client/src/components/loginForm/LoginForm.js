@@ -3,19 +3,29 @@ import Button from '@material-ui/core/Button';
 import { indigo, pink, red, teal } from '@material-ui/core/colors';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
+import {
+  createMuiTheme,
+  makeStyles,
+  MuiThemeProvider,
+} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { isUserLoggedIn, orgId, userId } from '../../actions';
+import {
+  isUserLoggedIn,
+  orgId,
+  userId,
+  userInfo,
+  orgInfo,
+} from '../../actions';
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
 import { getOrgLogin, getOrgById } from '../../services/OrgsAPI';
 import { getUserLogin, getUserById } from '../../services/UsersAPI';
 
-export default function LoginForm () {
+export default function LoginForm() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -25,37 +35,44 @@ export default function LoginForm () {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState(null);
   const [user, setUser] = useState({ email: '', password: '' });
-  const { from } = location.state || { from: { pathname: "/" } };
+  const { from } = location.state || { from: { pathname: '/' } };
 
-
-  function updateUser (event) {
+  function updateUser(event) {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
   }
 
-  function resetInputFields () {
+  function resetInputFields() {
     return setUser({
       email: '',
-      password: ''
+      password: '',
     });
   }
 
-  async function handleSubmit (event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
     let authToken;
     let loggedUser;
-    
+
     if (checked) {
-      authToken = await getOrgLogin({ org_email: user.email, org_password: user.password });
+      authToken = await getOrgLogin({
+        org_email: user.email,
+        org_password: user.password,
+      });
     } else {
-      authToken = await getUserLogin({ user_email: user.email, user_password: user.password });
+      authToken = await getUserLogin({
+        user_email: user.email,
+        user_password: user.password,
+      });
     }
-    
+
     if (authToken === 'Invalid email or password') {
-      setMessage('Invalid email or password. Make sure you log in with the correct account type');
+      setMessage(
+        'Invalid email or password. Make sure you log in with the correct account type'
+      );
       setError(true);
     } else {
       setMessage('Succesfully logged in!');
@@ -64,12 +81,17 @@ export default function LoginForm () {
         loggedUser = await getOrgById();
       } else {
         loggedUser = await getUserById();
-      };
+      }
 
       dispatch(isUserLoggedIn());
-      checked ? dispatch(orgId(loggedUser.id)) : dispatch(userId(loggedUser.id));
+
+      checked
+        ? dispatch(orgId(loggedUser.id))
+        : dispatch(userId(loggedUser.id));
+      checked ? dispatch(orgInfo(loggedUser)) : dispatch(userInfo(loggedUser));
+
       return history.replace(from);
-    };
+    }
 
     resetInputFields();
     setTimeout(() => {
@@ -77,7 +99,6 @@ export default function LoginForm () {
       setError(false);
       setMessage(null);
     }, 3000);
-
   }
 
   const toggleChecked = () => {
@@ -95,10 +116,9 @@ export default function LoginForm () {
             Log in
           </Typography>
           <Typography className={classes.caption} variant="caption">
-            {checked ?
-              'Login as a NGO, if you are a Person, flip the switch'
-              :
-              'Login as a Person, if you are an NGO, flip the switch.'}
+            {checked
+              ? 'Login as a NGO, if you are a Person, flip the switch'
+              : 'Login as a Person, if you are an NGO, flip the switch.'}
           </Typography>
           <ToggleSwitch toggleChecked={toggleChecked} checked={checked} />
           <form className={classes.form} onSubmit={handleSubmit}>
@@ -114,7 +134,7 @@ export default function LoginForm () {
                   label="Email Address"
                   autoComplete="email"
                   value={user.email}
-                  onChange={event => updateUser(event)}
+                  onChange={(event) => updateUser(event)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -128,36 +148,35 @@ export default function LoginForm () {
                   id="password"
                   autoComplete="password"
                   value={user.password}
-                  onChange={event => updateUser(event)}
+                  onChange={(event) => updateUser(event)}
                 />
               </Grid>
-              {!checked ?
-                (
-                  <Grid item xs={12}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      className={classes.facebook}
-                    >
-                      Facebook
-                </Button>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      className={classes.google}
-                    >
-                      Google
-                </Button>
-                  </Grid>
-                )
-                : null
-              }
-              {loading ?
-                <Typography className={error ? classes.error : classes.success} variant="caption">
+              {!checked ? (
+                <Grid item xs={12}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    className={classes.facebook}
+                  >
+                    Facebook
+                  </Button>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    className={classes.google}
+                  >
+                    Google
+                  </Button>
+                </Grid>
+              ) : null}
+              {loading ? (
+                <Typography
+                  className={error ? classes.error : classes.success}
+                  variant="caption"
+                >
                   {message}
                 </Typography>
-                : null
-              }
+              ) : null}
             </Grid>
             <Button
               type="submit"
