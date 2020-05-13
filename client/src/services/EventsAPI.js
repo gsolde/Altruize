@@ -27,6 +27,7 @@ export async function addEvent(body, org_id) {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
+      'authorization': `Bearer ${localStorage.getItem('altruize-token')}`,
     },
     body: JSON.stringify(body),
   });

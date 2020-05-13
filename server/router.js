@@ -9,7 +9,7 @@ router.get('/events', event.getAllEvents);
 router.get('/events/active', event.getActiveEvents);
 router.get('/events/past', event.getPastEvents);
 router.get('/events/cancelled', event.getCancelledEvents);
-router.post('/events', event.addEvent);
+router.post('/events', verifyJWT, event.addEvent);
 router.post('/events/getEventById', event.getEvent);
 router.post('/events/addTagToEvent', event.addTagToEvent);
 router.post('/events/addOrgToEvent', event.addOrgToEvent);
