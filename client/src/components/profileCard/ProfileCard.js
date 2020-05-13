@@ -130,12 +130,8 @@ export default function SignUp() {
       address: address,
       profile_pic: profilePic,
     };
-    console.log({ ...userInfo, body });
     const updatedUser = await updateUser(body);
-    console.log('handleSubmit -> updateduser', updatedUser[1][0]);
-    const loggedInUser = await getUserById({ id: 2 }); //Update for the actual Org or User Log in when ready.
     dispatch(userInfo(updatedUser[1][0]));
-    console.log('handleSubmit -> loggedInUser', loggedInUser);
     setEditMode(!editMode);
   };
 
