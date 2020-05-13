@@ -19,7 +19,7 @@ export default function Nav () {
   const isLoggedIn = useSelector(state => state.isLoggedIn);
   const userPic = useSelector(state => state.userInfo.profile_pic);
   const userName = useSelector(state => state.userInfo.user_name);
-
+  const organizationId = useSelector(state => state.orgId)
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -45,9 +45,13 @@ export default function Nav () {
         <Link className="link" to="/">ALTRUIZE</Link>
       </div>
       <div className="addEvent-login-options">
-        <Button aria-controls="add-event-btn" aria-haspopup="true">
-          <Link className="link" to="/addEvent">Add Event</Link>
-        </Button>
+        {
+          organizationId ?  
+          <Button aria-controls="add-event-btn" aria-haspopup="true">
+            <Link className="link" to="/addEvent">Add Event</Link>
+          </Button>
+          : null
+        }
         <div className="log-in-btn">
           <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
             {isLoggedIn ?
