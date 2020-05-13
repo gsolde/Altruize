@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 async function getAllOrgs(req, res) {
   try {
     const orgList = await db.Org.findAll({
-      include: [{ model: db.Event }, { model: db.Tag }]
+      include: [{ model: db.Event }, { model: db.Tag }],
     });
     res.status(200);
     res.json(orgList);
@@ -38,7 +38,7 @@ async function getOrg(req, res) {
       where: {
         org_name: req.body.org_name,
       },
-      include: [{ model: db.Event }, { model: db.Tag }]
+      include: [{ model: db.Event }, { model: db.Tag }],
     });
     res.status(200);
     res.json(org);
@@ -53,7 +53,19 @@ async function getOrgById(req, res) {
       where: {
         id: req.user.id,
       },
-      include: [{ model: db.Event }, { model: db.Tag }]
+      include: [
+        {
+          model: db.Event,
+          where: {
+            cancelled: false,
+          },
+          include: [{model: db.User}, {model: db.Org}, {model: db.Tag}], 
+        }, 
+        { model: db.Tag }],
+      order: [
+        [db.Event, 'start_date', 'ASC']
+      ],
+      order: [[db.Event, 'start_date', 'ASC']],
     });
     res.status(200);
     res.json(org);
@@ -88,7 +100,7 @@ async function getOrgLogin(req, res) {
       const token = jwt.sign({ user: org }, process.env.TOKEN_SECRET);
       res.status(200);
       res.json(token);
-    };
+    }
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -166,7 +178,7 @@ async function updateOrg(req, res) {
         address: req.body.address,
         profile_pic: req.body.profilePic,
       },
-      { where: { id: req.body.org_id } }
+      { where: { id: req.body.org_id }, returning: true }
     );
     res.status(201);
     res.json(updatedOrg);

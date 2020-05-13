@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
 export default function JobItem ({ job, updateEvents }) {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.userId);
+  const organizationId = useSelector(state => state.orgId);
   const attendeesList = job.Users.map(attendee => attendee.id);
 
   const history = useHistory();
@@ -77,7 +78,9 @@ export default function JobItem ({ job, updateEvents }) {
   async function handleLikedClick () {
     let event_id = job.id;
     let user_id = userId;
+  
     !user_id && history.replace(from);
+
     if(liked && userId) {
       await deleteEventFromUser({
         user_id,
@@ -157,7 +160,9 @@ export default function JobItem ({ job, updateEvents }) {
         }
       </div>
     );
-  } else {
+  }; 
+  
+  if(!userId && !organizationId) {
     return (
       <div className="job-item">
         <div className="job-card">
@@ -210,6 +215,74 @@ export default function JobItem ({ job, updateEvents }) {
               onClick={handleLikedClick}
             >
             Login to attend! 
+            </Button>
+          </div>
+          : null
+        }
+      </div>
+    );
+  };
+
+  if(organizationId) {
+    return (
+      <div className="job-item">
+        <div className="job-card">
+          <div className="job-img-owner">
+            <img className="img" src={job.picture} alt={job.event_name} />
+            <div className="event-owner">{job.Orgs[0] !== undefined ? job.Orgs[0].org_name : null}</div>
+          </div>
+          <div className="job-main-info">
+            <div className="date">{moment(job.start_date).format('Do, MMMM YYYY, h:mm a')}</div>
+            <div className="title">{job.event_name.toUpperCase()}</div>
+            <div className="location">
+              <FontAwesomeIcon icon={faMapMarker} />
+              {` ${job.location}`}
+            </div>
+            {job.Tags ?
+              <div className="job-tags">{job.Tags.map((tag) => {
+                return <div className="tag" key={tag.id}>{tag.tag_name}</div>;
+              })}
+              </div>
+              :
+              <div className="tag" >No tags</div>
+            }
+            <div className="job-footer">
+              <StyledAvatarGroup max={4}>
+                {job.Users.map((attendee) => {
+                  return <Avatar key={attendee.id} alt={attendee.user_name} src={`${attendee.profile_pic}`} />;
+                })}
+              </StyledAvatarGroup>
+              <div className="job-actions">
+                <IconButton
+                  className={clsx(classes.expand, {
+                    [classes.expandOpen]: expanded
+                  })}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label="show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </div>
+            </div>
+          </div>
+        </div>
+        {expanded ?
+          <div className="job-extra">
+            <div className="job-description">{job.description}</div>
+            <Button
+              variant="contained"
+              className={classes.loginBtn}
+              onClick={handleLikedClick}
+            >
+            Edit event
+            </Button>
+            <Button
+              variant="contained"
+              className={classes.loginBtn}
+              onClick={handleLikedClick}
+            >
+            Delete event 
             </Button>
           </div>
           : null
