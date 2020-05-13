@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,7 +36,10 @@ export default function ListMenu() {
 
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [selected, setSelected] = useState('ALL EVENTS');
+  const selection = (useSelector((state) => state.eventSelectionButton))
+  const [selected, setSelected] = useState(selection);
+
+
 
   function handleClick(e) {
     const eventSelector = e.target.innerText;

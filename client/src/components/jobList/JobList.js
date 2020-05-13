@@ -15,8 +15,6 @@ export default function JobList() {
   const eventQuerySelector = useSelector((state) => state.eventSelectionButton);
   const searchedEvents = useSelector((state) => state.searchedEventsList);
   
-  !userId && dispatch(eventSelectionButton('ALL EVENTS')); 
-
   const [jobs, setJobs] = useState([]);
 
   const getEvents = async () => {
