@@ -8,7 +8,7 @@ export async function addOrg (body) {
     },
     body: JSON.stringify(body),
   });
-  return response.json();
+  return response;
 }
 
 export async function getOrgByName (org) {
@@ -24,6 +24,17 @@ export async function getOrgByName (org) {
 
 export async function getOrgById () {
   const response = await fetch(`${API_URL}/orgs/getOrgById`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      'authorization': `Bearer ${localStorage.getItem('altruize-token')}`,
+    },
+  });
+  return response.json();
+};
+
+export async function getOrgByLoginId () {
+  const response = await fetch(`${API_URL}/orgs/getOrgByLoginId`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',

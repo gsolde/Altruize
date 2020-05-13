@@ -22,7 +22,7 @@ import {
   orgInfo,
 } from '../../actions';
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
-import { getOrgLogin, getOrgById } from '../../services/OrgsAPI';
+import { getOrgLogin, getOrgByLoginId } from '../../services/OrgsAPI';
 import { getUserLogin, getUserByLoginId } from '../../services/UsersAPI';
 
 export default function LoginForm() {
@@ -78,7 +78,7 @@ export default function LoginForm() {
       setMessage('Succesfully logged in!');
       localStorage.setItem('altruize-token', authToken);
       if (checked) {
-        loggedUser = await getOrgById();
+        loggedUser = await getOrgByLoginId();
       } else {
         loggedUser = await getUserByLoginId();
       };
