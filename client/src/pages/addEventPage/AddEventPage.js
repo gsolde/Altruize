@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { addEvent } from '../../services/EventsAPI';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -16,11 +16,16 @@ import {
   KeyboardDateTimePicker,
 } from '@material-ui/pickers';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+
+import { eventSelectionButton, eventSelection } from '../../actions';
 
 export default function AddEventPage() {
   const history = useHistory();
-  const { from } = { from: { pathname: "/" } };
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: '/' } };
+
+  const dispatch = useDispatch();
   const classes = useStyles();
   const orgId = useSelector((state) => state.orgId);
   const [formData, setFormData] = useState({
@@ -54,7 +59,7 @@ export default function AddEventPage() {
     event.preventDefault();
     addEvent(formData, orgId);
     resetInputFields();
-    history.replace(from)
+    history.push(from);
   }
 
   return (
