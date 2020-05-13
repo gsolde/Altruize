@@ -14,7 +14,7 @@ export default function JobList() {
   const userId = useSelector(state => state.userId);
   const eventQuerySelector = useSelector((state) => state.eventSelectionButton);
   const searchedEvents = useSelector((state) => state.searchedEventsList);
-  
+
   const [jobs, setJobs] = useState([]);
 
   const getEvents = async () => {
@@ -28,17 +28,17 @@ export default function JobList() {
     dispatch(eventSelectionButton('ALL EVENTS'))
     setJobs(jobList);
   };
-  
+
   const getMyEvents = async () => {
     const myEventList = await getUserById({user_id: userId});
-    dispatch(myEventsList(myEventList.Events));
-    dispatch(searchedEventsList([]))
-    setJobs(myEventList.Events);
+    myEventList && dispatch(myEventsList(myEventList.Events));
+    myEventList && setJobs(myEventList.Events);
+    dispatch(searchedEventsList([]));
   }
 
   useEffect(() => {
     getEvents();
-  }, []); 
+  }, []);
 
   if (searchedEvents.length >= 1) {
     return (
@@ -53,7 +53,7 @@ export default function JobList() {
         })}
       </div>
     </div>
-    ) 
+    )
   } else {
     return (
       <div className="list-wrapper">
@@ -68,5 +68,5 @@ export default function JobList() {
         </div>
       </div>
     );
-  } 
+  }
 }
