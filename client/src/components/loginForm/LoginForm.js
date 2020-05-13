@@ -3,14 +3,24 @@ import Button from '@material-ui/core/Button';
 import { indigo, pink, red, teal } from '@material-ui/core/colors';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
+import {
+  createMuiTheme,
+  makeStyles,
+  MuiThemeProvider,
+} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { isUserLoggedIn, orgId, userId } from '../../actions';
+import {
+  isUserLoggedIn,
+  orgId,
+  userId,
+  userInfo,
+  orgInfo,
+} from '../../actions';
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
 import { getOrgLogin, getOrgById } from '../../services/OrgsAPI';
 import { getUserLogin, getUserByLoginId } from '../../services/UsersAPI';
@@ -25,8 +35,7 @@ export default function LoginForm() {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState(null);
   const [user, setUser] = useState({ email: '', password: '' });
-  const { from } = location.state || { from: { pathname: "/" } };
-
+  const { from } = location.state || { from: { pathname: '/' } };
 
   function updateUser(event) {
     setUser({
@@ -38,7 +47,7 @@ export default function LoginForm() {
   function resetInputFields() {
     return setUser({
       email: '',
-      password: ''
+      password: '',
     });
   }
 
@@ -49,7 +58,10 @@ export default function LoginForm() {
     let loggedUser;
 
     if (checked) {
-      authToken = await getOrgLogin({ org_email: user.email, org_password: user.password });
+      authToken = await getOrgLogin({
+        org_email: user.email,
+        org_password: user.password,
+      });
     } else {
       authToken = await getUserLogin({ user_email: user.email, user_password: user.password });
     };
@@ -73,9 +85,13 @@ export default function LoginForm() {
       console.log('loggedUser', loggedUser)
 
       dispatch(isUserLoggedIn());
-      checked ? dispatch(orgId(loggedUser.id)) : dispatch(userId(loggedUser.id));
+
+      checked
+        ? dispatch(orgId(loggedUser.id))
+        : dispatch(userId(loggedUser.id));
+      checked ? dispatch(orgInfo(loggedUser)) : dispatch(userInfo(loggedUser));
       return history.replace(from);
-    };
+    }
 
     resetInputFields();
     setTimeout(() => {
@@ -83,7 +99,6 @@ export default function LoginForm() {
       setError(false);
       setMessage(null);
     }, 3000);
-
   }
 
   const toggleChecked = () => {
@@ -101,10 +116,9 @@ export default function LoginForm() {
             Log in
           </Typography>
           <Typography className={classes.caption} variant="caption">
-            {checked ?
-              'Login as a NGO, if you are a Person, flip the switch'
-              :
-              'Login as a Person, if you are an NGO, flip the switch.'}
+            {checked
+              ? 'Login as a NGO, if you are a Person, flip the switch'
+              : 'Login as a Person, if you are an NGO, flip the switch.'}
           </Typography>
           <ToggleSwitch toggleChecked={toggleChecked} checked={checked} />
           <form className={classes.form} onSubmit={handleSubmit}>
@@ -120,7 +134,7 @@ export default function LoginForm() {
                   label="Email Address"
                   autoComplete="email"
                   value={user.email}
-                  onChange={event => updateUser(event)}
+                  onChange={(event) => updateUser(event)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -134,15 +148,14 @@ export default function LoginForm() {
                   id="password"
                   autoComplete="password"
                   value={user.password}
-                  onChange={event => updateUser(event)}
+                  onChange={(event) => updateUser(event)}
                 />
               </Grid>
               {loading ?
                 <Typography className={error ? classes.error : classes.success} variant="caption">
                   {message}
                 </Typography>
-                : null
-              }
+              ) : null}
             </Grid>
             <Button
               type="submit"

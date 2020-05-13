@@ -2,7 +2,7 @@ const db = require('../models/index');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-async function getAllUsers (req, res) {
+async function getAllUsers(req, res) {
   try {
     const userList = await db.User.findAll({
       include: [{ model: db.Event }, { model: db.Tag }],
@@ -15,7 +15,7 @@ async function getAllUsers (req, res) {
   }
 }
 
-async function getUser (req, res) {
+async function getUser(req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -43,10 +43,10 @@ async function getUserById (req, res) {
           where: {
             cancelled: false,
           },
-          include: [{model: db.User}, {model: db.Org}, {model: db.Tag}],
-        },
+          include: [{model: db.User}, {model: db.Org}, {model: db.Tag}], 
+        }, 
         { model: db.Tag }],
-        order: [
+      order: [
         [db.Event, 'start_date', 'ASC']
       ],
       order: [[db.Event, 'start_date', 'ASC']],
@@ -85,14 +85,13 @@ async function getUserLogin (req, res) {
       res.status(200);
       res.json(token);
     };
-
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
   }
 }
 
-async function getActiveUsers (req, res) {
+async function getActiveUsers(req, res) {
   try {
     const activeUsers = await db.User.findAll({
       where: {
@@ -108,9 +107,19 @@ async function getActiveUsers (req, res) {
   }
 }
 
-async function addUser (req, res) {
+async function addUser(req, res) {
   try {
-    const { password, user_name, about_me, email, address, profile_pic, active, karma, notes } = req.body;
+    const {
+      password,
+      user_name,
+      about_me,
+      email,
+      address,
+      profile_pic,
+      active,
+      karma,
+      notes,
+    } = req.body;
     const user = await db.User.findOne({ where: { user_name } });
     const checkEmail = await db.User.findOne({ where: { email } });
     if (user) res.status(403).json('User already exists');
@@ -118,7 +127,17 @@ async function addUser (req, res) {
     else {
       const saltRounds = 10;
       const hash = await bcrypt.hash(password, saltRounds);
-      const newUser = await db.User.create({ password: hash, user_name, about_me, email, address, profile_pic, active, karma, notes });
+      const newUser = await db.User.create({
+        password: hash,
+        user_name,
+        about_me,
+        email,
+        address,
+        profile_pic,
+        active,
+        karma,
+        notes,
+      });
       res.status(201);
       res.json(newUser);
     }
@@ -128,7 +147,7 @@ async function addUser (req, res) {
   }
 }
 
-async function updateUser (req, res) {
+async function updateUser(req, res) {
   try {
     const updatedUser = await db.User.update(
       {
@@ -148,7 +167,7 @@ async function updateUser (req, res) {
   }
 }
 
-async function addEventToUser (req, res) {
+async function addEventToUser(req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -164,7 +183,7 @@ async function addEventToUser (req, res) {
   }
 }
 
-async function deleteEventFromUser (req, res) {
+async function deleteEventFromUser(req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -180,7 +199,7 @@ async function deleteEventFromUser (req, res) {
   }
 }
 
-async function addTagToUser (req, res) {
+async function addTagToUser(req, res) {
   try {
     const user = await db.User.findOne({
       where: {

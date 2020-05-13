@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { teal, grey } from '@material-ui/core/colors';
 
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { eventSelectionButton } from '../../actions';
@@ -30,20 +30,23 @@ const theme = createMuiTheme({
 
 export default function ListMenu() {
   const userId =  useSelector((state) => state.userId);
-  const orgId =  useSelector((state) => state.orgId);
-  const eventSelectionTag = useSelector((state) => state.eventSelectionButton)
+  
+  const history = useHistory();
+  const { from } = { from: { pathname: "/login" } };
 
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [selected, setSelected] = useState('ALL EVENTS');
+  const selection = (useSelector((state) => state.eventSelectionButton))
+  const [selected, setSelected] = useState(selection);
+
+
 
   function handleClick(e) {
     const eventSelector = e.target.innerText;
     setSelected(eventSelector);
     dispatch(eventSelectionButton(eventSelector));
+    if (!userId && selected === 'ALL EVENTS') history.replace(from);
   }
-  
-  if(!userId && eventSelectionTag !== 'ALL EVENTS') return (<Redirect to='/login'/>);
   
   return (
     <MuiThemeProvider theme={theme}>
