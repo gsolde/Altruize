@@ -30,6 +30,7 @@ router.get('/users', user.getAllUsers);
 router.post('/users', user.addUser);
 router.post('/users/getUserByName', user.getUser);
 router.post('/users/getUserById', verifyJWT, user.getUserById);
+router.post('/users/getUserByLoginId', verifyJWT, user.getUserByLoginId);
 router.post('/users/getUserLogin', user.getUserLogin);
 router.post('/users/addEventToUser', user.addEventToUser);
 router.post('/users/deleteEventFromUser', user.deleteEventFromUser);

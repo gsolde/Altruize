@@ -46,7 +46,7 @@ async function getUserById (req, res) {
           include: [{model: db.User}, {model: db.Org}, {model: db.Tag}],
         },
         { model: db.Tag }],
-      order: [
+        order: [
         [db.Event, 'start_date', 'ASC']
       ],
       order: [[db.Event, 'start_date', 'ASC']],
@@ -58,23 +58,34 @@ async function getUserById (req, res) {
     res.sendStatus(500);
   }
 }
+
+// TODO: combine with getUserById function?? if no events are assigned to the user, we get a null response -> log in fails
+async function getUserByLoginId (req, res) {
+  try {
+    const user = await db.User.findOne({ where: { id: req.user.id } });
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
 async function getUserLogin (req, res) {
   try {
     const user = await db.User.findOne({
       where: {
         email: req.body.user_email,
-        password: req.body.user_password,
       }
     });
-    if (user === null) {
-      res.status(400);
-      const err = 'Invalid email or password';
-      res.json(err);
-    } else {
+    if (user === null) return res.status(400).json('Invalid email');
+    else {
+      const validPassword = await bcrypt.compare(req.body.user_password, user.password);
+      if (!validPassword) return res.status(403).json('Invalid password')
       const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
       res.status(200);
       res.json(token);
     };
+
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -195,5 +206,6 @@ module.exports = {
   deleteEventFromUser,
   addTagToUser,
   updateUser,
-  getUserLogin
+  getUserLogin,
+  getUserByLoginId
 };

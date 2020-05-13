@@ -13,9 +13,9 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { isUserLoggedIn, orgId, userId } from '../../actions';
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
 import { getOrgLogin, getOrgById } from '../../services/OrgsAPI';
-import { getUserLogin, getUserById } from '../../services/UsersAPI';
+import { getUserLogin, getUserByLoginId } from '../../services/UsersAPI';
 
-export default function LoginForm () {
+export default function LoginForm() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -28,43 +28,49 @@ export default function LoginForm () {
   const { from } = location.state || { from: { pathname: "/" } };
 
 
-  function updateUser (event) {
+  function updateUser(event) {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
   }
 
-  function resetInputFields () {
+  function resetInputFields() {
     return setUser({
       email: '',
       password: ''
     });
   }
 
-  async function handleSubmit (event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
     let authToken;
     let loggedUser;
-    
+
     if (checked) {
       authToken = await getOrgLogin({ org_email: user.email, org_password: user.password });
     } else {
       authToken = await getUserLogin({ user_email: user.email, user_password: user.password });
-    }
-    
-    if (authToken === 'Invalid email or password') {
+    };
+
+    if (authToken === 'Invalid email') {
       setMessage('Invalid email or password. Make sure you log in with the correct account type');
       setError(true);
+      console.log('Invalid email')
+    } else if (authToken === 'Invalid password') {
+      setMessage('Invalid email or password. Make sure you log in with the correct account type');
+      setError(true);
+      console.log('Invalid password')
     } else {
       setMessage('Succesfully logged in!');
       localStorage.setItem('altruize-token', authToken);
       if (checked) {
         loggedUser = await getOrgById();
       } else {
-        loggedUser = await getUserById();
+        loggedUser = await getUserByLoginId();
       };
+      console.log('loggedUser', loggedUser)
 
       dispatch(isUserLoggedIn());
       checked ? dispatch(orgId(loggedUser.id)) : dispatch(userId(loggedUser.id));
