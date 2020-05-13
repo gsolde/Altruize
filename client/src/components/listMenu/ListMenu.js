@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { teal, grey } from '@material-ui/core/colors';
 
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { eventSelectionButton } from '../../actions';
@@ -30,8 +30,6 @@ const theme = createMuiTheme({
 
 export default function ListMenu() {
   const userId =  useSelector((state) => state.userId);
-  const orgId =  useSelector((state) => state.orgId);
-  const eventSelectionTag = useSelector((state) => state.eventSelectionButton)
   
   const history = useHistory();
   const { from } = { from: { pathname: "/login" } };
@@ -44,7 +42,7 @@ export default function ListMenu() {
     const eventSelector = e.target.innerText;
     setSelected(eventSelector);
     dispatch(eventSelectionButton(eventSelector));
-    selected === 'ALL EVENTS' && history.replace(from);
+    if (!userId && selected === 'ALL EVENTS') history.replace(from);
   }
   
   return (
