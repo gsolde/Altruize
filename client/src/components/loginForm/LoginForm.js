@@ -137,27 +137,6 @@ export default function LoginForm() {
                   onChange={event => updateUser(event)}
                 />
               </Grid>
-              {!checked ?
-                (
-                  <Grid item xs={12}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      className={classes.facebook}
-                    >
-                      Facebook
-                </Button>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      className={classes.google}
-                    >
-                      Google
-                </Button>
-                  </Grid>
-                )
-                : null
-              }
               {loading ?
                 <Typography className={error ? classes.error : classes.success} variant="caption">
                   {message}

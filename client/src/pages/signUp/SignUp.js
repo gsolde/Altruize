@@ -141,31 +141,6 @@ export default function SignUp() {
                   onChange={checked ? event => updateOrg(event) : event => updateUser(event)}
                 />
               </Grid>
-              {!checked ?
-                (
-                  <Grid item xs={12}>
-                    <Button
-                      type="login"
-                      fullWidth
-                      variant="contained"
-                      color="blue"
-                      className={classes.facebook}
-                    >
-                      Facebook
-                </Button>
-                    <Button
-                      type="login"
-                      fullWidth
-                      variant="contained"
-                      color="red"
-                      className={classes.google}
-                    >
-                      Google
-                </Button>
-                  </Grid>
-                )
-                : null
-              }
             </Grid>
             <Button
               type="submit"
