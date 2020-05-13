@@ -8,7 +8,7 @@ import { teal, grey } from '@material-ui/core/colors';
 import { useHistory } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { eventSelectionButton } from '../../actions';
+import { eventSelectionButton, eventSelection } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,6 +30,7 @@ const theme = createMuiTheme({
 
 export default function ListMenu() {
   const userId =  useSelector((state) => state.userId);
+  const orgId =  useSelector((state) => state.orgId);
   
   const history = useHistory();
   const { from } = { from: { pathname: "/login" } };
@@ -39,31 +40,61 @@ export default function ListMenu() {
   const selection = (useSelector((state) => state.eventSelectionButton))
   const [selected, setSelected] = useState(selection);
 
-
-
-  function handleClick(e) {
+  function handleClickUser(e) {
     const eventSelector = e.target.innerText;
     setSelected(eventSelector);
     dispatch(eventSelectionButton(eventSelector));
     if (!userId && selected === 'ALL EVENTS') history.replace(from);
   }
+
+  function handleClickOrg(e) {
+    const eventSelector = e.target.innerText;
+    setSelected(eventSelector);
+    dispatch(eventSelectionButton(eventSelector));
+    dispatch(eventSelection(eventSelector));
+  }
+
+  function handleRedirection() {
+    history.replace('/addEvent')
+  }
   
-  return (
-    <MuiThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <ButtonGroup color="primary" aria-label="outlined primary button group">
-          <Button
-            variant={selected === 'ALL EVENTS' ? 'contained' : 'outlined'}
-            onClick={handleClick}
-          >ALL EVENTS
-          </Button>
-          <Button
-            variant={selected === 'MY EVENTS' ? 'contained' : 'outlined'}
-            onClick={handleClick}
-          >MY EVENTS
-          </Button>
-        </ButtonGroup>
-      </div>
-    </MuiThemeProvider>
-  );
+  if (!orgId) {
+    return (
+      <MuiThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <ButtonGroup color="primary" aria-label="outlined primary button group">
+            <Button
+              variant={selected === 'ALL EVENTS' ? 'contained' : 'outlined'}
+              onClick={handleClickUser}
+            >ALL EVENTS
+            </Button>
+            <Button
+              variant={selected === 'MY EVENTS' ? 'contained' : 'outlined'}
+              onClick={handleClickUser}
+            >MY EVENTS
+            </Button>
+          </ButtonGroup>
+        </div>
+      </MuiThemeProvider>
+    );
+  } else {
+    return (
+      <MuiThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <ButtonGroup color="primary" aria-label="outlined primary button group">
+            <Button
+              variant={selected === 'MY EVENTS' ? 'contained' : 'outlined'}
+              onClick={handleClickOrg}
+            >MY EVENTS
+            </Button>
+            <Button
+              variant={selected === 'CREATE EVENT' ? 'contained' : 'outlined'}
+              onClick={handleRedirection}
+            >CREATE EVENT
+            </Button>
+          </ButtonGroup>
+        </div>
+      </MuiThemeProvider>
+    );
+  }
 }

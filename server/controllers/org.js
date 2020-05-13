@@ -52,7 +52,19 @@ async function getOrgById (req, res) {
       where: {
         id: req.user.id,
       },
-      include: [{ model: db.Event }, { model: db.Tag }]
+      include: [
+        {
+          model: db.Event,
+          where: {
+            cancelled: false,
+          },
+          include: [{model: db.User}, {model: db.Org}, {model: db.Tag}], 
+        }, 
+        { model: db.Tag }],
+      order: [
+        [db.Event, 'start_date', 'ASC']
+      ],
+      order: [[db.Event, 'start_date', 'ASC']],
     });
     res.status(200);
     res.json(org);
