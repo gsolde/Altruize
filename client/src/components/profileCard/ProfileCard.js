@@ -19,7 +19,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUser, getUserByName } from '../../services/UsersAPI';
+import { updateUser, getUserById } from '../../services/UsersAPI';
 import { userInfo } from '../../actions';
 
 const theme = createMuiTheme({
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const userInfo = useSelector((state) => state.userInfo);
+  const userProfileInfo = useSelector((state) => state.userInfo);
   const [userName, setUserName] = useState('');
   const [address, setAddress] = useState('');
   const [aboutMe, setAboutMe] = useState('');
@@ -86,13 +86,13 @@ export default function SignUp() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setUserName(userInfo.user_name);
-    setAddress(userInfo.address);
-    setAboutMe(userInfo.about_me);
-    setEmail(userInfo.email);
-    setPassword(userInfo.password);
-    setProfilePic(userInfo.profile_pic);
-  }, [userInfo, editMode]);
+    setUserName(userProfileInfo.user_name);
+    setAddress(userProfileInfo.address);
+    setAboutMe(userProfileInfo.about_me);
+    setEmail(userProfileInfo.email);
+    setPassword(userProfileInfo.password);
+    setProfilePic(userProfileInfo.profile_pic);
+  }, [userProfileInfo, editMode]);
 
   const handleEditMode = () => {
     setEditMode(!editMode);
@@ -119,9 +119,10 @@ export default function SignUp() {
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const body = {
-      user_id: userInfo.id,
+      user_id: userProfileInfo.id,
       user_name: userName,
       about_me: aboutMe,
       email: email,
@@ -129,11 +130,8 @@ export default function SignUp() {
       address: address,
       profile_pic: profilePic,
     };
-    console.log({ ...userInfo, body });
     const updatedUser = await updateUser(body);
-    console.log('handleSubmit -> updateduser', updatedUser[1]);
-    // const loggedInUser = await getUserByName({ user_name: 'Alejandro' }); //Update for the actual Org or User Log in when ready.
-    // dispatch(userInfo(updatedUser[1][0]));
+    dispatch(userInfo(updatedUser[1][0]));
     setEditMode(!editMode);
   };
 
@@ -173,7 +171,7 @@ export default function SignUp() {
           </div>
           <form className={classes.form} noValidate>
             <Grid container spacing={2}>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <TextField
                   // autoComplete="fname"
                   onChange={handleUserName}
