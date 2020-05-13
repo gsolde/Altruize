@@ -155,7 +155,7 @@ export default function LoginForm() {
                 <Typography className={error ? classes.error : classes.success} variant="caption">
                   {message}
                 </Typography>
-              ) : null}
+              : null}
             </Grid>
             <Button
               type="submit"
