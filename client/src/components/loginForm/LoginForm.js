@@ -82,7 +82,6 @@ export default function LoginForm() {
       } else {
         loggedUser = await getUserByLoginId();
       };
-      console.log('loggedUser', loggedUser)
 
       dispatch(isUserLoggedIn());
 

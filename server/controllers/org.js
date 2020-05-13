@@ -78,15 +78,13 @@ async function getOrgLogin(req, res) {
   try {
     const org = await db.Org.findOne({
       where: {
-        email: req.body.org_email,
-        password: req.body.org_password,
+        email: req.body.org_email
       }
     });
-    if (org === null) {
-      res.status(400);
-      const err = 'Invalid email or password';
-      res.json(err);
-    } else {
+    if (org === null) res.status(400).json('Invalid email');
+    else {
+      const validPassword = await bcrypt.compare(req.body.org_password, org.password);
+      if (!validPassword) return res.status(403).json('Invalid password')
       const token = jwt.sign({ user: org }, process.env.TOKEN_SECRET);
       res.status(200);
       res.json(token);
