@@ -23,7 +23,7 @@ import {
 } from '../../actions';
 import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
 import { getOrgLogin, getOrgById } from '../../services/OrgsAPI';
-import { getUserLogin, getUserById } from '../../services/UsersAPI';
+import { getUserLogin, getUserByLoginId } from '../../services/UsersAPI';
 
 export default function LoginForm() {
   const classes = useStyles();
@@ -63,25 +63,26 @@ export default function LoginForm() {
         org_password: user.password,
       });
     } else {
-      authToken = await getUserLogin({
-        user_email: user.email,
-        user_password: user.password,
-      });
-    }
+      authToken = await getUserLogin({ user_email: user.email, user_password: user.password });
+    };
 
-    if (authToken === 'Invalid email or password') {
-      setMessage(
-        'Invalid email or password. Make sure you log in with the correct account type'
-      );
+    if (authToken === 'Invalid email') {
+      setMessage('Invalid email or password. Make sure you log in with the correct account type');
       setError(true);
+      console.log('Invalid email')
+    } else if (authToken === 'Invalid password') {
+      setMessage('Invalid email or password. Make sure you log in with the correct account type');
+      setError(true);
+      console.log('Invalid password')
     } else {
       setMessage('Succesfully logged in!');
       localStorage.setItem('altruize-token', authToken);
       if (checked) {
         loggedUser = await getOrgById();
       } else {
-        loggedUser = await getUserById();
-      }
+        loggedUser = await getUserByLoginId();
+      };
+      console.log('loggedUser', loggedUser)
 
       dispatch(isUserLoggedIn());
 
@@ -89,7 +90,6 @@ export default function LoginForm() {
         ? dispatch(orgId(loggedUser.id))
         : dispatch(userId(loggedUser.id));
       checked ? dispatch(orgInfo(loggedUser)) : dispatch(userInfo(loggedUser));
-
       return history.replace(from);
     }
 
@@ -151,29 +151,8 @@ export default function LoginForm() {
                   onChange={(event) => updateUser(event)}
                 />
               </Grid>
-              {!checked ? (
-                <Grid item xs={12}>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    className={classes.facebook}
-                  >
-                    Facebook
-                  </Button>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    className={classes.google}
-                  >
-                    Google
-                  </Button>
-                </Grid>
-              ) : null}
-              {loading ? (
-                <Typography
-                  className={error ? classes.error : classes.success}
-                  variant="caption"
-                >
+              {loading ?
+                <Typography className={error ? classes.error : classes.success} variant="caption">
                   {message}
                 </Typography>
               ) : null}

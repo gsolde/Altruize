@@ -21,6 +21,18 @@ export async function getUserById () {
   });
   return response.json();
 };
+
+export async function getUserByLoginId () {
+  const response = await fetch(`${API_URL}/users/getUserByLoginId`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      'authorization': `Bearer ${localStorage.getItem('altruize-token')}`,
+    },
+  });
+  return response.json();
+};
+
 export async function getUserLogin (user) {
   const response = await fetch(`${API_URL}/users/getUserLogin`, {
     method: 'POST',
@@ -61,7 +73,7 @@ export async function addUser (user) {
     },
     body: JSON.stringify(user),
   });
-  return response.json();
+  return response;
 }
 
 export async function updateUser (user) {

@@ -19,6 +19,7 @@ export default function SignUp() {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
   const [checkIfUserExists, setCheckIfUserExists] = useState(false);
+  const [checkIfEmailExists, setCheckIfEmailExists] = useState(false);
   const [userCreated, setUserCreated] = useState(false);
   const [user, setUser] = useState({ user_name: '', email: '', password: '' });
   const [org, setOrg] = useState({ org_name: '', email: '', password: '', reg_number: '' });
@@ -56,9 +57,12 @@ export default function SignUp() {
       const response = await addUser(user);
       if (response.status === 403) {
         setCheckIfUserExists(!checkIfUserExists);
+      } else if (response.status === 409) {
+        setCheckIfEmailExists(!checkIfEmailExists);
       } else {
         setUserCreated(!userCreated);
         setCheckIfUserExists(false);
+        setCheckIfEmailExists(false);
         setTimeout(() => history.replace(from), 3000);
       }
     }
@@ -109,6 +113,8 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  error={checkIfEmailExists ? true : false}
+                  helperText={checkIfEmailExists ? 'Email already used' : ''}
                   variant="outlined"
                   required
                   type="email"
@@ -135,31 +141,6 @@ export default function SignUp() {
                   onChange={checked ? event => updateOrg(event) : event => updateUser(event)}
                 />
               </Grid>
-              {!checked ?
-                (
-                  <Grid item xs={12}>
-                    <Button
-                      type="login"
-                      fullWidth
-                      variant="contained"
-                      color="blue"
-                      className={classes.facebook}
-                    >
-                      Facebook
-                </Button>
-                    <Button
-                      type="login"
-                      fullWidth
-                      variant="contained"
-                      color="red"
-                      className={classes.google}
-                    >
-                      Google
-                </Button>
-                  </Grid>
-                )
-                : null
-              }
             </Grid>
             <Button
               type="submit"

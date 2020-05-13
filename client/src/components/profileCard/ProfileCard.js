@@ -116,9 +116,11 @@ export default function SignUp() {
   const dispatchUserInfo = (user) => {
     dispatch(userInfo(user));
   };
+
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
