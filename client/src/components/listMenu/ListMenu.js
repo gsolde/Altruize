@@ -19,7 +19,7 @@ export default function ListMenu() {
 
   const dispatch = useDispatch();
   const classes = useStyles();
-  const selection = (useSelector((state) => state.eventSelectionButton))
+  const selection = (useSelector((state) => state.eventSelection))
   const [selected, setSelected] = useState(selection);
 
   function handleClickUser(e) {
@@ -37,8 +37,6 @@ export default function ListMenu() {
   }
 
   function handleRedirection() {
-    dispatch(eventSelection('CREATE EVENT'));
-    dispatch(eventSelectionButton('CREATE EVENT'));
     history.replace('/addEvent');
   }
 

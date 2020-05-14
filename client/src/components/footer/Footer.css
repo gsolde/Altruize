@@ -7,8 +7,6 @@
           justify-content: space-evenly;
   background-color: #009688;
   margin-top: auto;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
   font-size: 14px;
 }
 

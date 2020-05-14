@@ -52,11 +52,6 @@ export default function Nav () {
 
   const handleClose = () => {
     setAnchorEl(null);
-    if (orgName) {
-      dispatch(eventSelectionButton('MY EVENTS'));
-      dispatch(eventSelection('MY EVENTS'));
-    }
-    dispatch(eventSelectionButton('ALL EVENTS'));
   };
 
   const handleLogOut = () => {
@@ -91,7 +86,7 @@ export default function Nav () {
             onClose={handleClose}
           >
             <MenuItem onClick={handleClose}>
-              <Link className="link-accent" to="/">Home</Link>
+              <Link style={{fontSize: '13px'}} className="link-accent" to="/">Home</Link>
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <Link style={{fontSize: '13px'}} className="link-accent" to="/profile">Profile</Link>
