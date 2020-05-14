@@ -16,6 +16,7 @@ import Profile from './pages/profile/Profile';
 import NotFound from './pages/notfound/NotFound';
 import SignUp from './pages/signUp/SignUp';
 import PrivateRoute from './pages/PrivateRoute';
+import EditEvent from './pages/editEvent/EditEvent';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/about" component={About} />
             <Route path="/login" component={Login} />
             <Route path="/signUp" component={SignUp} />
+            <PrivateRoute path='/editEvent' component={EditEvent}/>
             <PrivateRoute path="/addEvent">
               <AddEventPage />
             </PrivateRoute>

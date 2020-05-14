@@ -13,72 +13,19 @@ import React, { useState, useEffect } from 'react';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import ClearIcon from '@material-ui/icons/Clear';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateEvent } from '../../services/EventsAPI';
 import { currentEventInfo } from '../../actions';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: teal,
-    secondary: pink,
-  },
-});
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  addphoto: {
-    display: 'none',
-  },
-  avatar: {
-    width: theme.spacing(12),
-    height: theme.spacing(12),
-  },
-  edit: {
-    margin: theme.spacing(1),
-    backgroundColor: 'primary',
-    color: 'white',
-  },
-  discard: {
-    margin: theme.spacing(1),
-    backgroundColor: grey.A200,
-    color: 'white',
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  caption: {
-    margin: theme.spacing(2),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}));
 
 export default function SignUp() {
   const classes = useStyles();
   const currentEvent = useSelector((state) => state.currentEventInfo);
   const [eventName, setEventName] = useState('');
+  const [editMode, setEditMode] = useState(false);
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [cancelled, setCancelled] = useState(null);
   const [picture, setPicture] = useState(
     'https://media-exp1.licdn.com/dms/image/C4D03AQEuhw7UQwbX5A/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=CJ7wNArHAR2JQhlbCWOaTUh2i6JjK6YiuR9bQD3GPCo'
   );
@@ -92,7 +39,6 @@ export default function SignUp() {
     setStartDate(currentEvent.start_date);
     setEndDate(currentEvent.end_date);
     setPicture(currentEvent.picture);
-    setCancelled(currentEvent.cancelled);
   }, [currentEvent, editMode]);
 
   const handleEditMode = () => {
@@ -113,10 +59,6 @@ export default function SignUp() {
     setPicture(URL.createObjectURL(e.target.files[0]));
   };
 
-  const handleCancelled = (e) => {
-    setCancelled(e.target.value);
-  };
-
   const handleStartDate = (e) => {
     setStartDate(e.target.value);
   };
@@ -127,12 +69,11 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
-      org_id: currentEvent.id,
+      event_id: currentEvent.id,
       event_name: eventName,
       description: description,
       start_date: startDate,
-      end_date: endDate,
-      cancelled: cancelled,
+      finish_date: endDate,
       location: location,
       picture: picture,
     };
@@ -157,7 +98,7 @@ export default function SignUp() {
             <Avatar
               className={classes.avatar}
               alt="user.image{}"
-              src={profilePic}
+              src={picture}
             />
           </label>
           <div>
@@ -168,14 +109,13 @@ export default function SignUp() {
               startIcon={editMode ? <ClearIcon /> : <EditIcon />}
               onClick={handleEditMode}
             >
-              {editMode ? 'Discard changes' : 'Edit Profile'}
+              {editMode ? 'Discard changes' : 'Edit Event'}
             </Button>
           </div>
           <form className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  // autoComplete="fname"
                   onChange={handleEventName}
                   name="Event Name"
                   value={eventName}
@@ -190,20 +130,6 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  onChange={handleCancelled}
-                  variant="outlined"
-                  value={cancelled}
-                  required
-                  fullWidth
-                  disabled={editMode ? false : true}
-                  id="cancelled"
-                  label="Cancelled"
-                  name="Cancelled"
-                  // autoComplete="Location"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
                   onChange={handleLocation}
                   variant="outlined"
                   value={location}
@@ -213,7 +139,6 @@ export default function SignUp() {
                   id="location"
                   label="Location"
                   name="location"
-                  // autoComplete="Location"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -225,9 +150,8 @@ export default function SignUp() {
                   fullWidth
                   disabled={editMode ? false : true}
                   id="startDate"
-                  label="startDate"
+                  label="Start Date"
                   name="startDate"
-                  // autoComplete="Location"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -239,9 +163,8 @@ export default function SignUp() {
                   fullWidth
                   disabled={editMode ? false : true}
                   id="endDate"
-                  label="endDate"
+                  label="Finish Date"
                   name="endDate"
-                  // autoComplete="Location"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -258,51 +181,7 @@ export default function SignUp() {
                   name="description"
                   label="Description"
                   id="multiline"
-                  // type="password"
-                  // autoComplete="current-password"
                 />
-              </Grid>
-              <Grid item xs={12}>
-                <ExpansionPanel>
-                  <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography className={classes.heading}>
-                      Account Settings
-                    </Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <TextField
-                      variant="outlined"
-                      required
-                      fullWidth
-                      disabled={editMode ? false : true}
-                      onChange={handleEmail}
-                      id="email"
-                      label="Email"
-                      name="email"
-                      value={email}
-                      autoComplete="email"
-                    />
-                  </ExpansionPanelDetails>
-                  <ExpansionPanelDetails>
-                    <TextField
-                      variant="outlined"
-                      required
-                      fullWidth
-                      disabled={editMode ? false : true}
-                      id="Password"
-                      onChange={handlePassword}
-                      label="Password"
-                      name="password"
-                      type="password"
-                      value={password}
-                      autoComplete="current-password"
-                    />
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
               </Grid>
               {editMode ? (
                 <Button
@@ -324,3 +203,52 @@ export default function SignUp() {
     </MuiThemeProvider>
   );
 }
+
+const theme = createMuiTheme({
+  palette: {
+    primary: teal,
+    secondary: pink,
+  },
+});
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  addphoto: {
+    display: 'none',
+  },
+  avatar: {
+    width: theme.spacing(12),
+    height: theme.spacing(12),
+  },
+  edit: {
+    margin: theme.spacing(3),
+    backgroundColor: 'primary',
+    color: 'white',
+  },
+  discard: {
+    margin: theme.spacing(3),
+    backgroundColor: grey.A200,
+    color: 'white',
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  caption: {
+    margin: theme.spacing(2),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: pink[500],
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));

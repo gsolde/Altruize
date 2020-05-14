@@ -44,16 +44,11 @@ export default function JobItem ({ job, updateEvents }) {
 
   async function handleLikedClick(e) {
     e.preventDefault();
-    // console.log('in delete event route');
-    // deleteEvent({ event_id: job.id });
-    //sort out buttons for delete event
-    const currentEvent = await getEventbyId({ event_id: job.id });
-    dispatch(currentEventInfo(currentEvent));
     let event_id = job.id;
     let user_id = userId;
-
+    
     !user_id && history.replace(from);
-
+    
     if (liked && userId) {
       await deleteEventFromUser({
         user_id,
@@ -69,20 +64,16 @@ export default function JobItem ({ job, updateEvents }) {
     }
     setLiked(!liked);
   }
-
-
-  function handleEditClick () {
-    let event_id = job.id
-    console.log(event_id)
-    // history.replace('/editEvent') //redirection
+  
+  async function handleEditClick () {
+    const currentEvent = await getEventbyId({ event_id: job.id });
+    dispatch(currentEventInfo(currentEvent));
+    history.replace('/editEvent')
   }
-
+  
   function handleDeleteClick () {
-    let event_id = job.id
-    console.log(event_id)
+    deleteEvent({ event_id: job.id });
   }
-
-
 
   if(userId) {
     return (
