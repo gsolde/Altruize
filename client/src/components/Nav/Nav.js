@@ -7,7 +7,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
-import { eventSelectionButton, orgId, orgInfo, userId, userInfo } from '../../actions';
+import { eventSelectionButton, eventSelection, orgId, orgInfo, userId, userInfo } from '../../actions';
 import { persistantLoginOrg } from '../../services/OrgsAPI';
 import { persistantLoginUser } from '../../services/UsersAPI';
 import './Nav.css';
@@ -52,6 +52,11 @@ export default function Nav () {
 
   const handleClose = () => {
     setAnchorEl(null);
+    if (orgName) {
+      dispatch(eventSelectionButton('MY EVENTS'));
+      dispatch(eventSelection('MY EVENTS'));
+    }
+    dispatch(eventSelectionButton('ALL EVENTS'));
   };
 
   const handleLogOut = () => {
@@ -68,7 +73,7 @@ export default function Nav () {
   return (
     <div className="nav-wrapper">
       <div className="name">
-        <Link className="link" to="/">ALTRUIZE</Link>
+        <Link className="link" onClick={handleClose} to="/">ALTRUIZE</Link>
       </div>
       <div className="addEvent-login-options">
         <div className="log-in-btn">
