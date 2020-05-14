@@ -90,7 +90,7 @@ export default function LoginForm() {
       checked ? dispatch(orgInfo(loggedUser)) : dispatch(userInfo(loggedUser));
       checked && dispatch(eventSelectionButton('MY EVENTS'));
 
-      return history.replace(from);
+      setTimeout(() => history.replace(from), 1000);
     }
 
     resetInputFields();
@@ -210,10 +210,12 @@ const useStyles = makeStyles((theme) => ({
   error: {
     margin: theme.spacing(2),
     color: 'red',
+    textAlign: 'center',
   },
   success: {
     margin: theme.spacing(2),
     color: 'green',
+    textAlign: 'center',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -224,15 +226,5 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
     backgroundColor: pink[500],
     color: 'white',
-  },
-  google: {
-    margin: theme.spacing(0.5, 0, 0.5),
-    backgroundColor: red.A200,
-    color: 'white',
-  },
-  facebook: {
-    margin: theme.spacing(0.5, 0, 0.5),
-    backgroundColor: indigo[800],
-    color: 'white',
-  },
+  }
 }));
