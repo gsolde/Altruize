@@ -19,7 +19,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateEvent } from '../../services/EventsAPI';
 import { currentEventInfo } from '../../actions';
 
-export default function SignUp() {
+//!
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDateTimePicker,
+} from '@material-ui/pickers';
+//!
+
+export default function SignUp () {
   const classes = useStyles();
   const currentEvent = useSelector((state) => state.currentEventInfo);
   const [eventName, setEventName] = useState('');
@@ -39,7 +48,7 @@ export default function SignUp() {
     setDescription(currentEvent.description);
     setLocation(currentEvent.location);
     setStartDate(currentEvent.start_date);
-    setEndDate(currentEvent.end_date);
+    setEndDate(currentEvent.finish_date);
     setPicture(currentEvent.picture);
   }, [currentEvent, editMode]);
 
@@ -62,10 +71,10 @@ export default function SignUp() {
   };
 
   const handleStartDate = (e) => {
-    setStartDate(e.target.value);
+    setStartDate(e);
   };
   const handleEndDate = (e) => {
-    setEndDate(e.target.value);
+    setEndDate(e);
   };
 
   const handleSubmit = async (e) => {
@@ -114,9 +123,9 @@ export default function SignUp() {
               {editMode ? 'Discard changes' : 'Edit Event'}
             </Button>
           </div>
-          <form className={classes.form} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <form className={classes.form} noValidate>
+              <Grid container spacing={2}>
                 <TextField
                   onChange={handleEventName}
                   name="Event Name"
@@ -129,8 +138,6 @@ export default function SignUp() {
                   label="Event Name"
                   autoFocus
                 />
-              </Grid>
-              <Grid item xs={12}>
                 <TextField
                   onChange={handleLocation}
                   variant="outlined"
@@ -141,35 +148,38 @@ export default function SignUp() {
                   id="location"
                   label="Location"
                   name="location"
+                  className={classes.spacing}
                 />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
+                <KeyboardDateTimePicker
+                  required
+                  name="start_date"
+                  value={startDate}
                   onChange={handleStartDate}
-                  variant="outlined"
-                  value={moment(startDate).format('lll')}
-                  required
-                  fullWidth
+                  inputVariant="outlined"
+                  className={classes.form}
                   disabled={editMode ? false : true}
-                  id="endDate"
+                  format="dd/MM/yyyy hh:mm a"
+                  id="date-picker-inline"
                   label="Start Date"
-                  name="endDate"
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
                 />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  onChange={handleEndDate}
-                  variant="outlined"
-                  value={moment(endDate).format('lll')}
+                <KeyboardDateTimePicker
                   required
-                  fullWidth
+                  name="start_date"
+                  value={endDate}
+                  onChange={handleEndDate}
+                  inputVariant="outlined"
+                  className={classes.form}
                   disabled={editMode ? false : true}
-                  id="endDate"
+                  format="dd/MM/yyyy hh:mm a"
+                  id="date-picker-inline"
                   label="Finish Date"
-                  name="endDate"
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
                 />
-              </Grid>
-              <Grid item xs={12}>
                 <TextField
                   variant="outlined"
                   onChange={handleDescription}
@@ -183,23 +193,24 @@ export default function SignUp() {
                   name="description"
                   label="Description"
                   id="multiline"
+                  className={classes.spacing}
                 />
+                {editMode ? (
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color={editMode ? 'secondary' : 'primary'}
+                    className={classes.submit}
+                    startIcon={editMode ? <SaveIcon /> : <EditIcon />}
+                    onClick={handleSubmit}
+                  >
+                    {editMode ? 'Save changes' : 'Edit Profile'}
+                  </Button>
+                ) : null}
               </Grid>
-              {editMode ? (
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color={editMode ? 'secondary' : 'primary'}
-                  className={classes.submit}
-                  startIcon={editMode ? <SaveIcon /> : <EditIcon />}
-                  onClick={handleSubmit}
-                >
-                  {editMode ? 'Save changes' : 'Edit Profile'}
-                </Button>
-              ) : null}
-            </Grid>
-          </form>
+            </form>
+          </MuiPickersUtilsProvider>
         </div>
       </Container>
     </MuiThemeProvider>
@@ -216,7 +227,7 @@ const theme = createMuiTheme({
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(10),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -252,5 +263,8 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
+  },
+  spacing: {
+    marginTop: theme.spacing(3),
   },
 }));
