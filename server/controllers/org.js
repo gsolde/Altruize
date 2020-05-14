@@ -2,7 +2,7 @@ const db = require('../models/index');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-async function getAllOrgs(req, res) {
+async function getAllOrgs (req, res) {
   try {
     const orgList = await db.Org.findAll({
       include: [{ model: db.Event }, { model: db.Tag }],
@@ -15,7 +15,7 @@ async function getAllOrgs(req, res) {
   }
 }
 
-async function getActiveOrgs(req, res) {
+async function getActiveOrgs (req, res) {
   try {
     const activeOrgs = await db.Org.findAll({
       where: {
@@ -32,7 +32,7 @@ async function getActiveOrgs(req, res) {
   }
 }
 
-async function getOrg(req, res) {
+async function getOrg (req, res) {
   try {
     const org = await db.Org.findOne({
       where: {
@@ -47,7 +47,7 @@ async function getOrg(req, res) {
     res.sendStatus(500);
   }
 }
-async function getOrgById(req, res) {
+async function getOrgById (req, res) {
   try {
     const org = await db.Org.findOne({
       where: {
@@ -59,8 +59,8 @@ async function getOrgById(req, res) {
           where: {
             cancelled: false,
           },
-          include: [{model: db.User}, {model: db.Org}, {model: db.Tag}], 
-        }, 
+          include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
+        },
         { model: db.Tag }],
       order: [
         [db.Event, 'start_date', 'ASC']
@@ -75,7 +75,7 @@ async function getOrgById(req, res) {
   }
 }
 
-async function getOrgByLoginId(req, res) {
+async function getOrgByLoginId (req, res) {
   try {
     const org = await db.Org.findOne({ where: { id: req.user.id } });
     res.status(200);
@@ -86,7 +86,26 @@ async function getOrgByLoginId(req, res) {
   }
 }
 
-async function getOrgLogin(req, res) {
+async function persistantLogin (req, res) {
+  try {
+    const org = await db.Org.findOne({
+      where: {
+        email: req.user.email,
+        password: req.user.password,
+      }
+    });
+    if (org === null) return res.status(400).json(org);
+    else {
+      res.status(200);
+      res.json(org);
+    };
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
+async function getOrgLogin (req, res) {
   try {
     const org = await db.Org.findOne({
       where: {
@@ -96,7 +115,7 @@ async function getOrgLogin(req, res) {
     if (org === null) res.status(400).json('Invalid email');
     else {
       const validPassword = await bcrypt.compare(req.body.org_password, org.password);
-      if (!validPassword) return res.status(403).json('Invalid password')
+      if (!validPassword) return res.status(403).json('Invalid password');
       const token = jwt.sign({ user: org }, process.env.TOKEN_SECRET);
       res.status(200);
       res.json(token);
@@ -107,7 +126,7 @@ async function getOrgLogin(req, res) {
   }
 }
 
-async function addOrg(req, res) {
+async function addOrg (req, res) {
   try {
     const {
       reg_number,
@@ -150,7 +169,7 @@ async function addOrg(req, res) {
   }
 }
 
-async function addTagToOrg(req, res) {
+async function addTagToOrg (req, res) {
   try {
     const org = await db.Org.findOne({
       where: {
@@ -166,7 +185,7 @@ async function addTagToOrg(req, res) {
   }
 }
 
-async function updateOrg(req, res) {
+async function updateOrg (req, res) {
   try {
     const updatedOrg = await db.Org.update(
       {
@@ -197,5 +216,6 @@ module.exports = {
   addTagToOrg,
   updateOrg,
   getOrgLogin,
-  getOrgByLoginId
+  getOrgByLoginId,
+  persistantLogin
 };

@@ -23,43 +23,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  liked: {
-    color: teal[500],
-  },
-  likeBtn: {
-    margin: theme.spacing(1),
-    backgroundColor: teal[500],
-    color: 'white',
-  },
-  waitBtn: {
-    margin: theme.spacing(1),
-    backgroundColor: grey.A200,
-    border: '1px',
-    borderBlockColor: teal[500],
-    color: 'white',
-  },
-  loginBtn: {
-    margin: theme.spacing(1),
-    backgroundColor: '#df6767',
-    border: '1px',
-    borderBlockColor: teal[500],
-    color: 'white',
-    fontSize: '0.7rem',
-  },
-}));
-
-export default function JobItem({ job, updateEvents }) {
+export default function JobItem ({ job, updateEvents }) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userId);
   const organizationId = useSelector((state) => state.orgId);
@@ -106,7 +70,21 @@ export default function JobItem({ job, updateEvents }) {
     setLiked(!liked);
   }
 
-  if (userId) {
+
+  function handleEditClick () {
+    let event_id = job.id
+    console.log(event_id)
+    // history.replace('/editEvent') //redirection
+  }
+
+  function handleDeleteClick () {
+    let event_id = job.id
+    console.log(event_id)
+  }
+
+
+
+  if(userId) {
     return (
       <div className="job-item">
         <div className="job-card">
@@ -327,23 +305,78 @@ export default function JobItem({ job, updateEvents }) {
         {expanded ? (
           <div className="job-extra">
             <div className="job-description">{job.description}</div>
-            <Button
-              variant="contained"
-              className={classes.loginBtn}
-              onClick={handleLikedClick}
-            >
+            <div className="edit-delete-buttons">
+              <Button
+                variant="contained"
+                className={classes.editBtn}
+                onClick={handleEditClick}
+              >
               Edit event
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.loginBtn}
-              onClick={handleLikedClick}
-            >
-              Delete event
-            </Button>
+              </Button>
+              <Button
+                variant="contained"
+                className={classes.deleteBtn}
+                onClick={handleDeleteClick}
+              >
+              Delete event 
+              </Button>  
+            </div>
           </div>
         ) : null}
       </div>
     );
   }
 }
+
+  const useStyles = makeStyles((theme) => ({
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+      }),
+    },
+    expandOpen: {
+      transform: 'rotate(180deg)',
+    },
+    liked: {
+      color: teal[500],
+    },
+    likeBtn: {
+      margin: theme.spacing(1),
+      backgroundColor: teal[500],
+      color: 'white',
+    },
+    waitBtn: {
+      margin: theme.spacing(1),
+      backgroundColor: grey.A200,
+      border: '1px',
+      borderBlockColor: teal[500],
+      color: 'white',
+    },
+    loginBtn: {
+      margin: theme.spacing(1),
+      backgroundColor: '#df6767',
+      border: '1px',
+      borderBlockColor: teal[500],
+      color: 'white',
+      fontSize: '0.6rem'
+    },
+    deleteBtn: {
+      margin: theme.spacing(1),
+      backgroundColor: '#df6767',
+      border: '1px',
+      borderBlockColor: teal[500],
+      color: 'white',
+      fontSize: '0.6rem'
+    },
+    editBtn: {
+      margin: theme.spacing(1),
+      backgroundColor: '#2196f3',
+      border: '1px',
+      borderBlockColor: teal[500],
+      color: 'white',
+      fontSize: '0.6rem'
+    },
+  }));
+

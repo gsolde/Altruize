@@ -2,7 +2,7 @@ const db = require('../models/index');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-async function getAllUsers(req, res) {
+async function getAllUsers (req, res) {
   try {
     const userList = await db.User.findAll({
       include: [{ model: db.Event }, { model: db.Tag }],
@@ -15,7 +15,7 @@ async function getAllUsers(req, res) {
   }
 }
 
-async function getUser(req, res) {
+async function getUser (req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -43,8 +43,8 @@ async function getUserById (req, res) {
           where: {
             cancelled: false,
           },
-          include: [{model: db.User}, {model: db.Org}, {model: db.Tag}], 
-        }, 
+          include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
+        },
         { model: db.Tag }],
       order: [
         [db.Event, 'start_date', 'ASC']
@@ -59,11 +59,29 @@ async function getUserById (req, res) {
   }
 }
 
-// TODO: combine with getUserById function?? if no events are assigned to the user, we get a null response -> log in fails
 async function getUserByLoginId (req, res) {
   try {
-    const user = await db.User.findOne({ where: { id: req.user.id } });
+    const user = await db.User.findOne({ where: { email: req.user.email } });
     res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
+async function persistantLogin (req, res) {
+  try {
+    const user = await db.User.findOne({
+      where: {
+        email: req.user.email,
+        password: req.user.password,
+      }
+    });
+    if (user === null) return res.status(400).json(user);
+    else {
+      res.status(200);
+      res.json(user);
+    };
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -80,7 +98,7 @@ async function getUserLogin (req, res) {
     if (user === null) return res.status(400).json('Invalid email');
     else {
       const validPassword = await bcrypt.compare(req.body.user_password, user.password);
-      if (!validPassword) return res.status(403).json('Invalid password')
+      if (!validPassword) return res.status(403).json('Invalid password');
       const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
       res.status(200);
       res.json(token);
@@ -91,7 +109,7 @@ async function getUserLogin (req, res) {
   }
 }
 
-async function getActiveUsers(req, res) {
+async function getActiveUsers (req, res) {
   try {
     const activeUsers = await db.User.findAll({
       where: {
@@ -107,7 +125,7 @@ async function getActiveUsers(req, res) {
   }
 }
 
-async function addUser(req, res) {
+async function addUser (req, res) {
   try {
     const {
       password,
@@ -147,7 +165,7 @@ async function addUser(req, res) {
   }
 }
 
-async function updateUser(req, res) {
+async function updateUser (req, res) {
   try {
     const updatedUser = await db.User.update(
       {
@@ -167,7 +185,7 @@ async function updateUser(req, res) {
   }
 }
 
-async function addEventToUser(req, res) {
+async function addEventToUser (req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -183,7 +201,7 @@ async function addEventToUser(req, res) {
   }
 }
 
-async function deleteEventFromUser(req, res) {
+async function deleteEventFromUser (req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -199,7 +217,7 @@ async function deleteEventFromUser(req, res) {
   }
 }
 
-async function addTagToUser(req, res) {
+async function addTagToUser (req, res) {
   try {
     const user = await db.User.findOne({
       where: {
@@ -226,5 +244,6 @@ module.exports = {
   addTagToUser,
   updateUser,
   getUserLogin,
-  getUserByLoginId
+  getUserByLoginId,
+  persistantLogin
 };

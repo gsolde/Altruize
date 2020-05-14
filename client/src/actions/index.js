@@ -1,9 +1,3 @@
-export const isUserLoggedIn = () => {
-  return {
-    type: 'LOG_IN',
-  };
-};
-
 export const userId = (id) => {
   return {
     type: 'LOG_IN_USER',
@@ -62,27 +56,30 @@ export const currentEventInfo = (selection) => {
 export const allEventsList = (allEventsList) => {
   return {
     type: 'ALL_EVENTS_LIST',
-    payload: allEventsList,
+    payload: allEventsList
   };
 };
 
 export const myEventsList = (myEventsList) => {
   return {
     type: 'MY_EVENTS_LIST',
-    payload: myEventsList,
+    payload: myEventsList
   };
 };
 
 export const searchedEventsList = (searchedEventsList) => {
   return {
     type: 'SEARCHED_EVENTS_LIST',
-    payload: searchedEventsList,
+    payload: searchedEventsList
+
   };
 };
 
 export const orgEventsList = (orgEventsList) => {
   return {
     type: 'ORG_EVENTS_LIST',
-    payload: orgEventsList,
+    payload: orgEventsList
   };
 };
+
+

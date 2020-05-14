@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import isLoggedInReducer from './IsLoggedInReducer';
 import isLoggedInUserReducer from './logInUserReducer';
 import isLoggedInOrgReducer from './logInOrgReducer';
 import eventListSelectorReducer from './eventListSelectorReducer';
@@ -13,7 +12,6 @@ import orgEventListReducer from './orgEventListReducer';
 import currentEventInfoReducer from './currentEventInfoReducer';
 
 const allReducers = combineReducers({
-  isLoggedIn: isLoggedInReducer,
   orgId: isLoggedInOrgReducer,
   userId: isLoggedInUserReducer,
   eventSelection: eventListSelectorReducer,

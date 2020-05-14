@@ -10,28 +10,10 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { eventSelectionButton, eventSelection } from '../../actions';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    minWidth: '350px',
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-}));
-const theme = createMuiTheme({
-  palette: {
-    primary: teal,
-    secondary: grey,
-  },
-});
-
 export default function ListMenu() {
-  const userId =  useSelector((state) => state.userId);
-  const orgId =  useSelector((state) => state.orgId);
-  
+  const userId = useSelector((state) => state.userId);
+  const orgId = useSelector((state) => state.orgId);
+
   const history = useHistory();
   const { from } = { from: { pathname: "/login" } };
 
@@ -59,7 +41,7 @@ export default function ListMenu() {
     dispatch(eventSelectionButton('CREATE EVENT'));
     history.replace('/addEvent');
   }
-  
+
   if (!orgId) {
     return (
       <MuiThemeProvider theme={theme}>
@@ -100,3 +82,22 @@ export default function ListMenu() {
     );
   }
 }
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    minWidth: '350px',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
+const theme = createMuiTheme({
+  palette: {
+    primary: teal,
+    secondary: grey,
+  },
+});

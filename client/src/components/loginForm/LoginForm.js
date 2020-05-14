@@ -15,7 +15,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import {
-  isUserLoggedIn,
   orgId,
   userId,
   userInfo,
@@ -26,7 +25,7 @@ import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
 import { getOrgLogin, getOrgByLoginId } from '../../services/OrgsAPI';
 import { getUserLogin, getUserByLoginId } from '../../services/UsersAPI';
 
-export default function LoginForm() {
+export default function LoginForm () {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -38,21 +37,21 @@ export default function LoginForm() {
   const [user, setUser] = useState({ email: '', password: '' });
   const { from } = location.state || { from: { pathname: '/' } };
 
-  function updateUser(event) {
+  function updateUser (event) {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
   }
 
-  function resetInputFields() {
+  function resetInputFields () {
     return setUser({
       email: '',
       password: '',
     });
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit (event) {
     event.preventDefault();
     setLoading(true);
     let authToken;
@@ -64,17 +63,20 @@ export default function LoginForm() {
         org_password: user.password,
       });
     } else {
-      authToken = await getUserLogin({ user_email: user.email, user_password: user.password });
+      authToken = await getUserLogin({
+        user_email: user.email,
+        user_password: user.password
+      });
     };
 
     if (authToken === 'Invalid email') {
       setMessage('Invalid email or password. Make sure you log in with the correct account type');
       setError(true);
-      console.log('Invalid email')
+      console.log('Invalid email');
     } else if (authToken === 'Invalid password') {
       setMessage('Invalid email or password. Make sure you log in with the correct account type');
       setError(true);
-      console.log('Invalid password')
+      console.log('Invalid password');
     } else {
       setMessage('Succesfully logged in!');
       localStorage.setItem('altruize-token', authToken);
@@ -84,13 +86,12 @@ export default function LoginForm() {
         loggedUser = await getUserByLoginId();
       };
 
-      dispatch(isUserLoggedIn());
 
       checked ? dispatch(orgId(loggedUser.id)) : dispatch(userId(loggedUser.id));
       checked ? dispatch(orgInfo(loggedUser)) : dispatch(userInfo(loggedUser));
       checked && dispatch(eventSelectionButton('MY EVENTS'));
 
-      return history.replace(from);
+      setTimeout(() => history.replace(from), 1000);
     }
 
     resetInputFields();
@@ -155,7 +156,7 @@ export default function LoginForm() {
                 <Typography className={error ? classes.error : classes.success} variant="caption">
                   {message}
                 </Typography>
-              : null}
+                : null}
             </Grid>
             <Button
               type="submit"
@@ -165,9 +166,9 @@ export default function LoginForm() {
             >
               Log In
             </Button>
-            <Grid container justify="flex-end">
+            <Grid container justify="center">
               <Grid item>
-                <Link to="/signUp">You don't have an account yet? Sign up</Link>
+                <Link style={{fontSize: '12px'}} to="/signUp">You don't have an account yet? Sign up</Link>
               </Grid>
             </Grid>
           </form>
@@ -210,10 +211,12 @@ const useStyles = makeStyles((theme) => ({
   error: {
     margin: theme.spacing(2),
     color: 'red',
+    textAlign: 'center',
   },
   success: {
     margin: theme.spacing(2),
     color: 'green',
+    textAlign: 'center',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -224,15 +227,5 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
     backgroundColor: pink[500],
     color: 'white',
-  },
-  google: {
-    margin: theme.spacing(0.5, 0, 0.5),
-    backgroundColor: red.A200,
-    color: 'white',
-  },
-  facebook: {
-    margin: theme.spacing(0.5, 0, 0.5),
-    backgroundColor: indigo[800],
-    color: 'white',
-  },
+  }
 }));
