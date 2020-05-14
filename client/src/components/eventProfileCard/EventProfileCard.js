@@ -152,7 +152,7 @@ export default function SignUp() {
                   fullWidth
                   disabled={editMode ? false : true}
                   id="endDate"
-                  label="Finish Date"
+                  label="Start Date"
                   name="endDate"
                 />
               </Grid>
