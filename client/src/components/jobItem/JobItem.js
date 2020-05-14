@@ -100,7 +100,7 @@ export default function JobItem ({ job, updateEvents }) {
   function handleEditClick () {
     let event_id = job.id
     console.log(event_id)
-    // history.replace('/editEvent')
+    // history.replace('/editEvent') //redirection
   }
 
   function handleDeleteClick () {
