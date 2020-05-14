@@ -303,7 +303,7 @@ export default function JobItem ({ job, updateEvents }) {
       border: '1px',
       borderBlockColor: teal[500],
       color: 'white',
-      fontSize: '0.7rem'
+      fontSize: '0.6rem'
     },
     deleteBtn: {
       margin: theme.spacing(1),
@@ -311,7 +311,7 @@ export default function JobItem ({ job, updateEvents }) {
       border: '1px',
       borderBlockColor: teal[500],
       color: 'white',
-      fontSize: '0.7rem'
+      fontSize: '0.6rem'
     },
     editBtn: {
       margin: theme.spacing(1),
@@ -319,7 +319,7 @@ export default function JobItem ({ job, updateEvents }) {
       border: '1px',
       borderBlockColor: teal[500],
       color: 'white',
-      fontSize: '0.7rem'
+      fontSize: '0.6rem'
     },
   }));
   

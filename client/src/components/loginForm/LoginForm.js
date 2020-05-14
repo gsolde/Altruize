@@ -165,9 +165,9 @@ export default function LoginForm() {
             >
               Log In
             </Button>
-            <Grid container justify="flex-end">
+            <Grid container justify="center">
               <Grid item>
-                <Link to="/signUp">You don't have an account yet? Sign up</Link>
+                <Link style={{fontSize: '12px'}} to="/signUp">You don't have an account yet? Sign up</Link>
               </Grid>
             </Grid>
           </form>

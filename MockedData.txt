@@ -64,12 +64,14 @@ INSERT INTO "TagsOrgs" ("createdAt", "updatedAt","TagId", "OrgId") VALUES
 (NOW(), NOW(), 5, 4),
 (NOW(), NOW(), 4, 5);
 
+
 INSERT INTO "EventsOrg" ("createdAt", "updatedAt", "OrgId", "EventId") VALUES
 (NOW(), NOW(), 1, 1),
 (NOW(), NOW(), 2, 2),
 (NOW(), NOW(), 3, 3),
 (NOW(), NOW(), 5, 4),
-(NOW(), NOW(), 4, 5);
+(NOW(), NOW(), 4, 5),
+(NOW(), NOW(), 4, 6);
 
 INSERT INTO "TagsUsers" ("createdAt", "updatedAt", "TagId", "UserId") VALUES
 (NOW(), NOW(), 1, 1),
