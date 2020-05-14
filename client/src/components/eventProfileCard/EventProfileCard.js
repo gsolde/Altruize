@@ -8,6 +8,8 @@ import {
   makeStyles,
   MuiThemeProvider,
 } from '@material-ui/core/styles';
+import 'date-fns';
+import moment from 'moment';
 import TextField from '@material-ui/core/TextField';
 import React, { useState, useEffect } from 'react';
 import EditIcon from '@material-ui/icons/Edit';
@@ -145,20 +147,20 @@ export default function SignUp() {
                 <TextField
                   onChange={handleStartDate}
                   variant="outlined"
-                  value={startDate}
+                  value={moment(startDate).format('lll')}
                   required
                   fullWidth
                   disabled={editMode ? false : true}
-                  id="startDate"
-                  label="Start Date"
-                  name="startDate"
+                  id="endDate"
+                  label="Finish Date"
+                  name="endDate"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   onChange={handleEndDate}
                   variant="outlined"
-                  value={startDate}
+                  value={moment(endDate).format('lll')}
                   required
                   fullWidth
                   disabled={editMode ? false : true}

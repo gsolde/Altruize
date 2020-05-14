@@ -84,6 +84,7 @@ export async function updateEvent(body) {
     method: 'PUT',
     headers: {
       'content-type': 'application/json',
+      'authorization': `Bearer ${localStorage.getItem('altruize-token')}`,
     },
     body: JSON.stringify(body),
   });

@@ -14,7 +14,7 @@ router.post('/events/getEventById', event.getEvent);
 router.post('/events/addTagToEvent', event.addTagToEvent);
 router.post('/events/addOrgToEvent', event.addOrgToEvent);
 router.post('/events/filteredActiveEvents', event.getFilteredActiveEvents);
-router.put('/events/updateEvent', event.updateEvent);
+router.put('/events/updateEvent', verifyJWT, event.updateEvent);
 router.delete('/events', event.deleteEvent);
 
 router.get('/orgs', org.getAllOrgs);
