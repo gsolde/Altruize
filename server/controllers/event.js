@@ -39,11 +39,11 @@ async function getFilteredActiveEvents(req, res) {
       where: {
         cancelled: false,
         finish_date: { [Op.gt]: new Date() },
-        [Op.or]: 
-          [
-          {event_name: {[Op.iLike]: '%' + req.body.search_input + '%'}},
-          {location: {[Op.iLike]: '%' + req.body.search_input + '%'}}
-        ]},
+        [Op.or]: [
+          { event_name: { [Op.iLike]: '%' + req.body.search_input + '%' } },
+          { location: { [Op.iLike]: '%' + req.body.search_input + '%' } },
+        ],
+      },
       order: [['start_date', 'ASC']],
       include: [{ model: db.User }, { model: db.Org }, { model: db.Tag }],
     });
@@ -169,12 +169,24 @@ async function updateEvent(req, res) {
         latitude: req.body.latitude,
         longitude: req.body.longitude,
         location: req.body.location,
-        picture: req.body.picture
+        picture: req.body.picture,
       },
-      { where: { id: req.body.event_id } }
+      { where: { id: req.body.event_id }, returning: true }
     );
     res.status(201);
     res.json(updatedEvent);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+async function deleteEvent(req, res) {
+  try {
+    const deletedEvent = await db.Event.destroy({
+      where: { id: req.body.event_id },
+    });
+    res.status(201);
+    res.json(deletedEvent);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -191,5 +203,6 @@ module.exports = {
   getCancelledEvents,
   addTagToEvent,
   updateEvent,
-  addOrgToEvent
+  addOrgToEvent,
+  deleteEvent,
 };

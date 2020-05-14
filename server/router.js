@@ -15,6 +15,7 @@ router.post('/events/addTagToEvent', event.addTagToEvent);
 router.post('/events/addOrgToEvent', event.addOrgToEvent);
 router.post('/events/filteredActiveEvents', event.getFilteredActiveEvents);
 router.put('/events/updateEvent', event.updateEvent);
+router.delete('/events', event.deleteEvent);
 
 router.get('/orgs', org.getAllOrgs);
 router.get('/orgs/active', org.getActiveOrgs);
