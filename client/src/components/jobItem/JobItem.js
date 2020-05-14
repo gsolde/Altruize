@@ -97,6 +97,19 @@ export default function JobItem ({ job, updateEvents }) {
     setLiked(!liked);
   };
 
+  function handleEditClick () {
+    let event_id = job.id
+    console.log(event_id)
+    // history.replace('/editEvent')
+  }
+
+  function handleDeleteClick () {
+    let event_id = job.id
+    console.log(event_id)
+  }
+
+
+
   if(userId) {
     return (
       <div className="job-item">
@@ -273,14 +286,14 @@ export default function JobItem ({ job, updateEvents }) {
             <Button
               variant="contained"
               className={classes.loginBtn}
-              onClick={handleLikedClick}
+              onClick={handleEditClick}
             >
             Edit event
             </Button>
             <Button
               variant="contained"
               className={classes.loginBtn}
-              onClick={handleLikedClick}
+              onClick={handleDeleteClick}
             >
             Delete event 
             </Button>
