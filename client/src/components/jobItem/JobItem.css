@@ -129,6 +129,15 @@
   margin-bottom: 2rem;
 }
 
+.job-item .job-extra .edit-delete-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .job-item:hover {
   cursor: pointer;
 }

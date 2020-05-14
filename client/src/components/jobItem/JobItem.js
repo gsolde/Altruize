@@ -22,42 +22,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  liked: {
-    color: teal[500],
-  },
-  likeBtn: {
-    margin: theme.spacing(1),
-    backgroundColor: teal[500],
-    color: 'white',
-  },
-  waitBtn: {
-    margin: theme.spacing(1),
-    backgroundColor: grey.A200,
-    border: '1px',
-    borderBlockColor: teal[500],
-    color: 'white',
-  },
-  loginBtn: {
-    margin: theme.spacing(1),
-    backgroundColor: '#df6767',
-    border: '1px',
-    borderBlockColor: teal[500],
-    color: 'white',
-    fontSize: '0.7rem'
-  },
-}));
-
 export default function JobItem ({ job, updateEvents }) {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.userId);
@@ -283,20 +247,22 @@ export default function JobItem ({ job, updateEvents }) {
         {expanded ?
           <div className="job-extra">
             <div className="job-description">{job.description}</div>
-            <Button
-              variant="contained"
-              className={classes.loginBtn}
-              onClick={handleEditClick}
-            >
-            Edit event
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.loginBtn}
-              onClick={handleDeleteClick}
-            >
-            Delete event 
-            </Button>
+            <div className="edit-delete-buttons">
+              <Button
+                variant="contained"
+                className={classes.editBtn}
+                onClick={handleEditClick}
+              >
+              Edit event
+              </Button>
+              <Button
+                variant="contained"
+                className={classes.deleteBtn}
+                onClick={handleDeleteClick}
+              >
+              Delete event 
+              </Button>  
+            </div>
           </div>
           : null
         }
@@ -304,3 +270,56 @@ export default function JobItem ({ job, updateEvents }) {
     );
   }
   } 
+
+  const useStyles = makeStyles((theme) => ({
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+      }),
+    },
+    expandOpen: {
+      transform: 'rotate(180deg)',
+    },
+    liked: {
+      color: teal[500],
+    },
+    likeBtn: {
+      margin: theme.spacing(1),
+      backgroundColor: teal[500],
+      color: 'white',
+    },
+    waitBtn: {
+      margin: theme.spacing(1),
+      backgroundColor: grey.A200,
+      border: '1px',
+      borderBlockColor: teal[500],
+      color: 'white',
+    },
+    loginBtn: {
+      margin: theme.spacing(1),
+      backgroundColor: '#df6767',
+      border: '1px',
+      borderBlockColor: teal[500],
+      color: 'white',
+      fontSize: '0.7rem'
+    },
+    deleteBtn: {
+      margin: theme.spacing(1),
+      backgroundColor: '#df6767',
+      border: '1px',
+      borderBlockColor: teal[500],
+      color: 'white',
+      fontSize: '0.7rem'
+    },
+    editBtn: {
+      margin: theme.spacing(1),
+      backgroundColor: '#009688',
+      border: '1px',
+      borderBlockColor: teal[500],
+      color: 'white',
+      fontSize: '0.7rem'
+    },
+  }));
+  

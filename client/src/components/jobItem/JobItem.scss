@@ -86,7 +86,10 @@ $base-color: #009688;
     .job-description {
       text-align: justify;
       margin-bottom : 2rem ;
-
+    }
+    .edit-delete-buttons {
+      display: flex;
+      justify-content: center;
     }
   }
 }
