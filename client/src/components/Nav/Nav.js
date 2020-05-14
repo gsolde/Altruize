@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import './Nav.css';
+import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Avatar from '@material-ui/core/Avatar';
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { makeStyles } from '@material-ui/core/styles';
-import { useSelector, useDispatch } from 'react-redux';
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
-import { isUserLoggedIn, userInfo, orgInfo, userId, orgId, eventSelectionButton} from '../../actions';
+import { eventSelectionButton, orgId, orgInfo, userId, userInfo } from '../../actions';
+import './Nav.css';
 
 
 export default function Nav () {
@@ -16,10 +16,16 @@ export default function Nav () {
   const dispatch = useDispatch();
   let history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
-  const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const isLoggedIn = localStorage.getItem('altruize-token');
   const userPic = useSelector(state => state.userInfo.profile_pic);
   const userName = useSelector(state => state.userInfo.user_name);
-  const organizationId = useSelector(state => state.orgId)
+  const orgName = useSelector(state => state.orgInfo.org_name);
+  const orgPic = useSelector(state => state.orgInfo.profile_pic);
+  const avatarData = { name: userName || orgName, pic: userPic || orgPic };
+
+
+
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -28,7 +34,6 @@ export default function Nav () {
     setAnchorEl(null);
   };
   const handleLogOut = () => {
-    dispatch(isUserLoggedIn());
     dispatch(userId(''));
     dispatch(orgId(''));
     dispatch(userInfo({}));
@@ -48,7 +53,7 @@ export default function Nav () {
         <div className="log-in-btn">
           <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
             {isLoggedIn ?
-              <Avatar alt={userName} src={`${userPic}`} className={classes.small} />
+              <Avatar alt={avatarData.name} src={`${avatarData.pic}`} className={classes.small} />
               :
               <AccountCircleIcon style={{ color: 'white' }} />
             }
