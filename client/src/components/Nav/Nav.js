@@ -94,20 +94,20 @@ export default function Nav () {
               <Link className="link-accent" to="/">Home</Link>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <Link className="link-accent" to="/profile">Profile</Link>
+              <Link style={{fontSize: '13px'}} className="link-accent" to="/profile">Profile</Link>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <Link className="link-accent" to="/about">About</Link>
+              <Link style={{fontSize: '13px'}} className="link-accent" to="/about">About</Link>
             </MenuItem>
             {isLoggedIn ? (
               <MenuItem onClick={handleClose}>
-                <div onClick={handleLogOut}>
+                <div style={{fontSize: '13px'}} onClick={handleLogOut}>
                   Log out
                 </div>
               </MenuItem>
             ) : (
                 <MenuItem onClick={handleClose}>
-                  <Link className="link-accent" to="/login">Log in</Link>
+                  <Link style={{fontSize: '13px'}} className="link-accent" to="/login">Log in</Link>
                 </MenuItem>
               )
             }

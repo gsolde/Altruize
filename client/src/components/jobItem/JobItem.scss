@@ -27,7 +27,7 @@ $base-color: #009688;
 
       .event-owner {
         color: rgb(156, 154, 154);
-        font-size: 0.8rem;
+        font-size: 13px;
       }
     }
 
@@ -43,14 +43,17 @@ $base-color: #009688;
       .date {
         font-weight: 500;
         color:$base-color;
+        font-size: 13px;
       }
       .title {
         font-weight: 700;
+        font-size: 13px;
       }
       .location {
         color: grey;
         font-weight: 400;
         padding-right: 10px;
+        font-size: 13px;
       }
 
       .job-tags {
@@ -60,11 +63,14 @@ $base-color: #009688;
       }
 
       .tag {
-        border: 1px solid $base-color;
+        border: 1px solid #90a4ae;
         border-radius: 10px;
         margin-top: 5px;
         margin-right: 5px;
         padding: 2px 6px 4px 6px;
+        font-size: 12px;
+        background-color: #b0bec5;
+        color: white;
       }
 
       .job-footer {
@@ -85,8 +91,15 @@ $base-color: #009688;
 
     .job-description {
       text-align: justify;
-      margin-bottom : 2rem ;
-
+      margin-left: 1rem;
+      margin-right: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem ;
+      font-size: 13px;
+    }
+    .edit-delete-buttons {
+      display: flex;
+      justify-content: center;
     }
   }
 }
