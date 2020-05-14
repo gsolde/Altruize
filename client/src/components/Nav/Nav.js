@@ -45,13 +45,6 @@ export default function Nav () {
         <Link className="link" to="/">ALTRUIZE</Link>
       </div>
       <div className="addEvent-login-options">
-        {/* {
-          organizationId ?  
-          <Button aria-controls="add-event-btn" aria-haspopup="true">
-            <Link className="link" to="/addEvent">Add Event</Link>
-          </Button>
-          : null
-        } */}
         <div className="log-in-btn">
           <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
             {isLoggedIn ?
@@ -69,6 +62,9 @@ export default function Nav () {
             <MenuItem onClick={handleClose}>
               <Link className="link-accent" to="/profile">Profile</Link>
             </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link className="link-accent" to="/about">About</Link>
+            </MenuItem>
             {isLoggedIn ? (
               <MenuItem onClick={handleClose}>
                 <div onClick={handleLogOut}>
@@ -81,9 +77,6 @@ export default function Nav () {
                 </MenuItem>
               )
             }
-            <MenuItem onClick={handleClose}>
-              <Link className="link-accent" to="/about">About</Link>
-            </MenuItem>
           </Menu>
         </div>
       </div>
