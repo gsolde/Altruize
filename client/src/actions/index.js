@@ -46,6 +46,12 @@ export const orgInfo = (selection) => {
     payload: selection,
   };
 };
+export const currentEventInfo = (selection) => {
+  return {
+    type: 'EVENT_INFO',
+    payload: selection,
+  };
+};
 
 export const allEventsList = (allEventsList) => {
   return {
@@ -65,6 +71,7 @@ export const searchedEventsList = (searchedEventsList) => {
   return {
     type: 'SEARCHED_EVENTS_LIST',
     payload: searchedEventsList
+
   };
 };
 
@@ -74,4 +81,5 @@ export const orgEventsList = (orgEventsList) => {
     payload: orgEventsList
   };
 };
+
 

@@ -9,6 +9,7 @@ import userInfoReducer from './userInfoReducer';
 import orgInfoReducer from './orgInfoReducer';
 import searchedEventListReducer from './searchedEventsListReducer';
 import orgEventListReducer from './orgEventListReducer';
+import currentEventInfoReducer from './currentEventInfoReducer';
 
 const allReducers = combineReducers({
   orgId: isLoggedInOrgReducer,
@@ -24,6 +25,7 @@ const allReducers = combineReducers({
   myEventsList: myEventsListReducer,
   searchedEventsList: searchedEventListReducer,
   orgEventsList: orgEventListReducer,
+  currentEventInfo: currentEventInfoReducer,
 });
 
 export default allReducers;
