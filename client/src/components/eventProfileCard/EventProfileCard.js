@@ -246,7 +246,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 10, 2),
     backgroundColor: pink[500],
   },
   heading: {
