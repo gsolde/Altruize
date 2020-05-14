@@ -22,54 +22,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateOrg } from '../../services/OrgsAPI';
 import { orgInfo } from '../../actions';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: teal,
-    secondary: pink,
-  },
-});
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  addphoto: {
-    display: 'none',
-  },
-  avatar: {
-    width: theme.spacing(12),
-    height: theme.spacing(12),
-  },
-  edit: {
-    margin: theme.spacing(1),
-    backgroundColor: 'primary',
-    color: 'white',
-  },
-  discard: {
-    margin: theme.spacing(1),
-    backgroundColor: grey.A200,
-    color: 'white',
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  caption: {
-    margin: theme.spacing(2),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}));
-
 export default function SignUp() {
   const classes = useStyles();
   const orgProfileInfo = useSelector((state) => state.orgInfo);
@@ -318,3 +270,52 @@ export default function SignUp() {
     </MuiThemeProvider>
   );
 }
+
+const theme = createMuiTheme({
+  palette: {
+    primary: teal,
+    secondary: pink,
+  },
+});
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(10),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  addphoto: {
+    display: 'none',
+  },
+  avatar: {
+    width: theme.spacing(12),
+    height: theme.spacing(12),
+    marginBottom: theme.spacing(3),
+  },
+  edit: {
+    margin: theme.spacing(3),
+    backgroundColor: 'primary',
+    color: 'white',
+  },
+  discard: {
+    margin: theme.spacing(3),
+    backgroundColor: grey.A200,
+    color: 'white',
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  caption: {
+    margin: theme.spacing(2),
+  },
+  submit: {
+    margin: theme.spacing(3, 10, 2),
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));

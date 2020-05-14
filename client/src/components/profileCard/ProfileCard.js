@@ -22,54 +22,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../../services/UsersAPI';
 import { userInfo } from '../../actions';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: teal,
-    secondary: pink,
-  },
-});
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  addphoto: {
-    display: 'none',
-  },
-  avatar: {
-    width: theme.spacing(12),
-    height: theme.spacing(12),
-  },
-  edit: {
-    margin: theme.spacing(1),
-    backgroundColor: 'primary',
-    color: 'white',
-  },
-  discard: {
-    margin: theme.spacing(1),
-    backgroundColor: grey.A200,
-    color: 'white',
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  caption: {
-    margin: theme.spacing(2),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}));
-
 export default function SignUp() {
   const classes = useStyles();
   const userProfileInfo = useSelector((state) => state.userInfo);
@@ -113,10 +65,6 @@ export default function SignUp() {
     setEmail(e.target.value);
   };
 
-  // const dispatchUserInfo = (user) => {
-  //   dispatch(userInfo(user));
-  // };
-
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
@@ -156,7 +104,7 @@ export default function SignUp() {
           <label htmlFor="add-image-file">
             <Avatar
               className={classes.avatar}
-              alt="user.image{}"
+              alt={userName}
               src={profilePic}
             />
           </label>
@@ -175,7 +123,6 @@ export default function SignUp() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  // autoComplete="fname"
                   onChange={handleUserName}
                   name="User Name"
                   value={userName}
@@ -199,7 +146,6 @@ export default function SignUp() {
                   id="location"
                   label="Location"
                   name="location"
-                  // autoComplete="Location"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -216,8 +162,6 @@ export default function SignUp() {
                   name="about"
                   label="About me"
                   id="multiline"
-                  // type="password"
-                  // autoComplete="current-password"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -282,3 +226,53 @@ export default function SignUp() {
     </MuiThemeProvider>
   );
 }
+
+const theme = createMuiTheme({
+  palette: {
+    primary: teal,
+    secondary: pink,
+  },
+});
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(10),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  addphoto: {
+    display: 'none',
+  },
+  avatar: {
+    width: theme.spacing(12),
+    height: theme.spacing(12),
+    marginBottom: theme.spacing(3),
+  },
+  edit: {
+    margin: theme.spacing(3),
+    backgroundColor: 'primary',
+    color: 'white',
+  },
+  discard: {
+    margin: theme.spacing(3),
+    backgroundColor: grey.A200,
+    color: 'white',
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  caption: {
+    margin: theme.spacing(2),
+  },
+  submit: {
+    margin: theme.spacing(3, 10, 2),
+    backgroundColor: pink[500],
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
