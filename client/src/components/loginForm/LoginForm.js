@@ -15,7 +15,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import {
-  isUserLoggedIn,
   orgId,
   userId,
   userInfo,
@@ -26,7 +25,7 @@ import ToggleSwitch from '../../components/toggleSwitch/ToggleSwitch';
 import { getOrgLogin, getOrgByLoginId } from '../../services/OrgsAPI';
 import { getUserLogin, getUserByLoginId } from '../../services/UsersAPI';
 
-export default function LoginForm() {
+export default function LoginForm () {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -38,21 +37,21 @@ export default function LoginForm() {
   const [user, setUser] = useState({ email: '', password: '' });
   const { from } = location.state || { from: { pathname: '/' } };
 
-  function updateUser(event) {
+  function updateUser (event) {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
   }
 
-  function resetInputFields() {
+  function resetInputFields () {
     return setUser({
       email: '',
       password: '',
     });
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit (event) {
     event.preventDefault();
     setLoading(true);
     let authToken;
@@ -64,17 +63,20 @@ export default function LoginForm() {
         org_password: user.password,
       });
     } else {
-      authToken = await getUserLogin({ user_email: user.email, user_password: user.password });
+      authToken = await getUserLogin({
+        user_email: user.email,
+        user_password: user.password
+      });
     };
 
     if (authToken === 'Invalid email') {
       setMessage('Invalid email or password. Make sure you log in with the correct account type');
       setError(true);
-      console.log('Invalid email')
+      console.log('Invalid email');
     } else if (authToken === 'Invalid password') {
       setMessage('Invalid email or password. Make sure you log in with the correct account type');
       setError(true);
-      console.log('Invalid password')
+      console.log('Invalid password');
     } else {
       setMessage('Succesfully logged in!');
       localStorage.setItem('altruize-token', authToken);
@@ -84,7 +86,6 @@ export default function LoginForm() {
         loggedUser = await getUserByLoginId();
       };
 
-      dispatch(isUserLoggedIn());
 
       checked ? dispatch(orgId(loggedUser.id)) : dispatch(userId(loggedUser.id));
       checked ? dispatch(orgInfo(loggedUser)) : dispatch(userInfo(loggedUser));
@@ -155,7 +156,7 @@ export default function LoginForm() {
                 <Typography className={error ? classes.error : classes.success} variant="caption">
                   {message}
                 </Typography>
-              : null}
+                : null}
             </Grid>
             <Button
               type="submit"
