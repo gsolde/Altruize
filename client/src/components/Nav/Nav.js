@@ -4,10 +4,12 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
 import { eventSelectionButton, orgId, orgInfo, userId, userInfo } from '../../actions';
+import { persistantLoginOrg } from '../../services/OrgsAPI';
+import { persistantLoginUser } from '../../services/UsersAPI';
 import './Nav.css';
 
 
@@ -23,8 +25,26 @@ export default function Nav () {
   const orgPic = useSelector(state => state.orgInfo.profile_pic);
   const avatarData = { name: userName || orgName, pic: userPic || orgPic };
 
+  useEffect(() => {
+    authenticate();
+  }, []);
 
-
+  const authenticate = async () => {
+    if (isLoggedIn) {
+      const loggedUser = await persistantLoginUser();
+      const loggedOrg = await persistantLoginOrg();
+      if (!loggedUser && !loggedOrg) handleLogOut();
+      if (loggedUser) {
+        dispatch(userId(loggedUser.id));
+        dispatch(userInfo(loggedUser));
+      } else if (loggedOrg) {
+        dispatch(orgId(loggedOrg.id));
+        dispatch(orgInfo(loggedOrg));
+      }
+      dispatch(eventSelectionButton('MY EVENTS'));
+    }
+    return;
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -33,6 +53,7 @@ export default function Nav () {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const handleLogOut = () => {
     dispatch(userId(''));
     dispatch(orgId(''));
