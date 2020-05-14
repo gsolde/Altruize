@@ -315,7 +315,7 @@ export default function JobItem ({ job, updateEvents }) {
     },
     editBtn: {
       margin: theme.spacing(1),
-      backgroundColor: '#009688',
+      backgroundColor: '#2196f3',
       border: '1px',
       borderBlockColor: teal[500],
       color: 'white',
