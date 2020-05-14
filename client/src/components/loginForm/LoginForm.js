@@ -91,7 +91,7 @@ export default function LoginForm () {
       checked ? dispatch(orgInfo(loggedUser)) : dispatch(userInfo(loggedUser));
       checked && dispatch(eventSelectionButton('MY EVENTS'));
 
-      setTimeout(() => history.replace(from), 1000);
+      setTimeout(() => history.replace(from), 700);
     }
 
     resetInputFields();

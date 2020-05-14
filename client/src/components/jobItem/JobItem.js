@@ -337,6 +337,7 @@ export default function JobItem ({ job, updateEvents }) {
       margin: theme.spacing(1),
       backgroundColor: teal[500],
       color: 'white',
+      fontSize: '0.6rem'
     },
     waitBtn: {
       margin: theme.spacing(1),
@@ -344,6 +345,7 @@ export default function JobItem ({ job, updateEvents }) {
       border: '1px',
       borderBlockColor: teal[500],
       color: 'white',
+      fontSize: '0.6rem'
     },
     loginBtn: {
       margin: theme.spacing(1),

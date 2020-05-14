@@ -59,11 +59,11 @@ export default function Nav () {
     dispatch(orgId(''));
     dispatch(userInfo({}));
     dispatch(orgInfo({}));
+    dispatch(eventSelection('ALL EVENTS'));
     dispatch(eventSelectionButton('ALL EVENTS'));
     localStorage.removeItem("altruize-token");
-    return history.push("/");
+    history.push("/");
   };
-
 
   return (
     <div className="nav-wrapper">
