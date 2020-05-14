@@ -86,6 +86,9 @@ export default function Nav () {
             onClose={handleClose}
           >
             <MenuItem onClick={handleClose}>
+              <Link className="link-accent" to="/">Home</Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
               <Link className="link-accent" to="/profile">Profile</Link>
             </MenuItem>
             <MenuItem onClick={handleClose}>
