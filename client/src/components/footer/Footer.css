@@ -1,7 +1,7 @@
 .footer-wrapper {
   display: flex;
   justify-content: space-evenly;
-  background-color: #009688;
+  background-color: red;
   margin-top: auto;
   font-size: 14px;
 }
