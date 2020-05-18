@@ -12,4 +12,9 @@ app.use(cors());
 app.use(express.json());
 app.use(router);
 
+app.use(express.static(__dirname + '/../client/build'));
+app.get('*', function(req, res){
+  res.sendFile(__dirname + '/../client/build/index.html');
+});
+
 app.listen(PORT, console.log(`** Server running on port ${PORT} **`));
