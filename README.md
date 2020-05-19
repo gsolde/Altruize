@@ -5,7 +5,7 @@ Check it out at https://altruize.herokuapp.com/
     
 <div>
   <img src="assets/main_iphone.png" alt="Home" width="250">
-  <img src="assets/create_event_iphone" alt="Create Event" width="250">
+  <img src="assets/create_event_iphone.png" alt="Create Event" width="250">
 </div>    
 
 ## 🧪 Want to use this project?
@@ -42,9 +42,9 @@ TOKEN_SECRET=<'a secret alpahumeric string'>
 * PostgreSQL with sequalize for the database.  
 
 ## 👨‍💻👨‍💻👨‍💻👨‍💻  Team
-[Scott Burgess](https://github.com/Scottburg)
-[Alejandro Gutiérrez](https://github.com/AlejandroGutierrezB)
-[Leonard Schilcher](https://github.com/LeonardvS)
-[Gerard Soldevila](https://github.com/gsolde)
+[Scott Burgess](https://github.com/Scottburg)     
+[Alejandro Gutiérrez](https://github.com/AlejandroGutierrezB)     
+[Leonard Schilcher](https://github.com/LeonardvS)     
+[Gerard Soldevila](https://github.com/gsolde)    
 
      
