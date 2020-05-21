@@ -1,48 +1,23 @@
 .profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   width: 100%;
   min-width: 300px;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .profile .card {
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   min-width: 350px;
-  margin-right: 2rem;
   margin-bottom: 2rem;
   border-radius: 5px;
-}
-
-.profile .dashboard {
-  flex: 3;
-  display: flex;
-  flex-direction: column;
-  min-width: 350px;
-  margin-right: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 0 5px 1px rgba(52, 49, 49, 0.2);
-  border-radius: 5px;
-}
-
-.profile .dashboard h1 {
-  text-align: center;
-  position: sticky;
-}
-
-.profile .dashboard .disable-scrollbars::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-  /* Chrome/Safari/Webkit */
-}
-
-.profile .dashboard .disable-scrollbars {
-  scrollbar-width: none;
-  /* Firefox */
-  -ms-overflow-style: none;
-  /* IE 10+ */
-  height: 90vh;
-  overflow: hidden;
-  overflow-y: auto;
 }
 /*# sourceMappingURL=Profile.css.map */

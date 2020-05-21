@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm install --prefix client && npm install --prefix server && npm run build --prefix client",
-    "start": "npm start --prefix server"
+    "start": "npm start --prefix server",
+    "install": "npm i --prefix altruize && npm i --prefix client && npm i --prefix server",
+    "start:server": "nodemon index.js --prefix server",
+    "start:client": "npm start --prefix client",
+    "start:all": "concurrently \"npm run start:server\" \"npm run start:client\""
   },
   "repository": {
     "type": "git",
