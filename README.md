@@ -7,7 +7,7 @@ Check it out at https://altruize.herokuapp.com/
   <img src="client/src/assets/main.png" alt="Home" >
 </div>
 
-<div style='center'>
+<div align='center'>
   <img src="client/src/assets/user_login.png" alt="user login" width="250">
   <img src="client/src/assets/event_list_user.png" alt="ngo login" width="250">
   <img src="client/src/assets/user_event_confirmed.png" alt="ngo login" width="250">
