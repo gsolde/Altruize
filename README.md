@@ -4,7 +4,7 @@ Check it out at https://altruize.herokuapp.com/
 
     
 <div>
-  <img src="assets/main_iphone.png" alt="Home" width="250">
+  <img src="client/src/assets/main.png" alt="Home" width="250">
   <img src="assets/create_event_iphone.png" alt="Create Event" width="250">
 </div>    
 
