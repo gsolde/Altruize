@@ -15,7 +15,7 @@ Check it out at https://altruize.herokuapp.com/
   <img src="client/src/assets/user_event_confirmed.png" alt="user event confirmed" width="250">
 </div> 
 
-## Ong flow
+## NGO flow
 
 <div align='center'>
   <img src="client/src/assets/NGO_login.png" alt="NGO login" width="250">
