@@ -7,10 +7,20 @@ Check it out at https://altruize.herokuapp.com/
   <img src="client/src/assets/main.png" alt="Home" >
 </div>
 
+## User flow
+
 <div align='center'>
   <img src="client/src/assets/user_login.png" alt="user login" width="250">
-  <img src="client/src/assets/event_list_user.png" alt="ngo login" width="250">
-  <img src="client/src/assets/user_event_confirmed.png" alt="ngo login" width="250">
+  <img src="client/src/assets/event_list_user.png" alt="user event list" width="250">
+  <img src="client/src/assets/user_event_confirmed.png" alt="user event confirmed" width="250">
+</div> 
+
+## Ong flow
+
+<div align='center'>
+  <img src="client/src/assets/NGO_login.png" alt="NGO login" width="250">
+  <img src="client/src/assets/NGO_event_tile.png" alt="NGO event tile" width="250">
+  <img src="client/src/assets/edit_event.png" alt="NGO edit event" width="250">
 </div> 
 
 ## 🧪 Want to use this project?
