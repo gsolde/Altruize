@@ -40,7 +40,11 @@ PSQL_DB_PASSWORD=<'leave it blank if you dont want a password'>
 PSQL_DB_HOST='localhost'
 TOKEN_SECRET=<'a secret alpahumeric string'>
 ```
-#### 4. Start your postgresSQL
+#### 4. Start postgresSQL and create a database.
+
+```txt
+CREATE DATABASE 'db name'
+```
 #### 5. In the root directoy run `npm run start:all`.
 #### 6. 🚀 Open [http://localhost:3000](http://localhost:3000) to view it in your browser, and start using the app!
 
