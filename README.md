@@ -4,9 +4,14 @@ Check it out at https://altruize.herokuapp.com/
 
     
 <div>
-  <img src="client/src/assets/main.png" alt="Home" width="250">
-  <img src="assets/create_event_iphone.png" alt="Create Event" width="250">
-</div>    
+  <img src="client/src/assets/main.png" alt="Home" >
+</div>
+
+<div style='center'>
+  <img src="client/src/assets/user_login.png" alt="user login" width="250">
+  <img src="client/src/assets/event_list_user.png" alt="ngo login" width="250">
+  <img src="client/src/assets/user_event_confirmed.png" alt="ngo login" width="250">
+</div> 
 
 ## 🧪 Want to use this project?
 Check, explore and remix it!
